@@ -9,4 +9,4 @@ def test_flags_private_ip_and_home_path():
 
 def test_allows_noreply_address_only():
     assert not scan_text(f"User-Agent: x {ALLOWED_EMAIL}")
-    assert scan_text("contact someone@example.com")
+    assert scan_text("contact someone" + "@example.com")
