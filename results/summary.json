@@ -1,0 +1,64 @@
+{
+ "build_end": "2026-10-30",
+ "n_companies": 111,
+ "n_edge_rows": 39,
+ "methods": {
+  "curated": 39
+ },
+ "graph": {
+  "nodes": 111,
+  "connected_nodes": 15,
+  "edges": 16,
+  "disclosed_weight_share": 0.5,
+  "pagerank_vs_mcap": {
+   "rho": 0.8422276927942434,
+   "p": 8.163862028240154e-05,
+   "n": 15
+  },
+  "strength_vs_mcap": {
+   "rho": -0.7506210580506754,
+   "p": 0.0012624254906597999,
+   "n": 15
+  }
+ },
+ "information_set": {
+  "first_month_with_edges": "2024-02-29",
+  "months_with_at_least_6_suppliers": 0,
+  "max_suppliers": 5
+ },
+ "momentum_primary": {
+  "cost_x0": {
+   "n_months": 0,
+   "sharpe": null,
+   "mean_monthly": null
+  },
+  "cost_x1": {
+   "n_months": 0,
+   "sharpe": null,
+   "mean_monthly": null
+  },
+  "cost_x2": {
+   "n_months": 0,
+   "sharpe": null,
+   "mean_monthly": null
+  }
+ },
+ "fama_macbeth": {
+  "n_months": 0,
+  "slope": null,
+  "t": null
+ },
+ "trials": {
+  "n_trials": 48,
+  "months_total": 18,
+  "months_primary": 0
+ },
+ "placebo": {
+  "note": "skipped: primary strategy has fewer than 8 active months"
+ },
+ "overfitting": {
+  "note": "skipped: 0 months give fewer than 4 CSCV blocks of 12 months",
+  "T": 0
+ },
+ "runtime_s": 0.1
+}

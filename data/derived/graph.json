@@ -1,0 +1,1225 @@
+{
+ "version": 1,
+ "built_on": "2026-10-30",
+ "nodes": [
+  {
+   "ticker": "4063.T",
+   "name": "Shin-Etsu Chemical",
+   "tier": "T01",
+   "country": "JP",
+   "mcap_usd": 63688000000.0
+  },
+  {
+   "ticker": "3436.T",
+   "name": "SUMCO",
+   "tier": "T01",
+   "country": "JP",
+   "mcap_usd": 4465000000.0
+  },
+  {
+   "ticker": "WAF.DE",
+   "name": "Siltronic",
+   "tier": "T01",
+   "country": "EU",
+   "mcap_usd": 2046000000.0
+  },
+  {
+   "ticker": "6488.TWO",
+   "name": "GlobalWafers",
+   "tier": "T01",
+   "country": "TW",
+   "mcap_usd": 8822000000.0
+  },
+  {
+   "ticker": "SOI.PA",
+   "name": "Soitec",
+   "tier": "T01",
+   "country": "EU",
+   "mcap_usd": 3920000000.0
+  },
+  {
+   "ticker": "5483.TWO",
+   "name": "Sino-American Silicon Products",
+   "tier": "T01",
+   "country": "TW",
+   "mcap_usd": 2678000000.0
+  },
+  {
+   "ticker": "LIN",
+   "name": "Linde",
+   "tier": "T02",
+   "country": "US",
+   "mcap_usd": 233793000000.0
+  },
+  {
+   "ticker": "APD",
+   "name": "Air Products and Chemicals",
+   "tier": "T02",
+   "country": "US",
+   "mcap_usd": 67790000000.0
+  },
+  {
+   "ticker": "AI.PA",
+   "name": "Air Liquide",
+   "tier": "T02",
+   "country": "EU",
+   "mcap_usd": 136022000000.0
+  },
+  {
+   "ticker": "4091.T",
+   "name": "Nippon Sanso Holdings",
+   "tier": "T02",
+   "country": "JP",
+   "mcap_usd": 16211000000.0
+  },
+  {
+   "ticker": "4186.T",
+   "name": "Tokyo Ohka Kogyo",
+   "tier": "T03",
+   "country": "JP",
+   "mcap_usd": 5523000000.0
+  },
+  {
+   "ticker": "4004.T",
+   "name": "Resonac Holdings",
+   "tier": "T03",
+   "country": "JP",
+   "mcap_usd": 14618000000.0
+  },
+  {
+   "ticker": "4901.T",
+   "name": "Fujifilm Holdings",
+   "tier": "T03",
+   "country": "JP",
+   "mcap_usd": 27461000000.0
+  },
+  {
+   "ticker": "4005.T",
+   "name": "Sumitomo Chemical",
+   "tier": "T03",
+   "country": "JP",
+   "mcap_usd": 5196000000.0
+  },
+  {
+   "ticker": "MRK.DE",
+   "name": "Merck KGaA",
+   "tier": "T03",
+   "country": "EU",
+   "mcap_usd": 73271000000.0
+  },
+  {
+   "ticker": "DD",
+   "name": "DuPont de Nemours",
+   "tier": "T03",
+   "country": "US",
+   "mcap_usd": 19816000000.0
+  },
+  {
+   "ticker": "ENTG",
+   "name": "Entegris",
+   "tier": "T04",
+   "country": "US",
+   "mcap_usd": 21782000000.0
+  },
+  {
+   "ticker": "PLAB",
+   "name": "Photronics",
+   "tier": "T04",
+   "country": "US",
+   "mcap_usd": 1576000000.0
+  },
+  {
+   "ticker": "2802.T",
+   "name": "Ajinomoto",
+   "tier": "T04",
+   "country": "JP",
+   "mcap_usd": 25239000000.0
+  },
+  {
+   "ticker": "5384.T",
+   "name": "Fujimi",
+   "tier": "T04",
+   "country": "JP",
+   "mcap_usd": 1310000000.0
+  },
+  {
+   "ticker": "6361.T",
+   "name": "Ebara",
+   "tier": "T04",
+   "country": "JP",
+   "mcap_usd": 9748000000.0
+  },
+  {
+   "ticker": "7741.T",
+   "name": "HOYA",
+   "tier": "T04",
+   "country": "JP",
+   "mcap_usd": 49344000000.0
+  },
+  {
+   "ticker": "7912.T",
+   "name": "Dai Nippon Printing",
+   "tier": "T04",
+   "country": "JP",
+   "mcap_usd": 7122000000.0
+  },
+  {
+   "ticker": "ASML.AS",
+   "name": "ASML Holding",
+   "tier": "T05",
+   "country": "EU",
+   "mcap_usd": 543670000000.0
+  },
+  {
+   "ticker": "AMAT",
+   "name": "Applied Materials",
+   "tier": "T05",
+   "country": "US",
+   "mcap_usd": 277577000000.0
+  },
+  {
+   "ticker": "LRCX",
+   "name": "Lam Research",
+   "tier": "T05",
+   "country": "US",
+   "mcap_usd": 261945000000.0
+  },
+  {
+   "ticker": "8035.T",
+   "name": "Tokyo Electron",
+   "tier": "T05",
+   "country": "JP",
+   "mcap_usd": 124780000000.0
+  },
+  {
+   "ticker": "6525.T",
+   "name": "Kokusai Electric",
+   "tier": "T05",
+   "country": "JP",
+   "mcap_usd": 8288000000.0
+  },
+  {
+   "ticker": "VECO",
+   "name": "Veeco Instruments",
+   "tier": "T05",
+   "country": "US",
+   "mcap_usd": 2254000000.0
+  },
+  {
+   "ticker": "ASM.AS",
+   "name": "ASM International",
+   "tier": "T05",
+   "country": "EU",
+   "mcap_usd": 36503000000.0
+  },
+  {
+   "ticker": "BESI.AS",
+   "name": "BE Semiconductor Industries",
+   "tier": "T05",
+   "country": "EU",
+   "mcap_usd": 13196000000.0
+  },
+  {
+   "ticker": "AIXA.DE",
+   "name": "Aixtron",
+   "tier": "T05",
+   "country": "EU",
+   "mcap_usd": 4022000000.0
+  },
+  {
+   "ticker": "6920.T",
+   "name": "Lasertec",
+   "tier": "T05",
+   "country": "JP",
+   "mcap_usd": 18526000000.0
+  },
+  {
+   "ticker": "7735.T",
+   "name": "SCREEN Holdings",
+   "tier": "T05",
+   "country": "JP",
+   "mcap_usd": 9357000000.0
+  },
+  {
+   "ticker": "6857.T",
+   "name": "Advantest",
+   "tier": "T05",
+   "country": "JP",
+   "mcap_usd": 124443000000.0
+  },
+  {
+   "ticker": "6146.T",
+   "name": "Disco",
+   "tier": "T05",
+   "country": "JP",
+   "mcap_usd": 30516000000.0
+  },
+  {
+   "ticker": "7731.T",
+   "name": "Nikon",
+   "tier": "T05",
+   "country": "JP",
+   "mcap_usd": 3239000000.0
+  },
+  {
+   "ticker": "KLAC",
+   "name": "KLA",
+   "tier": "T05",
+   "country": "US",
+   "mcap_usd": 187580000000.0
+  },
+  {
+   "ticker": "ONTO",
+   "name": "Onto Innovation",
+   "tier": "T05",
+   "country": "US",
+   "mcap_usd": 9960000000.0
+  },
+  {
+   "ticker": "CAMT",
+   "name": "Camtek",
+   "tier": "T05",
+   "country": "US",
+   "mcap_usd": 4642000000.0
+  },
+  {
+   "ticker": "NVMI",
+   "name": "Nova",
+   "tier": "T05",
+   "country": "US",
+   "mcap_usd": 9908000000.0
+  },
+  {
+   "ticker": "TER",
+   "name": "Teradyne",
+   "tier": "T05",
+   "country": "US",
+   "mcap_usd": 36431000000.0
+  },
+  {
+   "ticker": "FORM",
+   "name": "FormFactor",
+   "tier": "T05",
+   "country": "US",
+   "mcap_usd": 6478000000.0
+  },
+  {
+   "ticker": "MKSI",
+   "name": "MKS",
+   "tier": "T05",
+   "country": "US",
+   "mcap_usd": 14107000000.0
+  },
+  {
+   "ticker": "AEIS",
+   "name": "Advanced Energy Industries",
+   "tier": "T05",
+   "country": "US",
+   "mcap_usd": 8611000000.0
+  },
+  {
+   "ticker": "UCTT",
+   "name": "Ultra Clean Holdings",
+   "tier": "T05",
+   "country": "US",
+   "mcap_usd": 2082000000.0
+  },
+  {
+   "ticker": "ICHR",
+   "name": "Ichor Holdings",
+   "tier": "T05",
+   "country": "US",
+   "mcap_usd": 1265000000.0
+  },
+  {
+   "ticker": "SNPS",
+   "name": "Synopsys",
+   "tier": "T06",
+   "country": "US",
+   "mcap_usd": 83044000000.0
+  },
+  {
+   "ticker": "CDNS",
+   "name": "Cadence Design Systems",
+   "tier": "T06",
+   "country": "US",
+   "mcap_usd": 85307000000.0
+  },
+  {
+   "ticker": "ARM",
+   "name": "Arm Holdings",
+   "tier": "T06",
+   "country": "US",
+   "mcap_usd": 198763000000.0
+  },
+  {
+   "ticker": "RMBS",
+   "name": "Rambus",
+   "tier": "T06",
+   "country": "US",
+   "mcap_usd": 8416000000.0
+  },
+  {
+   "ticker": "2330.TW",
+   "name": "Taiwan Semiconductor Manufacturing",
+   "tier": "T07",
+   "country": "TW",
+   "mcap_usd": 1731909000000.0
+  },
+  {
+   "ticker": "2303.TW",
+   "name": "United Microelectronics",
+   "tier": "T07",
+   "country": "TW",
+   "mcap_usd": 35807000000.0
+  },
+  {
+   "ticker": "GFS",
+   "name": "GlobalFoundries",
+   "tier": "T07",
+   "country": "US",
+   "mcap_usd": 22195000000.0
+  },
+  {
+   "ticker": "0981.HK",
+   "name": "Semiconductor Manufacturing International",
+   "tier": "T07",
+   "country": "HK",
+   "mcap_usd": 53695000000.0
+  },
+  {
+   "ticker": "1347.HK",
+   "name": "Hua Hong Semiconductor",
+   "tier": "T07",
+   "country": "HK",
+   "mcap_usd": 23048000000.0
+  },
+  {
+   "ticker": "6770.TW",
+   "name": "Powerchip Semiconductor Manufacturing",
+   "tier": "T07",
+   "country": "TW",
+   "mcap_usd": 7597000000.0
+  },
+  {
+   "ticker": "TSEM",
+   "name": "Tower Semiconductor",
+   "tier": "T07",
+   "country": "US",
+   "mcap_usd": 15176000000.0
+  },
+  {
+   "ticker": "5347.TWO",
+   "name": "Vanguard International Semiconductor",
+   "tier": "T07",
+   "country": "TW",
+   "mcap_usd": 7152000000.0
+  },
+  {
+   "ticker": "MU",
+   "name": "Micron Technology",
+   "tier": "T08",
+   "country": "US",
+   "mcap_usd": 790865000000.0
+  },
+  {
+   "ticker": "000660.KS",
+   "name": "SK hynix",
+   "tier": "T08",
+   "country": "KR",
+   "mcap_usd": 602937000000.0
+  },
+  {
+   "ticker": "005930.KS",
+   "name": "Samsung Electronics",
+   "tier": "T08",
+   "country": "KR",
+   "mcap_usd": 947602000000.0
+  },
+  {
+   "ticker": "2408.TW",
+   "name": "Nanya Technology",
+   "tier": "T08",
+   "country": "TW",
+   "mcap_usd": 34431000000.0
+  },
+  {
+   "ticker": "2344.TW",
+   "name": "Winbond Electronics",
+   "tier": "T08",
+   "country": "TW",
+   "mcap_usd": 14923000000.0
+  },
+  {
+   "ticker": "2337.TW",
+   "name": "Macronix International",
+   "tier": "T08",
+   "country": "TW",
+   "mcap_usd": 4250000000.0
+  },
+  {
+   "ticker": "SNDK",
+   "name": "Sandisk",
+   "tier": "T08",
+   "country": "US",
+   "mcap_usd": 109281000000.0
+  },
+  {
+   "ticker": "285A.T",
+   "name": "Kioxia Holdings",
+   "tier": "T08",
+   "country": "JP",
+   "mcap_usd": 81274000000.0
+  },
+  {
+   "ticker": "3711.TW",
+   "name": "ASE Technology Holding",
+   "tier": "T09",
+   "country": "TW",
+   "mcap_usd": 74293000000.0
+  },
+  {
+   "ticker": "AMKR",
+   "name": "Amkor Technology",
+   "tier": "T09",
+   "country": "US",
+   "mcap_usd": 8604000000.0
+  },
+  {
+   "ticker": "6239.TW",
+   "name": "Powertech Technology",
+   "tier": "T09",
+   "country": "TW",
+   "mcap_usd": 4901000000.0
+  },
+  {
+   "ticker": "4062.T",
+   "name": "Ibiden",
+   "tier": "T09",
+   "country": "JP",
+   "mcap_usd": 19159000000.0
+  },
+  {
+   "ticker": "3037.TW",
+   "name": "Unimicron Technology",
+   "tier": "T09",
+   "country": "TW",
+   "mcap_usd": 33452000000.0
+  },
+  {
+   "ticker": "009150.KS",
+   "name": "Samsung Electro-Mechanics",
+   "tier": "T09",
+   "country": "KR",
+   "mcap_usd": 45736000000.0
+  },
+  {
+   "ticker": "FN",
+   "name": "Fabrinet",
+   "tier": "T09",
+   "country": "US",
+   "mcap_usd": 11078000000.0
+  },
+  {
+   "ticker": "NVDA",
+   "name": "NVIDIA",
+   "tier": "T10",
+   "country": "US",
+   "mcap_usd": 3690169000000.0
+  },
+  {
+   "ticker": "AMD",
+   "name": "Advanced Micro Devices",
+   "tier": "T10",
+   "country": "US",
+   "mcap_usd": 839019000000.0
+  },
+  {
+   "ticker": "AVGO",
+   "name": "Broadcom",
+   "tier": "T10",
+   "country": "US",
+   "mcap_usd": 1678384000000.0
+  },
+  {
+   "ticker": "QCOM",
+   "name": "Qualcomm",
+   "tier": "T10",
+   "country": "US",
+   "mcap_usd": 173736000000.0
+  },
+  {
+   "ticker": "MRVL",
+   "name": "Marvell Technology",
+   "tier": "T10",
+   "country": "US",
+   "mcap_usd": 130403000000.0
+  },
+  {
+   "ticker": "INTC",
+   "name": "Intel",
+   "tier": "T10",
+   "country": "US",
+   "mcap_usd": 286523000000.0
+  },
+  {
+   "ticker": "2454.TW",
+   "name": "MediaTek",
+   "tier": "T10",
+   "country": "TW",
+   "mcap_usd": 193224000000.0
+  },
+  {
+   "ticker": "2379.TW",
+   "name": "Realtek Semiconductor",
+   "tier": "T10",
+   "country": "TW",
+   "mcap_usd": 11559000000.0
+  },
+  {
+   "ticker": "3034.TW",
+   "name": "Novatek Microelectronics",
+   "tier": "T10",
+   "country": "TW",
+   "mcap_usd": 8600000000.0
+  },
+  {
+   "ticker": "3661.TW",
+   "name": "Alchip Technologies",
+   "tier": "T10",
+   "country": "TW",
+   "mcap_usd": 10473000000.0
+  },
+  {
+   "ticker": "3443.TW",
+   "name": "Global Unichip",
+   "tier": "T10",
+   "country": "TW",
+   "mcap_usd": 27426000000.0
+  },
+  {
+   "ticker": "ALAB",
+   "name": "Astera Labs",
+   "tier": "T10",
+   "country": "US",
+   "mcap_usd": 37099000000.0
+  },
+  {
+   "ticker": "CRDO",
+   "name": "Credo Technology Group",
+   "tier": "T10",
+   "country": "US",
+   "mcap_usd": 23108000000.0
+  },
+  {
+   "ticker": "CRUS",
+   "name": "Cirrus Logic",
+   "tier": "T10",
+   "country": "US",
+   "mcap_usd": 5816000000.0
+  },
+  {
+   "ticker": "SWKS",
+   "name": "Skyworks Solutions",
+   "tier": "T10",
+   "country": "US",
+   "mcap_usd": 19906000000.0
+  },
+  {
+   "ticker": "LITE",
+   "name": "Lumentum Holdings",
+   "tier": "T10",
+   "country": "US",
+   "mcap_usd": 49650000000.0
+  },
+  {
+   "ticker": "COHR",
+   "name": "Coherent",
+   "tier": "T10",
+   "country": "US",
+   "mcap_usd": 41422000000.0
+  },
+  {
+   "ticker": "NXPI",
+   "name": "NXP Semiconductors",
+   "tier": "T10",
+   "country": "US",
+   "mcap_usd": 63396000000.0
+  },
+  {
+   "ticker": "IFX.DE",
+   "name": "Infineon Technologies",
+   "tier": "T10",
+   "country": "EU",
+   "mcap_usd": 71838000000.0
+  },
+  {
+   "ticker": "STMPA.PA",
+   "name": "STMicroelectronics",
+   "tier": "T10",
+   "country": "EU",
+   "mcap_usd": 40456000000.0
+  },
+  {
+   "ticker": "6723.T",
+   "name": "Renesas Electronics",
+   "tier": "T10",
+   "country": "JP",
+   "mcap_usd": 30318000000.0
+  },
+  {
+   "ticker": "AAPL",
+   "name": "Apple",
+   "tier": "T11",
+   "country": "US",
+   "mcap_usd": 5118307000000.0
+  },
+  {
+   "ticker": "MSFT",
+   "name": "Microsoft",
+   "tier": "T11",
+   "country": "US",
+   "mcap_usd": 3734113000000.0
+  },
+  {
+   "ticker": "GOOGL",
+   "name": "Alphabet",
+   "tier": "T11",
+   "country": "US",
+   "mcap_usd": 3460207000000.0
+  },
+  {
+   "ticker": "AMZN",
+   "name": "Amazon.com",
+   "tier": "T11",
+   "country": "US",
+   "mcap_usd": 2839854000000.0
+  },
+  {
+   "ticker": "META",
+   "name": "Meta Platforms",
+   "tier": "T11",
+   "country": "US",
+   "mcap_usd": 1563896000000.0
+  },
+  {
+   "ticker": "ORCL",
+   "name": "Oracle",
+   "tier": "T11",
+   "country": "US",
+   "mcap_usd": 355855000000.0
+  },
+  {
+   "ticker": "9988.HK",
+   "name": "Alibaba Group Holding",
+   "tier": "T11",
+   "country": "HK",
+   "mcap_usd": 216251000000.0
+  },
+  {
+   "ticker": "0700.HK",
+   "name": "Tencent Holdings",
+   "tier": "T11",
+   "country": "HK",
+   "mcap_usd": 427867000000.0
+  },
+  {
+   "ticker": "DELL",
+   "name": "Dell Technologies",
+   "tier": "T11",
+   "country": "US",
+   "mcap_usd": 201158000000.0
+  },
+  {
+   "ticker": "HPQ",
+   "name": "HP",
+   "tier": "T11",
+   "country": "US",
+   "mcap_usd": 25926000000.0
+  },
+  {
+   "ticker": "HPE",
+   "name": "Hewlett Packard Enterprise",
+   "tier": "T11",
+   "country": "US",
+   "mcap_usd": 60891000000.0
+  },
+  {
+   "ticker": "SMCI",
+   "name": "Super Micro Computer",
+   "tier": "T11",
+   "country": "US",
+   "mcap_usd": 16029000000.0
+  },
+  {
+   "ticker": "2317.TW",
+   "name": "Hon Hai Precision Industry",
+   "tier": "T11",
+   "country": "TW",
+   "mcap_usd": 95508000000.0
+  },
+  {
+   "ticker": "2382.TW",
+   "name": "Quanta Computer",
+   "tier": "T11",
+   "country": "TW",
+   "mcap_usd": 33358000000.0
+  },
+  {
+   "ticker": "3231.TW",
+   "name": "Wistron",
+   "tier": "T11",
+   "country": "TW",
+   "mcap_usd": 17061000000.0
+  },
+  {
+   "ticker": "0992.HK",
+   "name": "Lenovo Group",
+   "tier": "T11",
+   "country": "HK",
+   "mcap_usd": 27195000000.0
+  }
+ ],
+ "edges": [
+  {
+   "supplier": "AEIS",
+   "customer": "AMAT",
+   "weight": 20.0,
+   "disclosed": true,
+   "valid_from": "2025-02-19",
+   "valid_to": "2026-02-19",
+   "sources": [
+    {
+     "url": "https://pdf.dfcfw.com/pdf/H2_AN202503141644375881_1.pdf",
+     "type": "annual_report",
+     "filing_date": "2025-02-18",
+     "fiscal_year": 2024
+    },
+    {
+     "url": "https://pdf.dfcfw.com/pdf/H2_AN202503141644375881_1.pdf",
+     "type": "annual_report",
+     "filing_date": "2025-02-18",
+     "fiscal_year": 2023
+    },
+    {
+     "url": "https://pdf.dfcfw.com/pdf/H2_AN202503141644375881_1.pdf",
+     "type": "annual_report",
+     "filing_date": "2025-02-18",
+     "fiscal_year": 2022
+    }
+   ]
+  },
+  {
+   "supplier": "AEIS",
+   "customer": "LRCX",
+   "weight": 14.0,
+   "disclosed": true,
+   "valid_from": "2025-02-19",
+   "valid_to": "2026-02-19",
+   "sources": [
+    {
+     "url": "https://pdf.dfcfw.com/pdf/H2_AN202503141644375881_1.pdf",
+     "type": "annual_report",
+     "filing_date": "2025-02-18",
+     "fiscal_year": 2024
+    },
+    {
+     "url": "https://pdf.dfcfw.com/pdf/H2_AN202503141644375881_1.pdf",
+     "type": "annual_report",
+     "filing_date": "2025-02-18",
+     "fiscal_year": 2022
+    }
+   ]
+  },
+  {
+   "supplier": "AMKR",
+   "customer": "AAPL",
+   "weight": 27.7,
+   "disclosed": true,
+   "valid_from": "2024-02-20",
+   "valid_to": "2025-02-19",
+   "sources": [
+    {
+     "url": "https://stocklight.com/stocks/us/nasdaq-amkr/amkor-technology/annual-reports/nasdaq-amkr-2024-10K-24648139.pdf",
+     "type": "10-K",
+     "filing_date": "2024-02-16",
+     "fiscal_year": 2023
+    }
+   ]
+  },
+  {
+   "supplier": "ICHR",
+   "customer": "AMAT",
+   "weight": 31.0,
+   "disclosed": true,
+   "valid_from": "2025-02-24",
+   "valid_to": "2026-02-24",
+   "sources": [
+    {
+     "url": "https://ir-api.eqs.com/media/document/9b346343-d2a9-40c3-9343-2c30ed10351a/assets/Annual_Report_23.pdf",
+     "type": "10-K",
+     "filing_date": "2025-02-21",
+     "fiscal_year": 2024
+    },
+    {
+     "url": "https://ir-api.eqs.com/media/document/9b346343-d2a9-40c3-9343-2c30ed10351a/assets/Annual_Report_23.pdf",
+     "type": "10-K",
+     "filing_date": "2025-02-21",
+     "fiscal_year": 2023
+    },
+    {
+     "url": "https://ir-api.eqs.com/media/document/9b346343-d2a9-40c3-9343-2c30ed10351a/assets/Annual_Report_23.pdf",
+     "type": "10-K",
+     "filing_date": "2025-02-21",
+     "fiscal_year": 2022
+    }
+   ]
+  },
+  {
+   "supplier": "ICHR",
+   "customer": "LRCX",
+   "weight": 48.2,
+   "disclosed": true,
+   "valid_from": "2025-02-24",
+   "valid_to": "2026-02-24",
+   "sources": [
+    {
+     "url": "https://ir-api.eqs.com/media/document/9b346343-d2a9-40c3-9343-2c30ed10351a/assets/Annual_Report_23.pdf",
+     "type": "10-K",
+     "filing_date": "2025-02-21",
+     "fiscal_year": 2024
+    },
+    {
+     "url": "https://ir-api.eqs.com/media/document/9b346343-d2a9-40c3-9343-2c30ed10351a/assets/Annual_Report_23.pdf",
+     "type": "10-K",
+     "filing_date": "2025-02-21",
+     "fiscal_year": 2023
+    },
+    {
+     "url": "https://ir-api.eqs.com/media/document/9b346343-d2a9-40c3-9343-2c30ed10351a/assets/Annual_Report_23.pdf",
+     "type": "10-K",
+     "filing_date": "2025-02-21",
+     "fiscal_year": 2022
+    }
+   ]
+  },
+  {
+   "supplier": "KLAC",
+   "customer": "2330.TW",
+   "weight": 31.0,
+   "disclosed": false,
+   "valid_from": "2026-08-07",
+   "valid_to": "2027-08-07",
+   "sources": [
+    {
+     "url": "https://ir.kla.com/sec-filings/all-sec-filings/content/0000319201-26-000027/0000319201-26-000027.pdf",
+     "type": "10-K",
+     "filing_date": "2026-08-06",
+     "fiscal_year": 2026
+    },
+    {
+     "url": "https://ir.kla.com/sec-filings/all-sec-filings/content/0000319201-26-000027/0000319201-26-000027.pdf",
+     "type": "10-K",
+     "filing_date": "2026-08-06",
+     "fiscal_year": 2025
+    },
+    {
+     "url": "https://ir.kla.com/sec-filings/all-sec-filings/content/0000319201-26-000027/0000319201-26-000027.pdf",
+     "type": "10-K",
+     "filing_date": "2026-08-06",
+     "fiscal_year": 2024
+    }
+   ]
+  },
+  {
+   "supplier": "LRCX",
+   "customer": "000660.KS",
+   "weight": 31.0,
+   "disclosed": false,
+   "valid_from": "2024-08-30",
+   "valid_to": "2025-08-30",
+   "sources": [
+    {
+     "url": "https://filecache.investorroom.com/mr5ir_lamresearch2/1411/LRCX%20(Lam%20Research%20Corporation)%20%20(10-K)%202024-08-29.pdf_.pdf",
+     "type": "10-K",
+     "filing_date": "2024-08-29",
+     "fiscal_year": 2024
+    },
+    {
+     "url": "https://filecache.investorroom.com/mr5ir_lamresearch2/1411/LRCX%20(Lam%20Research%20Corporation)%20%20(10-K)%202024-08-29.pdf_.pdf",
+     "type": "10-K",
+     "filing_date": "2024-08-29",
+     "fiscal_year": 2023
+    },
+    {
+     "url": "https://filecache.investorroom.com/mr5ir_lamresearch2/1411/LRCX%20(Lam%20Research%20Corporation)%20%20(10-K)%202024-08-29.pdf_.pdf",
+     "type": "10-K",
+     "filing_date": "2024-08-29",
+     "fiscal_year": 2022
+    }
+   ]
+  },
+  {
+   "supplier": "LRCX",
+   "customer": "005930.KS",
+   "weight": 31.0,
+   "disclosed": false,
+   "valid_from": "2024-08-30",
+   "valid_to": "2025-08-30",
+   "sources": [
+    {
+     "url": "https://filecache.investorroom.com/mr5ir_lamresearch2/1411/LRCX%20(Lam%20Research%20Corporation)%20%20(10-K)%202024-08-29.pdf_.pdf",
+     "type": "10-K",
+     "filing_date": "2024-08-29",
+     "fiscal_year": 2024
+    },
+    {
+     "url": "https://filecache.investorroom.com/mr5ir_lamresearch2/1411/LRCX%20(Lam%20Research%20Corporation)%20%20(10-K)%202024-08-29.pdf_.pdf",
+     "type": "10-K",
+     "filing_date": "2024-08-29",
+     "fiscal_year": 2023
+    },
+    {
+     "url": "https://filecache.investorroom.com/mr5ir_lamresearch2/1411/LRCX%20(Lam%20Research%20Corporation)%20%20(10-K)%202024-08-29.pdf_.pdf",
+     "type": "10-K",
+     "filing_date": "2024-08-29",
+     "fiscal_year": 2022
+    }
+   ]
+  },
+  {
+   "supplier": "LRCX",
+   "customer": "2330.TW",
+   "weight": 31.0,
+   "disclosed": false,
+   "valid_from": "2024-08-30",
+   "valid_to": "2025-08-30",
+   "sources": [
+    {
+     "url": "https://filecache.investorroom.com/mr5ir_lamresearch2/1411/LRCX%20(Lam%20Research%20Corporation)%20%20(10-K)%202024-08-29.pdf_.pdf",
+     "type": "10-K",
+     "filing_date": "2024-08-29",
+     "fiscal_year": 2024
+    },
+    {
+     "url": "https://filecache.investorroom.com/mr5ir_lamresearch2/1411/LRCX%20(Lam%20Research%20Corporation)%20%20(10-K)%202024-08-29.pdf_.pdf",
+     "type": "10-K",
+     "filing_date": "2024-08-29",
+     "fiscal_year": 2023
+    },
+    {
+     "url": "https://filecache.investorroom.com/mr5ir_lamresearch2/1411/LRCX%20(Lam%20Research%20Corporation)%20%20(10-K)%202024-08-29.pdf_.pdf",
+     "type": "10-K",
+     "filing_date": "2024-08-29",
+     "fiscal_year": 2022
+    }
+   ]
+  },
+  {
+   "supplier": "LRCX",
+   "customer": "MU",
+   "weight": 31.0,
+   "disclosed": false,
+   "valid_from": "2024-08-30",
+   "valid_to": "2025-08-30",
+   "sources": [
+    {
+     "url": "https://filecache.investorroom.com/mr5ir_lamresearch2/1411/LRCX%20(Lam%20Research%20Corporation)%20%20(10-K)%202024-08-29.pdf_.pdf",
+     "type": "10-K",
+     "filing_date": "2024-08-29",
+     "fiscal_year": 2024
+    },
+    {
+     "url": "https://filecache.investorroom.com/mr5ir_lamresearch2/1411/LRCX%20(Lam%20Research%20Corporation)%20%20(10-K)%202024-08-29.pdf_.pdf",
+     "type": "10-K",
+     "filing_date": "2024-08-29",
+     "fiscal_year": 2023
+    },
+    {
+     "url": "https://filecache.investorroom.com/mr5ir_lamresearch2/1411/LRCX%20(Lam%20Research%20Corporation)%20%20(10-K)%202024-08-29.pdf_.pdf",
+     "type": "10-K",
+     "filing_date": "2024-08-29",
+     "fiscal_year": 2022
+    }
+   ]
+  },
+  {
+   "supplier": "MU",
+   "customer": "NVDA",
+   "weight": 1.0,
+   "disclosed": false,
+   "valid_from": "2024-02-27",
+   "valid_to": "2025-02-26",
+   "sources": [
+    {
+     "url": "https://investors.micron.com/news/press-release/2024/Micron-Commences-Volume-Production-of-Industry-Leading-HBM3E-Solution-to-Accelerate-the-Growth-of-AI-02-26-2024/default.aspx",
+     "type": "press_release",
+     "filing_date": "2024-02-26",
+     "fiscal_year": 2024
+    }
+   ]
+  },
+  {
+   "supplier": "QCOM",
+   "customer": "005930.KS",
+   "weight": 67.0,
+   "disclosed": false,
+   "valid_from": "2025-11-06",
+   "valid_to": "2026-11-06",
+   "sources": [
+    {
+     "url": "https://s204.q4cdn.com/645488518/files/doc_financials/2025/q4/QCOM-09-28-25-FY2025-10-K-Final.pdf",
+     "type": "10-K",
+     "filing_date": "2025-11-05",
+     "fiscal_year": 2025
+    }
+   ]
+  },
+  {
+   "supplier": "QCOM",
+   "customer": "AAPL",
+   "weight": 67.0,
+   "disclosed": false,
+   "valid_from": "2025-11-06",
+   "valid_to": "2026-11-06",
+   "sources": [
+    {
+     "url": "https://s204.q4cdn.com/645488518/files/doc_financials/2025/q4/QCOM-09-28-25-FY2025-10-K-Final.pdf",
+     "type": "10-K",
+     "filing_date": "2025-11-05",
+     "fiscal_year": 2025
+    }
+   ]
+  },
+  {
+   "supplier": "SWKS",
+   "customer": "AAPL",
+   "weight": 66.0,
+   "disclosed": true,
+   "valid_from": "2025-11-10",
+   "valid_to": "2026-11-10",
+   "sources": [
+    {
+     "url": "https://stocklight.com/stocks/us/nasdaq-swks/skyworks-solutions/annual-reports/nasdaq-swks-2025-10K-251462701.pdf",
+     "type": "10-K",
+     "filing_date": "2025-11-07",
+     "fiscal_year": 2025
+    },
+    {
+     "url": "https://stocklight.com/stocks/us/nasdaq-swks/skyworks-solutions/annual-reports/nasdaq-swks-2025-10K-251462701.pdf",
+     "type": "10-K",
+     "filing_date": "2025-11-07",
+     "fiscal_year": 2024
+    },
+    {
+     "url": "https://stocklight.com/stocks/us/nasdaq-swks/skyworks-solutions/annual-reports/nasdaq-swks-2025-10K-251462701.pdf",
+     "type": "10-K",
+     "filing_date": "2025-11-07",
+     "fiscal_year": 2023
+    }
+   ]
+  },
+  {
+   "supplier": "UCTT",
+   "customer": "AMAT",
+   "weight": 23.2,
+   "disclosed": true,
+   "valid_from": "2025-02-26",
+   "valid_to": "2026-02-26",
+   "sources": [
+    {
+     "url": "https://s29.q4cdn.com/619069826/files/doc_downloads/2025/03/2024-Form-10K-with-Exhibits_final.pdf",
+     "type": "10-K",
+     "filing_date": "2025-02-25",
+     "fiscal_year": 2024
+    },
+    {
+     "url": "https://s29.q4cdn.com/619069826/files/doc_downloads/2025/03/2024-Form-10K-with-Exhibits_final.pdf",
+     "type": "10-K",
+     "filing_date": "2025-02-25",
+     "fiscal_year": 2023
+    },
+    {
+     "url": "https://s29.q4cdn.com/619069826/files/doc_downloads/2025/03/2024-Form-10K-with-Exhibits_final.pdf",
+     "type": "10-K",
+     "filing_date": "2025-02-25",
+     "fiscal_year": 2022
+    }
+   ]
+  },
+  {
+   "supplier": "UCTT",
+   "customer": "LRCX",
+   "weight": 39.5,
+   "disclosed": true,
+   "valid_from": "2025-02-26",
+   "valid_to": "2026-02-26",
+   "sources": [
+    {
+     "url": "https://s29.q4cdn.com/619069826/files/doc_downloads/2025/03/2024-Form-10K-with-Exhibits_final.pdf",
+     "type": "10-K",
+     "filing_date": "2025-02-25",
+     "fiscal_year": 2024
+    },
+    {
+     "url": "https://s29.q4cdn.com/619069826/files/doc_downloads/2025/03/2024-Form-10K-with-Exhibits_final.pdf",
+     "type": "10-K",
+     "filing_date": "2025-02-25",
+     "fiscal_year": 2023
+    },
+    {
+     "url": "https://s29.q4cdn.com/619069826/files/doc_downloads/2025/03/2024-Form-10K-with-Exhibits_final.pdf",
+     "type": "10-K",
+     "filing_date": "2025-02-25",
+     "fiscal_year": 2022
+    }
+   ]
+  }
+ ],
+ "tiers": [
+  {
+   "id": "T01",
+   "name": "Wafers"
+  },
+  {
+   "id": "T02",
+   "name": "Industrial gases"
+  },
+  {
+   "id": "T03",
+   "name": "Photoresists and chemicals"
+  },
+  {
+   "id": "T04",
+   "name": "CMP, materials, masks"
+  },
+  {
+   "id": "T05",
+   "name": "Equipment"
+  },
+  {
+   "id": "T06",
+   "name": "EDA and IP"
+  },
+  {
+   "id": "T07",
+   "name": "Foundry"
+  },
+  {
+   "id": "T08",
+   "name": "Memory"
+  },
+  {
+   "id": "T09",
+   "name": "OSAT and substrates"
+  },
+  {
+   "id": "T10",
+   "name": "Chip designers and IDMs"
+  },
+  {
+   "id": "T11",
+   "name": "Hyperscalers, OEMs, servers"
+  }
+ ]
+}

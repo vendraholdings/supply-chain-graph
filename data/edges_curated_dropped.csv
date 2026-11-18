@@ -1,0 +1,29 @@
+supplier,customer,reason
+LRCX,INTC,Intel not named among Lam significant customers in FY2024 10-K
+KLAC,005930.KS,Samsung not named in KLA 10-K; only TSMC named as 10%+ customer
+KLAC,MU,Micron not named in KLA 10-K; only TSMC named as 10%+ customer
+ASML.AS,2330.TW,ASML annual report not readable (IR PDF blocked 403); no document read naming customer
+ASML.AS,005930.KS,ASML annual report not readable (IR PDF blocked 403); no document read naming customer
+ASML.AS,INTC,ASML annual report not readable (IR PDF blocked 403); no document read naming customer
+AMAT,2330.TW,Applied Materials 10-K on IR site blocked (403); filings seen via search show anonymised customers; not sourced
+AMAT,005930.KS,Applied Materials 10-K on IR site blocked (403); filings seen via search show anonymised customers; not sourced
+AMAT,000660.KS,Applied Materials 10-K on IR site blocked (403); filings seen via search show anonymised customers; not sourced
+LRCX,INTC,Intel not named among Lam significant customers in FY2024 10-K
+8035.T,2330.TW,not researched within tool budget
+8035.T,005930.KS,not researched within tool budget
+MKSI,AMAT,MKS 10-K on IR site blocked (403); no readable mirror found
+MKSI,LRCX,MKS 10-K on IR site blocked (403); no readable mirror found
+ENTG,2330.TW,not researched within tool budget
+2330.TW,AAPL,not researched within tool budget; TSMC filings typically anonymise customers
+2330.TW,NVDA,not researched within tool budget; TSMC filings typically anonymise customers
+000660.KS,NVDA,no official SK hynix document naming NVIDIA found; only press coverage
+005930.KS,NVDA,no official document found naming NVIDIA as customer
+INTC,DELL,anonymised: Intel 10-K read labels three largest customers as Customer A/B/C
+INTC,HPQ,anonymised: Intel 10-K read labels three largest customers as Customer A/B/C
+INTC,0992.HK,anonymised: Intel 10-K read labels three largest customers as Customer A/B/C
+AVGO,AAPL,not researched within tool budget
+QRVO,AAPL,Qorvo FY2025 annual report on IR site blocked (403); no readable mirror fetched
+CRUS,AAPL,Cirrus 10-K primary document not fetched; only secondary summaries seen
+LITE,AAPL,anonymised: Lumentum 10-K read labels customers as Customer A/B/C/D
+FN,NVDA,Fabrinet 10-K primary document not fetched; only secondary summaries seen
+AMKR,QCOM,Qualcomm share only seen in search snippet of FY2024 10-K; IR PDF blocked (403); FY2023 10-K read had no Qualcomm percentage

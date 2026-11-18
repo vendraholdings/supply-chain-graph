@@ -1,0 +1,112 @@
+ticker,name,tier,country,currency,source_note
+4063.T,Shin-Etsu Chemical,T01,JP,JPY,verified
+3436.T,SUMCO,T01,JP,JPY,verified
+WAF.DE,Siltronic,T01,EU,EUR,verified
+6488.TWO,GlobalWafers,T01,TW,TWD,verified
+SOI.PA,Soitec,T01,EU,EUR,verified
+5483.TWO,Sino-American Silicon Products,T01,TW,TWD,verified
+LIN,Linde,T02,US,USD,verified
+APD,Air Products and Chemicals,T02,US,USD,verified
+AI.PA,Air Liquide,T02,EU,EUR,verified
+4091.T,Nippon Sanso Holdings,T02,JP,JPY,verified
+4186.T,Tokyo Ohka Kogyo,T03,JP,JPY,verified
+4004.T,Resonac Holdings,T03,JP,JPY,verified
+4901.T,Fujifilm Holdings,T03,JP,JPY,verified
+4005.T,Sumitomo Chemical,T03,JP,JPY,verified
+MRK.DE,Merck KGaA,T03,EU,EUR,verified
+DD,DuPont de Nemours,T03,US,USD,verified
+ENTG,Entegris,T04,US,USD,verified
+PLAB,Photronics,T04,US,USD,verified
+2802.T,Ajinomoto,T04,JP,JPY,verified
+5384.T,Fujimi,T04,JP,JPY,verified
+6361.T,Ebara,T04,JP,JPY,verified
+7741.T,HOYA,T04,JP,JPY,verified
+7912.T,Dai Nippon Printing,T04,JP,JPY,verified
+ASML.AS,ASML Holding,T05,EU,EUR,verified
+AMAT,Applied Materials,T05,US,USD,verified
+LRCX,Lam Research,T05,US,USD,verified
+8035.T,Tokyo Electron,T05,JP,JPY,verified
+6525.T,Kokusai Electric,T05,JP,JPY,verified
+VECO,Veeco Instruments,T05,US,USD,verified
+ASM.AS,ASM International,T05,EU,EUR,verified
+BESI.AS,BE Semiconductor Industries,T05,EU,EUR,verified
+AIXA.DE,Aixtron,T05,EU,EUR,verified
+6920.T,Lasertec,T05,JP,JPY,verified
+7735.T,SCREEN Holdings,T05,JP,JPY,verified
+6857.T,Advantest,T05,JP,JPY,verified
+6146.T,Disco,T05,JP,JPY,verified
+7731.T,Nikon,T05,JP,JPY,verified
+KLAC,KLA,T05,US,USD,verified
+ONTO,Onto Innovation,T05,US,USD,verified
+CAMT,Camtek,T05,US,USD,verified
+NVMI,Nova,T05,US,USD,verified
+TER,Teradyne,T05,US,USD,verified
+FORM,FormFactor,T05,US,USD,verified
+MKSI,MKS,T05,US,USD,verified
+AEIS,Advanced Energy Industries,T05,US,USD,verified
+UCTT,Ultra Clean Holdings,T05,US,USD,verified
+ICHR,Ichor Holdings,T05,US,USD,verified
+SNPS,Synopsys,T06,US,USD,verified
+CDNS,Cadence Design Systems,T06,US,USD,verified
+ARM,Arm Holdings,T06,US,USD,verified
+RMBS,Rambus,T06,US,USD,verified
+2330.TW,Taiwan Semiconductor Manufacturing,T07,TW,TWD,verified
+2303.TW,United Microelectronics,T07,TW,TWD,verified
+GFS,GlobalFoundries,T07,US,USD,verified
+0981.HK,Semiconductor Manufacturing International,T07,HK,HKD,verified
+1347.HK,Hua Hong Semiconductor,T07,HK,HKD,verified
+6770.TW,Powerchip Semiconductor Manufacturing,T07,TW,TWD,verified
+TSEM,Tower Semiconductor,T07,US,USD,verified
+5347.TWO,Vanguard International Semiconductor,T07,TW,TWD,verified
+MU,Micron Technology,T08,US,USD,verified
+000660.KS,SK hynix,T08,KR,KRW,verified
+005930.KS,Samsung Electronics,T08,KR,KRW,verified
+2408.TW,Nanya Technology,T08,TW,TWD,verified
+2344.TW,Winbond Electronics,T08,TW,TWD,verified
+2337.TW,Macronix International,T08,TW,TWD,verified
+SNDK,Sandisk,T08,US,USD,first bar 2025-02-13
+285A.T,Kioxia Holdings,T08,JP,JPY,first bar 2024-12-18
+3711.TW,ASE Technology Holding,T09,TW,TWD,verified
+AMKR,Amkor Technology,T09,US,USD,verified
+6239.TW,Powertech Technology,T09,TW,TWD,verified
+4062.T,Ibiden,T09,JP,JPY,verified
+3037.TW,Unimicron Technology,T09,TW,TWD,verified
+009150.KS,Samsung Electro-Mechanics,T09,KR,KRW,verified
+FN,Fabrinet,T09,US,USD,verified
+NVDA,NVIDIA,T10,US,USD,verified
+AMD,Advanced Micro Devices,T10,US,USD,verified
+AVGO,Broadcom,T10,US,USD,verified
+QCOM,Qualcomm,T10,US,USD,verified
+MRVL,Marvell Technology,T10,US,USD,verified
+INTC,Intel,T10,US,USD,verified
+2454.TW,MediaTek,T10,TW,TWD,verified
+2379.TW,Realtek Semiconductor,T10,TW,TWD,verified
+3034.TW,Novatek Microelectronics,T10,TW,TWD,verified
+3661.TW,Alchip Technologies,T10,TW,TWD,verified
+3443.TW,Global Unichip,T10,TW,TWD,verified
+ALAB,Astera Labs,T10,US,USD,first bar 2024-03-20
+CRDO,Credo Technology Group,T10,US,USD,verified
+CRUS,Cirrus Logic,T10,US,USD,verified
+SWKS,Skyworks Solutions,T10,US,USD,verified
+LITE,Lumentum Holdings,T10,US,USD,verified
+COHR,Coherent,T10,US,USD,verified
+NXPI,NXP Semiconductors,T10,US,USD,verified
+IFX.DE,Infineon Technologies,T10,EU,EUR,verified
+STMPA.PA,STMicroelectronics,T10,EU,EUR,verified
+6723.T,Renesas Electronics,T10,JP,JPY,verified
+AAPL,Apple,T11,US,USD,verified
+MSFT,Microsoft,T11,US,USD,verified
+GOOGL,Alphabet,T11,US,USD,verified
+AMZN,Amazon.com,T11,US,USD,verified
+META,Meta Platforms,T11,US,USD,verified
+ORCL,Oracle,T11,US,USD,verified
+9988.HK,Alibaba Group Holding,T11,HK,HKD,verified
+0700.HK,Tencent Holdings,T11,HK,HKD,verified
+DELL,Dell Technologies,T11,US,USD,verified
+HPQ,HP,T11,US,USD,verified
+HPE,Hewlett Packard Enterprise,T11,US,USD,verified
+SMCI,Super Micro Computer,T11,US,USD,verified
+2317.TW,Hon Hai Precision Industry,T11,TW,TWD,verified
+2382.TW,Quanta Computer,T11,TW,TWD,verified
+3231.TW,Wistron,T11,TW,TWD,verified
+0992.HK,Lenovo Group,T11,HK,HKD,verified

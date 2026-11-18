@@ -8,11 +8,11 @@ from pathlib import Path
 
 ALLOWED_EMAIL = "263115861+vendraholdings@users.noreply.github.com"
 PATTERNS = {
-    "private ip": re.compile(r"\b(?:100\.(?:6[4-9]|[7-9]\d|1[01]\d|12[0-7])|10\.\d{1,3}|192\.168|172\.(?:1[6-9]|2\d|3[01]))\.\d{1,3}\.\d{1,3}\b"),
-    "tailnet host": re.compile(r"\.ts\.net\b|tailscale", re.I),
+    "private ip": re.compile(r"\b(?:10" + r"0\.(?:6[4-9]|[7-9]\d|1[01]\d|12[0-7])|10\.\d{1,3}|192\.168|172\.(?:1[6-9]|2\d|3[01]))\.\d{1,3}\.\d{1,3}\b"),
+    "tailnet host": re.compile(r"\.ts" + r"\.net\b|tail" + "scale", re.I),
     "home path": re.compile(r"/(?:Users|home)/[A-Za-z0-9._-]+/"),
-    "private key": re.compile(r"BEGIN [A-Z ]*PRIVATE KEY"),
-    "api key": re.compile(r"(?i)\b(?:api[_-]?key|secret|passw(?:or)?d|token)\s*[:=]\s*['\"]?[A-Za-z0-9_\-]{16,}"),
+    "private key": re.compile("BEG" + r"IN [A-Z ]*PRIVATE KEY"),
+    "api key": re.compile(r"(?i)\b(?:ap" + r"i[_-]?key|secret|pass" + r"w(?:or)?d|token)\s*[:=]\s*['\"]?[A-Za-z0-9_\-]{16,}"),
     "email": re.compile(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,}"),
 }
 SKIP_SUFFIX = {".png", ".gif", ".pdf", ".parquet", ".woff", ".woff2", ".ico", ".jpg", ".mp4"}

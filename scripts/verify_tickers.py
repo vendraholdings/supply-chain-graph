@@ -33,6 +33,9 @@ def info(ticker: str) -> dict:
     return {}
 
 
+MANUAL_DROP = {"QRVO": "delisted: vendor history ends 2026-10-02 (single bar)"}
+
+
 def main() -> None:
     cfg = config.load()
     end = pd.Timestamp(cfg["build_end"])
@@ -49,7 +52,9 @@ def main() -> None:
                    last_date=s.index.max().date().isoformat() if len(s) else None, n_obs=len(s))
         nm_ok = bool(tokens(r.name) & tokens(rec["long_name"] or ""))
         rec["name_match"] = nm_ok
-        if not len(s):
+        if r.ticker in MANUAL_DROP:
+            status, reason = "stale", MANUAL_DROP[r.ticker]
+        elif not len(s):
             status, reason = "not_found", "no price history returned"
         elif rec["quote_type"] not in (None, "EQUITY"):
             status, reason = "not_found", f"quoteType {rec['quote_type']}"
@@ -66,7 +71,13 @@ def main() -> None:
         print(r.ticker, status, rec["long_name"], rec["currency"], flush=True)
     rep = pd.DataFrame(rows)
     rep.to_csv(ROOT / "data" / "ticker_report.csv", index=False)
+    keep = rep[rep.status.isin(["ok", "short_history"])].copy()
+    keep["name"] = keep["seed_name"]
+    keep["source_note"] = keep.apply(lambda x: x["reason"] if x["reason"] else "verified", axis=1)
+    keep["country"] = keep["country"]
+    keep[["ticker", "name", "tier", "country", "currency", "source_note"]].to_csv(ROOT / "data" / "universe.csv", index=False)
     print(rep.status.value_counts().to_string())
+    print(len(keep), "companies in universe.csv")
 
 
 if __name__ == "__main__":
