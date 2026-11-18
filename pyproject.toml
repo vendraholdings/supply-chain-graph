@@ -13,7 +13,7 @@ dependencies = [
 ]
 
 [dependency-groups]
-dev = ["pytest>=8", "ruff>=0.5", "typst>=0.15.2", "playwright>=1.45"]
+dev = ["pytest>=8", "ruff>=0.5", "typst>=0.15.2", "playwright==1.65.2"]
 
 [build-system]
 requires = ["hatchling"]

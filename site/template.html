@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Semiconductor supply-chain graph</title>
+<style>
+:root{--bg:#0b0f17;--panel:#121826;--ink:#e5e7eb;--muted:#9aa5b1;--grid:#1f2937;--link:#4cc9f0}
+*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 "DejaVu Sans",Helvetica,Arial,sans-serif}
+a{color:var(--link)}main{max-width:1180px;margin:0 auto;padding:0 16px 60px}
+h1{font-size:1.5rem;font-weight:600;margin:28px 0 6px}h2{font-size:1.1rem;font-weight:600;margin:34px 0 8px}
+p.lead{color:var(--muted);margin:0 0 14px;max-width:820px}
+.facts{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0}.fact{background:var(--panel);border:1px solid var(--grid);border-radius:6px;padding:8px 12px;min-width:150px}
+.fact b{display:block;font-size:1.25rem}.fact span{color:var(--muted);font-size:.8rem}
+.notice{background:var(--panel);border-left:3px solid #f9c74f;padding:10px 14px;margin:14px 0;color:var(--ink)}
+#hero{position:relative;height:62vh;min-height:380px;background:var(--panel);border:1px solid var(--grid);border-radius:6px;overflow:hidden}
+#graph{position:absolute;inset:0}#info{position:absolute;top:8px;right:8px;width:min(330px,70%);max-height:90%;overflow:auto;background:rgba(11,15,23,.92);border:1px solid var(--grid);border-radius:6px;padding:10px 12px;font-size:.82rem}
+#legend{display:flex;flex-wrap:wrap;gap:4px 12px;margin:8px 0;font-size:.78rem;color:var(--muted)}#legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px}
+.fig{background:var(--panel);border:1px solid var(--grid);border-radius:6px;padding:6px;margin:10px 0}.cap{color:var(--muted);font-size:.85rem;margin:4px 2px 0}
+table{border-collapse:collapse;width:100%;font-size:.8rem}th,td{border-bottom:1px solid var(--grid);padding:5px 7px;text-align:left}th{color:var(--muted);font-weight:500}.tw{overflow-x:auto}
+label{font-size:.85rem;color:var(--muted)}input[type=range]{width:240px;vertical-align:middle}
+</style></head><body><main>
+<h1>Mapping the semiconductor supply chain from public filings</h1>
+<p class="lead">A directed supplier-to-customer graph of listed semiconductor companies, with the source and filing date of every edge, and tests of how shocks and returns move across tiers. Negative and uninformative results are reported as such.</p>
+<div class="facts" id="facts"></div>
+<div class="notice" id="notice"></div>
+<h2>Figure 1. Supplier-to-customer network</h2>
+<div id="legend"></div>
+<div id="hero"><div id="graph"></div><div id="info"><b>Select a company</b><br>Click a node to list its suppliers and customers with the filings behind each edge. Drag to rotate, scroll to zoom.</div></div>
+<p class="cap">Nodes are listed companies, coloured by tier (upstream to downstream, left to right) and sized by market capitalisation at the build date. Arrows point from supplier to customer. Companies without a sourced edge are shown in their tier column for reference.</p>
+<h2>Sourced edges</h2><div class="tw"><table id="edges"></table></div>
+<h2>Figure 9. Spillovers between tiers</h2><div class="fig"><div id="f9"></div></div>
+<p class="cap" id="cap9"></p>
+<h2>Figure 10. Rolling spillover index</h2><div class="fig"><div id="f10"></div></div>
+<p class="cap">Total spillover index and net directional spillover by tier over rolling 250-day windows of residualised daily returns on the US trading-day grid.</p>
+<h2>Figure 11. Lead-lag correlations between tiers</h2>
+<p><label>Lag (days): <input type="range" id="lag" min="-5" max="5" value="1" step="1"> <b id="lagv">1</b></label></p>
+<div class="fig"><div id="f11"></div></div>
+<p class="cap">Correlation of the row tier's return on day t with the column tier's return on day t plus the lag. Positive lags: the row leads. Lags of one day between Asian and US listings partly reflect closing-time order and are not evidence of information flow.</p>
+<h2>Method notes and limitations</h2>
+<p class="lead">Prices are daily adjusted closes aligned to US trading days by exchange close time, converted to US dollars. Tier indices use current market capitalisation as static weights, so the sample is subject to survivorship. The edge set is small; statistics that depend on it (customer momentum, linked-company event studies) are not yet reported as results. No price series are published on this site.</p>
+</main>
+<script src="vendor/plotly.min.js"></script><script src="vendor/3d-force-graph.min.js"></script>
+<script>
+const D=%%DATA%%;
+const C=D.colors,F=D.facts,T=D.graph.tiers,TC=D.tier_colors;
+const tierIdx={};T.forEach((t,i)=>tierIdx[t.id]=i);
+document.getElementById('facts').innerHTML=[[F.n_nodes,'companies in the universe'],[F.n_edges,'sourced supplier-customer pairs'],[F.n_edge_rows,'edge-years with a filing date'],[F.spill_total.toFixed(1)+'%','total spillover index (static)'],[F.n_shocks.toLocaleString('en-US'),'price shocks studied']].map(a=>'<div class="fact"><b>'+a[0]+'</b><span>'+a[1]+'</span></div>').join('');
+document.getElementById('notice').textContent='Status: the graph holds '+F.n_edges+' sourced pairs covering '+F.n_connected+' companies; at most '+F.max_suppliers+' suppliers have a usable signal in any month, so the customer-momentum strategy cannot yet be estimated. Automated extraction from SEC filings is built but not yet run. Data as of '+F.build_end+'.';
+document.getElementById('legend').innerHTML=T.map((t,i)=>'<span><i style="background:'+TC[i]+'"></i>'+t.id+' '+t.name+'</span>').join('');
+const nodes=D.graph.nodes.map(n=>({id:n.ticker,name:n.name,tier:n.tier,country:n.country,mcap:n.mcap_usd,val:Math.max(1,Math.sqrt((n.mcap_usd||2e9)/1e9)),fx:(tierIdx[n.tier]-5)*60}));
+const links=D.graph.edges.map(e=>({source:e.supplier,target:e.customer,w:e.weight,src:e.sources}));
+const el=document.getElementById('graph');
+const G=ForceGraph3D()(el).graphData({nodes,links}).backgroundColor(C.panel).nodeColor(n=>TC[tierIdx[n.tier]]).nodeVal('val').nodeRelSize(3).nodeOpacity(.95)
+ .nodeLabel(n=>n.id+' '+n.name+' ('+n.tier+')').linkColor(()=>'#9aa5b1').linkOpacity(.7).linkWidth(l=>0.4+Math.min(l.w,40)/20).linkDirectionalArrowLength(5).linkDirectionalArrowRelPos(1)
+ .cooldownTicks(120).d3VelocityDecay(.4).width(el.clientWidth).height(el.clientHeight);
+G.d3Force('charge').strength(-18);
+G.onNodeClick(n=>{const sup=D.graph.edges.filter(e=>e.customer===n.id),cus=D.graph.edges.filter(e=>e.supplier===n.id);
+ const row=(e,o)=>'<li>'+o+' <b>'+(o===e.supplier?e.supplier:e.customer)+'</b>'+(e.disclosed?' ('+e.weight+'% of revenue)':' (named, share not stated)')+' '+e.sources.slice(0,3).map(s=>'<a href="'+s.url+'" target="_blank" rel="noopener">FY'+s.fiscal_year+'</a>').join(' ')+'</li>';
+ document.getElementById('info').innerHTML='<b>'+n.id+'</b> '+n.name+'<br><span style="color:#9aa5b1">'+n.tier+' '+(T[tierIdx[n.tier]].name)+', '+n.country+(n.mcap?', market cap about US$'+(n.mcap/1e9).toFixed(0)+' bn':'')+'</span><br>Suppliers: '+(sup.length?'<ul>'+sup.map(e=>row(e,e.supplier)).join('')+'</ul>':'none sourced<br>')+'Customers: '+(cus.length?'<ul>'+cus.map(e=>row(e,e.customer)).join('')+'</ul>':'none sourced');});
+window.addEventListener('resize',()=>G.width(el.clientWidth).height(el.clientHeight));
+const tb=document.getElementById('edges');
+tb.innerHTML='<tr><th>Supplier</th><th>Customer</th><th>Share of revenue</th><th>Fiscal years</th><th>Latest filing</th><th>Source</th></tr>'+D.graph.edges.map(e=>{const s=e.sources.slice().sort((a,b)=>b.filing_date.localeCompare(a.filing_date));return '<tr><td>'+e.supplier+'</td><td>'+e.customer+'</td><td>'+(e.disclosed?e.weight+'%':'named, not stated')+'</td><td>'+[...new Set(e.sources.map(x=>x.fiscal_year))].sort().join(', ')+'</td><td>'+s[0].filing_date+'</td><td><a href="'+s[0].url+'" target="_blank" rel="noopener">'+s[0].type+'</a></td></tr>'}).join('');
+const L=(extra)=>Object.assign({paper_bgcolor:C.panel,plot_bgcolor:C.panel,font:{color:C.ink,family:'DejaVu Sans, Helvetica, Arial, sans-serif',size:12},margin:{l:60,r:20,t:20,b:55}},extra||{});
+Plotly.newPlot('f9',[{type:'heatmap',z:D.spill.theta,x:D.spill.names,y:D.spill.names,colorscale:'Turbo',zmin:0,zmax:20,colorbar:{title:{text:'% of row'}},hovertemplate:'shock from %{x}<br>to %{y}: %{z:.1f}%<extra></extra>'}],L({yaxis:{autorange:'reversed',title:'Variance of tier explained'},xaxis:{title:'Shock originates in tier'},height:520}),{responsive:true,displaylogo:false});
+document.getElementById('cap9').textContent='Generalised forecast-error variance decomposition, 10-day horizon, eleven tier indices (residualised on the US market). Total spillover index '+D.spill.total.toFixed(1)+'%; weekly data give '+F.spill_weekly.toFixed(1)+'%. Colour is capped at 20% so off-diagonal cells are legible; diagonal cells are own-tier shares.';
+const tr=[{x:D.rolling.dates,y:D.rolling.total,name:'Total index',line:{color:C.link,width:2},xaxis:'x',yaxis:'y'}];
+Object.keys(D.rolling.net).forEach((k,i,a)=>tr.push({x:D.rolling.dates,y:D.rolling.net[k],name:k,line:{width:1,color:TC[i]},xaxis:'x',yaxis:'y2'}));
+Plotly.newPlot('f10',tr,L({grid:{rows:2,columns:1,pattern:'independent',roworder:'top to bottom'},yaxis:{domain:[.62,1],title:'Total index (%)'},yaxis2:{domain:[0,.54],title:'Net spillover (points)'},xaxis:{anchor:'y2'},height:560,legend:{orientation:'h',y:-.12}}),{responsive:true,displaylogo:false});
+function ll(l){const M=D.leadlag.mats[l];Plotly.react('f11',[{type:'heatmap',z:M,x:D.leadlag.tiers,y:D.leadlag.tiers,colorscale:'Turbo',zmin:-.5,zmax:.5,colorbar:{title:{text:'correlation'}},hovertemplate:'%{y} leads %{x}: %{z:.2f}<extra></extra>'}],L({yaxis:{autorange:'reversed',title:'Leading tier'},xaxis:{title:'Following tier'},height:520}),{responsive:true,displaylogo:false});}
+const sl=document.getElementById('lag');sl.oninput=()=>{document.getElementById('lagv').textContent=sl.value;ll(sl.value)};ll(1);
+</script></body></html>
