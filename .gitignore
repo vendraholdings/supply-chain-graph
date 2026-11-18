@@ -1,0 +1,15 @@
+.env*
+*.key
+*.pem
+secrets/
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+cache/
+data/raw/
+data/edgar_cache/
+site/dist/
+paper/*.pdf
+!paper/paper.pdf

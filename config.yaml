@@ -1,0 +1,24 @@
+# Primary specification is fixed here before any result is computed.
+build_end: "2026-10-30"          # last price date used in every result
+price_start: "2015-01-01"
+edgar_user_agent: "vendraholdings research 263115861+vendraholdings@users.noreply.github.com"
+edgar_rate_per_s: 5
+primary:
+  frequency: monthly
+  quantiles: 3
+  weighting: equal
+  edge_set: curated+rule
+  holding_months: 1
+  lag_months: 0
+costs_bps:
+  oneway: {US: 10, EU: 10, JP: 10, TW: 25, KR: 25, HK: 25}
+  borrow_annual: 50
+  multipliers: [0, 1, 2]
+rewiring_draws: 1000
+seed: 20261119
+event:
+  z_threshold: 3.0
+  estimation_window: [-250, -30]
+  car_horizon: 20
+  placebo_draws: 1000
+spillover: {horizon: 10, window: 250, max_lag: 3}
