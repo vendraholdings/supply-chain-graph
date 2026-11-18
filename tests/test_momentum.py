@@ -66,7 +66,6 @@ def test_delaying_availability_never_raises_information_set():
 def test_edge_not_used_on_its_available_day():
     R, e, tier, ctry = world()
     eng = mo.Engine(R, ctry, CFG)
-    k = int(np.searchsorted(eng.dates, pd.Timestamp("2014-02-28")))
     E = mo.edge_arrays(e.assign(available_date="2014-02-28"), eng.tickers, tier)
     assert eng.info_set(E, mo.Spec())[0] == 0       # month end 2014-01 is before it
     assert eng.info_set(E, mo.Spec())[1] == 0       # signal day equal to available_date is not strictly after

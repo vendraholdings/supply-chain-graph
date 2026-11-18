@@ -1,6 +1,5 @@
 import json
 
-import pandas as pd
 
 from scgraph import auto_edges, edges
 from scgraph.extract_llm import LLM, cache_key

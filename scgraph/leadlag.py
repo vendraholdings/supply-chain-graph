@@ -12,11 +12,11 @@ def xcorr(X: np.ndarray, lags=LAGS) -> np.ndarray:
     T, K = X.shape
     Z = (X - X.mean(0)) / X.std(0, ddof=1)
     out = np.zeros((len(lags), K, K))
-    for a, l in enumerate(lags):
-        if l >= 0:
-            out[a] = Z[: T - l].T @ Z[l:] / (T - l - 1)
+    for a, lg in enumerate(lags):
+        if lg >= 0:
+            out[a] = Z[: T - lg].T @ Z[lg:] / (T - lg - 1)
         else:
-            out[a] = Z[-l:].T @ Z[: T + l] / (T + l - 1)
+            out[a] = Z[-lg:].T @ Z[: T + lg] / (T + lg - 1)
     return out
 
 
@@ -44,10 +44,10 @@ def bootstrap_ci(X: np.ndarray, reps: int = 300, mean_block: float = 10.0, seed:
 def table(X: pd.DataFrame, lo: np.ndarray, hi: np.ndarray, lags=LAGS) -> pd.DataFrame:
     C = xcorr(X.dropna().to_numpy(), lags)
     rows = []
-    for a, l in enumerate(lags):
+    for a, lg in enumerate(lags):
         for i, ci in enumerate(X.columns):
             for j, cj in enumerate(X.columns):
                 if i != j:
-                    rows.append(dict(lag=int(l), leader=ci, follower=cj, corr=C[a, i, j], lo=lo[a, i, j], hi=hi[a, i, j],
+                    rows.append(dict(lag=int(lg), leader=ci, follower=cj, corr=C[a, i, j], lo=lo[a, i, j], hi=hi[a, i, j],
                                      significant=bool(lo[a, i, j] > 0 or hi[a, i, j] < 0)))
     return pd.DataFrame(rows)

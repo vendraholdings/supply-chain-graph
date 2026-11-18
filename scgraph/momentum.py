@@ -8,7 +8,7 @@ Weights are held at their targets (no drift); costs are charged on the fill day 
 from __future__ import annotations
 
 import itertools
-from dataclasses import dataclass, replace
+from dataclasses import dataclass
 
 import numpy as np
 import pandas as pd
@@ -31,7 +31,7 @@ class Spec:
 
 def grid_specs() -> list[Spec]:
     """Declared grid of variants (N = 48), including the primary specification (lag 0, terciles, equal, curated+rule, 1 month)."""
-    return [Spec(l, q, w, e, h) for l, q, w, e, h in itertools.product((0, 1), (2, 3), ("equal", "revenue"),
+    return [Spec(lg, q, w, e, h) for lg, q, w, e, h in itertools.product((0, 1), (2, 3), ("equal", "revenue"),
                                                                        ("curated", "curated+rule"), (1, 3, 6))]
 
 

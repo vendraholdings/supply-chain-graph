@@ -8,7 +8,7 @@ import networkx as nx
 import numpy as np
 import pandas as pd
 
-from . import config, edges as edges_mod
+from . import edges as edges_mod
 
 TIERS = {"T01": "Wafers", "T02": "Industrial gases", "T03": "Photoresists and chemicals", "T04": "CMP, materials, masks",
          "T05": "Equipment", "T06": "EDA and IP", "T07": "Foundry", "T08": "Memory", "T09": "OSAT and substrates",
