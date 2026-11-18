@@ -32,7 +32,7 @@ def test_find_shocks_uses_trailing_window_only():
 
 def test_injected_abnormal_return_is_detected():
     Y, F = synthetic()
-    pairs = [(k, 600 + 3 * k, 0) for k in range(30)]
+    pairs = [(k, 600 + 3 * k, 1) for k in range(30)]
     for k, d0, _ in pairs:
         Y[d0:d0 + 5, k] += 0.01             # +5% over five days
     r = ev.study(Y, F, pairs)

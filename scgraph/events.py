@@ -92,10 +92,10 @@ def mean_cross_corr(resids: list[np.ndarray]) -> float:
 
 def study(Y: np.ndarray, F: dict[int, np.ndarray], pairs: list[tuple[int, int, int]], horizon: int = 20,
           est: tuple[int, int] = (-250, -30)) -> dict:
-    """pairs: (listing column, day-0 grid position, matching key for the factor block). Y: grid days x listings.
+    """pairs: (listing column, day-0 grid position, sign +1/-1 of the triggering shock). Y: grid days x listings.
     F[col] is the factor matrix (market first) for that listing. Returns standardised CARs, raw CAR paths and the test."""
     scars, paths, resids = [], [], []
-    for col, d0, _ in pairs:
+    for col, d0, sgn in pairs:
         Xd = design(F[col])
         fit = fit_market_model(Y[:, col], Xd, d0 + est[0], d0 + est[1])
         if fit is None:
@@ -103,6 +103,7 @@ def study(Y: np.ndarray, F: dict[int, np.ndarray], pairs: list[tuple[int, int, i
         cp = car_path(abnormal(Y[:, col], Xd, fit), d0, horizon)
         if cp is None:
             continue
+        cp = cp * sgn
         paths.append(cp)
         scars.append(cp[-1] / (fit.sigma * np.sqrt(horizon + 1)))
         resids.append(fit.resid)
@@ -122,7 +123,8 @@ def placebo(Y, F, listing_cols: list[int], countries: list[str], n_events: int, 
     for _ in range(draws):
         cols = rng.choice(listing_cols, n_events)
         dates = rng.integers(min_pos, T - horizon - 2, n_events)
-        r = study(Y, F, [(int(c), int(d), 0) for c, d in zip(cols, dates)], horizon, est)
+        sg = rng.choice([-1, 1], n_events)
+        r = study(Y, F, [(int(c), int(d), int(g)) for c, d, g in zip(cols, dates, sg)], horizon, est)
         if r["n"] < 3:
             continue
         ok += 1
