@@ -13,7 +13,7 @@ from .extract_llm import LLM, CacheMiss, reconcile
 def candidate_rows(extracts: list[dict]) -> list[dict]:
     """Extracts that can become edges: resolved customer other than the supplier, a revenue basis and a stated share."""
     return [x for x in extracts if x["customer"] and x["customer"] != x["supplier"] and x["basis"] == "revenue"
-            and x["pct"] is not None]
+            and (x["pct"] is not None or x.get("threshold") is not None)]
 
 
 def build(extracts: list[dict], llm: LLM, aliases, decisions: dict[str, str] | None = None):
@@ -29,13 +29,13 @@ def build(extracts: list[dict], llm: LLM, aliases, decisions: dict[str, str] | N
         accepted = status == "agree" or decisions.get(key) == "accept"
         if not accepted:
             if decisions.get(key) != "reject":
-                queue.append(dict(key=key, supplier=x["supplier"], customer=x["customer"], pct=x["pct"], status=status,
+                queue.append(dict(key=key, supplier=x["supplier"], customer=x["customer"], pct=x["pct"] if x["pct"] is not None else "", status=status,
                                   source_url=x["source_url"], text=x["text"][:400]))
             continue
-        rows.append(dict(supplier=x["supplier"], customer=x["customer"], pct_revenue=x["pct"], fiscal_year=x["fiscal_year"],
+        rows.append(dict(supplier=x["supplier"], customer=x["customer"], pct_revenue=x["pct"] if x["pct"] is not None else float("nan"), fiscal_year=x["fiscal_year"],
                          filing_date=x["filing_date"], source_type=x["form"] if x["form"] in ("10-K", "20-F") else "annual_report",
                          source_url=x["source_url"], source_note=f"Rule match, {'model-confirmed' if status == 'agree' else 'manually reviewed'}"
-                         + (f"; table row with {len(x['pct_all'])} columns, first column used" if x.get("table_row") else ""),
+                         + ("; named as a customer above the disclosure threshold, share not stated" if x["pct"] is None else "") + (f"; table row with {len(x['pct_all'])} columns, first column used" if x.get("table_row") else ""),
                          method="rule", confidence="medium" if x.get("table_row") else "high", reviewed=True))
     df = pd.DataFrame(rows)
     if df.empty:

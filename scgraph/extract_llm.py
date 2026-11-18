@@ -91,10 +91,13 @@ def resolve(name: str, aliases) -> str | None:
 
 def reconcile(extract: dict, resp: dict, aliases, tol: float = 0.5) -> str:
     """'agree' if the model names the same ticker and share (within tol) as the rule; otherwise 'disagree'."""
-    if extract["customer"] is None or extract["pct"] is None:
+    if extract["customer"] is None:
         return "disagree"
     for c in resp["customers"]:
-        if resolve(c["name"], aliases) == extract["customer"] and c["percent"] is not None and \
-                any(abs(c["percent"] - p) <= tol for p in extract.get("pct_all", [extract["pct"]])):
+        if resolve(c["name"], aliases) != extract["customer"]:
+            continue
+        if extract["pct"] is None:        # named above a threshold, or a share given jointly: the name is what must agree
+            return "agree"
+        if c["percent"] is not None and any(abs(c["percent"] - p) <= tol for p in extract.get("pct_all", [extract["pct"]])):
             return "agree"
     return "disagree"

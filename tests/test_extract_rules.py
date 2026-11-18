@@ -37,3 +37,14 @@ def test_alias_longest_match_wins_and_word_boundary():
     h = alias_hits("HP Inc. and Hewlett-Packard; SHP is not HP", AL)
     assert [x[2] for x in h].count("HPQ") >= 2
     assert not any(s == 0 and e == 2 and t == "HPQ" for s, e, t in alias_hits("HP Inc.", AL))  # 'HP Inc.' wins over 'HP'
+
+
+def test_list_of_names_with_threshold_gives_named_customers_without_share():
+    r = run("In fiscal 2025, revenues from Apple, Samsung and Xiaomi each comprised 10% or more of our consolidated revenues.", "QCOM")
+    got = {x["customer"] for x in r}
+    assert {"AAPL", "005930.KS"} <= got and all(x["pct"] is None and x["threshold"] == 10.0 for x in r)
+
+
+def test_negation_is_not_an_extract():
+    assert run("ASML did not represent 10% or more of sales in 2024.", "ICHR") == []
+    assert run("Apple accounted for less than 10% of net revenue.") == []

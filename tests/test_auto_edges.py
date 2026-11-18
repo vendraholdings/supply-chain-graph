@@ -53,3 +53,12 @@ def test_replay_miss_is_queued_not_silently_accepted(tmp_path):
 def test_receivable_and_anonymised_excluded():
     ex = extract_text("Apple represented 15% of accounts receivable.\nCustomer A accounted for 31% of net sales.", "SWKS", META, AL)
     assert auto_edges.candidate_rows(ex) == []
+
+
+def test_threshold_edge_has_empty_share(tmp_path):
+    ex = extract_text("Revenues from Apple, Samsung and Xiaomi each comprised 10% or more of our revenues.", "QCOM", META, AL)
+    seed_cache(tmp_path, ex[0]["text"], [{"name": "Apple", "percent": None, "basis": "revenue"}, {"name": "Samsung", "percent": None, "basis": "revenue"}])
+    import os
+    os.environ["SCG_LLM_LABEL"] = "lbl"
+    a, q = auto_edges.build(ex, LLM(mode="replay", cache_dir=tmp_path), AL)
+    assert len(a) == 2 and a["pct_revenue"].isna().all() and edges.validate(a) == []
