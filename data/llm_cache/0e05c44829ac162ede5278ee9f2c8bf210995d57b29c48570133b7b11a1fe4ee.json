@@ -1,0 +1,18 @@
+{
+ "label": "open-weights-local",
+ "prompt_version": "v1",
+ "response": {
+  "customers": [
+   {
+    "basis": "revenue",
+    "name": "Intel Corporation",
+    "percent": 12.0
+   },
+   {
+    "basis": "receivables",
+    "name": "Intel Corporation",
+    "percent": 11.0
+   }
+  ]
+ }
+}

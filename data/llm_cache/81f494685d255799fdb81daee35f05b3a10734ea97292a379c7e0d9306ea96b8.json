@@ -1,0 +1,33 @@
+{
+ "label": "open-weights-local",
+ "prompt_version": "v1",
+ "response": {
+  "customers": [
+   {
+    "basis": "revenue",
+    "name": "Broadcom",
+    "percent": 10.0
+   },
+   {
+    "basis": "revenue",
+    "name": "SK hynix",
+    "percent": 10.0
+   },
+   {
+    "basis": "revenue",
+    "name": "NVIDIA",
+    "percent": 10.0
+   },
+   {
+    "basis": "revenue",
+    "name": "Micron",
+    "percent": 10.0
+   },
+   {
+    "basis": "revenue",
+    "name": "Samsung",
+    "percent": 10.0
+   }
+  ]
+ }
+}

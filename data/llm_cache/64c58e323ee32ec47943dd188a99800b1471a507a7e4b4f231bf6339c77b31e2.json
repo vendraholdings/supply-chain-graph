@@ -1,0 +1,33 @@
+{
+ "label": "open-weights-local",
+ "prompt_version": "v1",
+ "response": {
+  "customers": [
+   {
+    "basis": "revenue",
+    "name": "Taiwan Semiconductor Manufacturing Company Ltd.",
+    "percent": 12.0
+   },
+   {
+    "basis": "revenue",
+    "name": "Taiwan Semiconductor Manufacturing Company Ltd.",
+    "percent": 15.0
+   },
+   {
+    "basis": "revenue",
+    "name": "Taiwan Semiconductor Manufacturing Company Ltd.",
+    "percent": 19.0
+   },
+   {
+    "basis": "revenue",
+    "name": "Taiwan Semiconductor Manufacturing Company Ltd.",
+    "percent": 25.0
+   },
+   {
+    "basis": "revenue",
+    "name": "Taiwan Semiconductor Manufacturing Company Ltd.",
+    "percent": 10.0
+   }
+  ]
+ }
+}

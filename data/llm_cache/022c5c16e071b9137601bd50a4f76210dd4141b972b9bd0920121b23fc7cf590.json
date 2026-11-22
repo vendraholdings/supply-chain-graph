@@ -1,0 +1,38 @@
+{
+ "label": "open-weights-local",
+ "prompt_version": "v1",
+ "response": {
+  "customers": [
+   {
+    "basis": "revenue",
+    "name": "Applied Materials, Inc.",
+    "percent": 13.0
+   },
+   {
+    "basis": "revenue",
+    "name": "Applied Materials, Inc.",
+    "percent": 14.0
+   },
+   {
+    "basis": "revenue",
+    "name": "Applied Materials, Inc.",
+    "percent": 18.0
+   },
+   {
+    "basis": "revenue",
+    "name": "Lam Research Corporation",
+    "percent": 12.0
+   },
+   {
+    "basis": "revenue",
+    "name": "Lam Research Corporation",
+    "percent": 11.0
+   },
+   {
+    "basis": "revenue",
+    "name": "Lam Research Corporation",
+    "percent": 13.0
+   }
+  ]
+ }
+}

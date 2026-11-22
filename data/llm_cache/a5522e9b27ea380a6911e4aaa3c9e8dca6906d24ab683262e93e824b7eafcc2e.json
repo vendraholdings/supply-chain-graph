@@ -1,0 +1,18 @@
+{
+ "label": "open-weights-local",
+ "prompt_version": "v1",
+ "response": {
+  "customers": [
+   {
+    "basis": "other",
+    "name": "Taiwan Semiconductor Manufacturing Company Ltd.",
+    "percent": null
+   },
+   {
+    "basis": "other",
+    "name": "Huawei Technologies Co. Ltd.",
+    "percent": null
+   }
+  ]
+ }
+}

@@ -1,0 +1,23 @@
+{
+ "label": "open-weights-local",
+ "prompt_version": "v1",
+ "response": {
+  "customers": [
+   {
+    "basis": "revenue",
+    "name": "Kingston",
+    "percent": 11.0
+   },
+   {
+    "basis": "revenue",
+    "name": "Intel",
+    "percent": 10.0
+   },
+   {
+    "basis": "revenue",
+    "name": "HP",
+    "percent": 10.0
+   }
+  ]
+ }
+}

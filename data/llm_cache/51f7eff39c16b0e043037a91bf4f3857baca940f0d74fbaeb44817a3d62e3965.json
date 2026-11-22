@@ -1,0 +1,18 @@
+{
+ "label": "open-weights-local",
+ "prompt_version": "v1",
+ "response": {
+  "customers": [
+   {
+    "basis": "revenue",
+    "name": "Applied Materials, Inc.",
+    "percent": null
+   },
+   {
+    "basis": "revenue",
+    "name": "Lam Research Corporation",
+    "percent": null
+   }
+  ]
+ }
+}

@@ -1,0 +1,18 @@
+{
+ "label": "open-weights-local",
+ "prompt_version": "v1",
+ "response": {
+  "customers": [
+   {
+    "basis": "other",
+    "name": "Lam Research",
+    "percent": 53.0
+   },
+   {
+    "basis": "other",
+    "name": "Applied Material",
+    "percent": 32.0
+   }
+  ]
+ }
+}

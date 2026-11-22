@@ -1,0 +1,28 @@
+{
+ "label": "open-weights-local",
+ "prompt_version": "v1",
+ "response": {
+  "customers": [
+   {
+    "basis": "revenue",
+    "name": "distributors",
+    "percent": 56.0
+   },
+   {
+    "basis": "revenue",
+    "name": "WT Microelectronics Co., Ltd.",
+    "percent": 20.0
+   },
+   {
+    "basis": "revenue",
+    "name": "top five end customers",
+    "percent": 35.0
+   },
+   {
+    "basis": "revenue",
+    "name": "Apple Inc.",
+    "percent": 20.0
+   }
+  ]
+ }
+}

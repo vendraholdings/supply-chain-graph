@@ -1,0 +1,18 @@
+{
+ "label": "open-weights-local",
+ "prompt_version": "v1",
+ "response": {
+  "customers": [
+   {
+    "basis": "other",
+    "name": "Qualcomm Incorporated",
+    "percent": null
+   },
+   {
+    "basis": "other",
+    "name": "Toshiba",
+    "percent": null
+   }
+  ]
+ }
+}

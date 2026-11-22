@@ -1,0 +1,23 @@
+{
+ "label": "open-weights-local",
+ "prompt_version": "v1",
+ "response": {
+  "customers": [
+   {
+    "basis": "revenue",
+    "name": "Apple",
+    "percent": 17.6
+   },
+   {
+    "basis": "revenue",
+    "name": "Apple",
+    "percent": 13.1
+   },
+   {
+    "basis": "revenue",
+    "name": "Apple",
+    "percent": 10.5
+   }
+  ]
+ }
+}

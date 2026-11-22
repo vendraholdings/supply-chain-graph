@@ -1,0 +1,23 @@
+{
+ "label": "open-weights-local",
+ "prompt_version": "v1",
+ "response": {
+  "customers": [
+   {
+    "basis": "revenue",
+    "name": "Micron",
+    "percent": null
+   },
+   {
+    "basis": "revenue",
+    "name": "Samsung",
+    "percent": null
+   },
+   {
+    "basis": "revenue",
+    "name": "SK hynix",
+    "percent": null
+   }
+  ]
+ }
+}

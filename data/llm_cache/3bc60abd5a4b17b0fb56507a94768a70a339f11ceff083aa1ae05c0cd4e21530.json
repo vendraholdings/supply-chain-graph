@@ -1,0 +1,38 @@
+{
+ "label": "open-weights-local",
+ "prompt_version": "v1",
+ "response": {
+  "customers": [
+   {
+    "basis": "revenue",
+    "name": "Taiwan Semiconductor Manufacturing Company Ltd.",
+    "percent": 19.0
+   },
+   {
+    "basis": "revenue",
+    "name": "Taiwan Semiconductor Manufacturing Company Ltd.",
+    "percent": 25.0
+   },
+   {
+    "basis": "revenue",
+    "name": "Taiwan Semiconductor Manufacturing Company Ltd.",
+    "percent": 10.0
+   },
+   {
+    "basis": "revenue",
+    "name": "Huawei Technologies Co. Ltd.",
+    "percent": 0.0
+   },
+   {
+    "basis": "revenue",
+    "name": "Huawei Technologies Co. Ltd.",
+    "percent": 3.0
+   },
+   {
+    "basis": "revenue",
+    "name": "Huawei Technologies Co. Ltd.",
+    "percent": 11.0
+   }
+  ]
+ }
+}

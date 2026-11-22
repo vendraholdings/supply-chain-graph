@@ -1,0 +1,38 @@
+{
+ "label": "open-weights-local",
+ "prompt_version": "v1",
+ "response": {
+  "customers": [
+   {
+    "basis": "revenue",
+    "name": "Apple",
+    "percent": null
+   },
+   {
+    "basis": "revenue",
+    "name": "Guangdong OPPO Mobile Telecommunications Corp., Ltd. (Oppo)",
+    "percent": null
+   },
+   {
+    "basis": "revenue",
+    "name": "BBK Communication Technology Co., Ltd. (vivo)",
+    "percent": null
+   },
+   {
+    "basis": "revenue",
+    "name": "Samsung",
+    "percent": null
+   },
+   {
+    "basis": "revenue",
+    "name": "Xiaomi",
+    "percent": null
+   },
+   {
+    "basis": "revenue",
+    "name": "Huawei",
+    "percent": null
+   }
+  ]
+ }
+}

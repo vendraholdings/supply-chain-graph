@@ -1,0 +1,23 @@
+{
+ "label": "open-weights-local",
+ "prompt_version": "v1",
+ "response": {
+  "customers": [
+   {
+    "basis": "revenue",
+    "name": "Sony",
+    "percent": null
+   },
+   {
+    "basis": "revenue",
+    "name": "Microsoft",
+    "percent": null
+   },
+   {
+    "basis": "revenue",
+    "name": "Hewlett-Packard",
+    "percent": null
+   }
+  ]
+ }
+}

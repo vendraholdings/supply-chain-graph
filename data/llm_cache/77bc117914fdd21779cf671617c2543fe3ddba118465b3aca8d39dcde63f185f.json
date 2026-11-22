@@ -1,0 +1,23 @@
+{
+ "label": "open-weights-local",
+ "prompt_version": "v1",
+ "response": {
+  "customers": [
+   {
+    "basis": "other",
+    "name": "Applied Materials, Inc.",
+    "percent": null
+   },
+   {
+    "basis": "other",
+    "name": "Lam Research Corporation",
+    "percent": null
+   },
+   {
+    "basis": "other",
+    "name": "Intuitive Surgical Inc. (ISI)",
+    "percent": null
+   }
+  ]
+ }
+}

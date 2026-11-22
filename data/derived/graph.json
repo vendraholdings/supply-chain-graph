@@ -1076,15 +1076,9 @@
    "customer": "HPQ",
    "weight": 44.0,
    "disclosed": true,
-   "valid_from": "2015-02-20",
+   "valid_from": "2017-02-22",
    "valid_to": "2019-02-28",
    "sources": [
-    {
-     "url": "https://www.sec.gov/Archives/edgar/data/2488/000119312515054362/d871455d10k.htm",
-     "type": "10-K",
-     "filing_date": "2015-02-19",
-     "fiscal_year": 2014
-    },
     {
      "url": "https://www.sec.gov/Archives/edgar/data/2488/000000248817000043/amd-12312016x10k.htm",
      "type": "10-K",
@@ -1322,22 +1316,6 @@
    ]
   },
   {
-   "supplier": "CRDO",
-   "customer": "2330.TW",
-   "weight": 10.0,
-   "disclosed": true,
-   "valid_from": "2022-06-09",
-   "valid_to": "2023-06-09",
-   "sources": [
-    {
-     "url": "https://www.sec.gov/Archives/edgar/data/1807794/000162828022016593/crdo-20220430.htm",
-     "type": "10-K",
-     "filing_date": "2022-06-08",
-     "fiscal_year": 2022
-    }
-   ]
-  },
-  {
    "supplier": "ENTG",
    "customer": "005930.KS",
    "weight": 9.0,
@@ -1538,22 +1516,6 @@
    ]
   },
   {
-   "supplier": "HPE",
-   "customer": "HPQ",
-   "weight": 99.0,
-   "disclosed": true,
-   "valid_from": "2018-12-13",
-   "valid_to": "2019-12-13",
-   "sources": [
-    {
-     "url": "https://www.sec.gov/Archives/edgar/data/1645590/000162828018015054/hpe-10312018x10k.htm",
-     "type": "10-K",
-     "filing_date": "2018-12-12",
-     "fiscal_year": 2018
-    }
-   ]
-  },
-  {
    "supplier": "ICHR",
    "customer": "AMAT",
    "weight": 31.0,
@@ -1572,6 +1534,12 @@
      "type": "10-K",
      "filing_date": "2018-03-13",
      "fiscal_year": 2017
+    },
+    {
+     "url": "https://www.sec.gov/Archives/edgar/data/1652535/000156459019006988/ichr-10k_20181228.htm",
+     "type": "10-K",
+     "filing_date": "2019-03-08",
+     "fiscal_year": 2018
     },
     {
      "url": "https://www.sec.gov/Archives/edgar/data/1652535/000156459020009069/ichr-10k_20191227.htm",
@@ -1602,22 +1570,6 @@
      "type": "10-K",
      "filing_date": "2025-02-21",
      "fiscal_year": 2022
-    }
-   ]
-  },
-  {
-   "supplier": "ICHR",
-   "customer": "ASML.AS",
-   "weight": 56.0,
-   "disclosed": true,
-   "valid_from": "2019-03-11",
-   "valid_to": "2020-03-10",
-   "sources": [
-    {
-     "url": "https://www.sec.gov/Archives/edgar/data/1652535/000156459019006988/ichr-10k_20181228.htm",
-     "type": "10-K",
-     "filing_date": "2019-03-08",
-     "fiscal_year": 2018
     }
    ]
   },
@@ -1815,22 +1767,6 @@
   },
   {
    "supplier": "INTC",
-   "customer": "HPE",
-   "weight": 18.0,
-   "disclosed": true,
-   "valid_from": "2017-02-21",
-   "valid_to": "2018-02-21",
-   "sources": [
-    {
-     "url": "https://www.sec.gov/Archives/edgar/data/50863/000005086317000012/a10kdocument12312016q4.htm",
-     "type": "10-K",
-     "filing_date": "2017-02-17",
-     "fiscal_year": 2016
-    }
-   ]
-  },
-  {
-   "supplier": "INTC",
    "customer": "HPQ",
    "weight": 11.0,
    "disclosed": true,
@@ -1978,12 +1914,6 @@
      "type": "10-K",
      "filing_date": "2017-08-15",
      "fiscal_year": 2017
-    },
-    {
-     "url": "https://www.sec.gov/Archives/edgar/data/707549/000070754918000115/lrcx_10kx2018xdocument.htm",
-     "type": "10-K",
-     "filing_date": "2018-08-14",
-     "fiscal_year": 2018
     },
     {
      "url": "https://filecache.investorroom.com/mr5ir_lamresearch2/1411/LRCX%20(Lam%20Research%20Corporation)%20%20(10-K)%202024-08-29.pdf_.pdf",
@@ -2156,10 +2086,10 @@
   {
    "supplier": "MU",
    "customer": "INTC",
-   "weight": 13.0,
-   "disclosed": true,
+   "weight": 8.5,
+   "disclosed": false,
    "valid_from": "2015-10-28",
-   "valid_to": "2020-10-17",
+   "valid_to": "2019-10-16",
    "sources": [
     {
      "url": "https://www.sec.gov/Archives/edgar/data/723125/000072312515000112/a2015q4.htm",
@@ -2184,19 +2114,13 @@
      "type": "10-K",
      "filing_date": "2018-10-15",
      "fiscal_year": 2018
-    },
-    {
-     "url": "https://www.sec.gov/Archives/edgar/data/723125/000072312519000094/a2019q4.htm",
-     "type": "10-K",
-     "filing_date": "2019-10-17",
-     "fiscal_year": 2019
     }
    ]
   },
   {
    "supplier": "MU",
    "customer": "NVDA",
-   "weight": 9.0,
+   "weight": 8.5,
    "disclosed": false,
    "valid_from": "2024-02-27",
    "valid_to": "2025-02-26",
@@ -3070,28 +2994,6 @@
      "type": "10-K",
      "filing_date": "2025-02-20",
      "fiscal_year": 2024
-    }
-   ]
-  },
-  {
-   "supplier": "TSEM",
-   "customer": "MU",
-   "weight": 21.0,
-   "disclosed": true,
-   "valid_from": "2016-05-12",
-   "valid_to": "2018-04-11",
-   "sources": [
-    {
-     "url": "https://www.sec.gov/Archives/edgar/data/928876/000117891316005389/zk1618437.htm",
-     "type": "20-F",
-     "filing_date": "2016-05-11",
-     "fiscal_year": 2015
-    },
-    {
-     "url": "https://www.sec.gov/Archives/edgar/data/928876/000117891317001103/zk1719799.htm",
-     "type": "20-F",
-     "filing_date": "2017-04-10",
-     "fiscal_year": 2016
     }
    ]
   },

@@ -1,0 +1,23 @@
+{
+ "label": "open-weights-local",
+ "prompt_version": "v1",
+ "response": {
+  "customers": [
+   {
+    "basis": "revenue",
+    "name": "Taiwan Semiconductor Manufacturing Company Ltd.",
+    "percent": 12.0
+   },
+   {
+    "basis": "revenue",
+    "name": "Qualcomm",
+    "percent": 11.0
+   },
+   {
+    "basis": "revenue",
+    "name": "one OEM customer",
+    "percent": 19.0
+   }
+  ]
+ }
+}

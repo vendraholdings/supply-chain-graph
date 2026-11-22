@@ -1,0 +1,28 @@
+{
+ "label": "open-weights-local",
+ "prompt_version": "v1",
+ "response": {
+  "customers": [
+   {
+    "basis": "revenue",
+    "name": "Cisco Systems Inc.",
+    "percent": 15.6
+   },
+   {
+    "basis": "revenue",
+    "name": "Lumentum Operations LLC",
+    "percent": 15.4
+   },
+   {
+    "basis": "revenue",
+    "name": "Nvidia Corporation",
+    "percent": 12.5
+   },
+   {
+    "basis": "revenue",
+    "name": "Infinera Corporation",
+    "percent": 12.4
+   }
+  ]
+ }
+}

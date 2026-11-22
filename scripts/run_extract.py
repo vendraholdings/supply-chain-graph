@@ -5,6 +5,7 @@ SCG_LLM_MODEL are set (SCG_LLM_MODE=live fills the cache, replay reads it); othe
 """
 from __future__ import annotations
 
+import json
 import os
 import sys
 from pathlib import Path
@@ -35,7 +36,9 @@ def main() -> int:
     use_llm = bool(os.environ.get("SCG_LLM_BASE_URL") and os.environ.get("SCG_LLM_MODEL")) or os.environ.get("SCG_LLM_MODE") == "replay"
     llm = LLM() if use_llm else None
     print(f"{len(extracts)} extracts; model pass: {'on (' + llm.mode + ')' if llm else 'off, rules only'}")
-    df, queue = auto_edges.build(extracts, llm, aliases)
+    dec_path = DATA / "review_decisions.json"
+    decisions = json.loads(dec_path.read_text()) if dec_path.exists() else {}
+    df, queue = auto_edges.build(extracts, llm, aliases, decisions)
     df.to_csv(DATA / "edges_auto.csv", index=False)
     auto_edges.write_queue(queue, DATA / "review_queue.csv")
     print(f"edges_auto.csv: {len(df)} rows; review queue: {len(queue)}")

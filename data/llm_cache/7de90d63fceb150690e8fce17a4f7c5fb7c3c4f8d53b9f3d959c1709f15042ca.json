@@ -1,0 +1,23 @@
+{
+ "label": "open-weights-local",
+ "prompt_version": "v1",
+ "response": {
+  "customers": [
+   {
+    "basis": "revenue",
+    "name": "Distributors",
+    "percent": 34.0
+   },
+   {
+    "basis": "revenue",
+    "name": "Foxconn Technology Group companies (including Hon Hai Precision Industries)",
+    "percent": 14.0
+   },
+   {
+    "basis": "revenue",
+    "name": "Apple, Inc.",
+    "percent": 25.0
+   }
+  ]
+ }
+}

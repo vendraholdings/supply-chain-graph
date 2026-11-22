@@ -1,0 +1,13 @@
+{
+ "label": "open-weights-local",
+ "prompt_version": "v1",
+ "response": {
+  "customers": [
+   {
+    "basis": "revenue",
+    "name": "Taiwan Semiconductor Manufacturing Company Limited",
+    "percent": 18.0
+   }
+  ]
+ }
+}

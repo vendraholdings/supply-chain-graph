@@ -1,0 +1,23 @@
+{
+ "label": "open-weights-local",
+ "prompt_version": "v1",
+ "response": {
+  "customers": [
+   {
+    "basis": "other",
+    "name": "Applied Materials Inc.",
+    "percent": 18.7
+   },
+   {
+    "basis": "other",
+    "name": "Lam Research",
+    "percent": 12.5
+   },
+   {
+    "basis": "other",
+    "name": "Novellus Systems, Inc.",
+    "percent": 10.7
+   }
+  ]
+ }
+}

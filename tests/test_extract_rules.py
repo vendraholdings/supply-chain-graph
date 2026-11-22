@@ -63,3 +63,9 @@ def test_aggregate_share_is_not_attributed_to_one_customer():
 
 def test_market_share_of_a_competitor_is_not_a_customer_share():
     assert not run("Taiwan Semiconductor Manufacturing Company, Limited (\u201cTSMC\u201d) at $75.8 billion of revenue in 2022 accounted for more than 50% of the total market.", "GFS")
+
+
+def test_respectively_with_more_names_than_shares_aligns_from_the_end():
+    ex = run("In 2018, our top three customers were Lam Research, Applied Materials, and ASML, with Lam Research and Applied Materials accounting for approximately 56% and 32% of sales, respectively.", "ICHR")
+    got = {e["customer"]: e["pct"] for e in ex if e["pct"] is not None}
+    assert got == {"LRCX": 56.0, "AMAT": 32.0}

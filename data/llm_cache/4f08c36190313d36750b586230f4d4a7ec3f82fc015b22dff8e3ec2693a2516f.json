@@ -1,0 +1,18 @@
+{
+ "label": "open-weights-local",
+ "prompt_version": "v1",
+ "response": {
+  "customers": [
+   {
+    "basis": "revenue",
+    "name": "NVIDIA Corporation",
+    "percent": 27.6
+   },
+   {
+    "basis": "revenue",
+    "name": "Cisco Systems, Inc.",
+    "percent": 18.2
+   }
+  ]
+ }
+}

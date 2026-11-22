@@ -1,0 +1,18 @@
+{
+ "label": "open-weights-local",
+ "prompt_version": "v1",
+ "response": {
+  "customers": [
+   {
+    "basis": "revenue",
+    "name": "Taiwan Semiconductor Manufacturing Company Limited",
+    "percent": 13.0
+   },
+   {
+    "basis": "revenue",
+    "name": "Samsung Electronics Co.",
+    "percent": 10.0
+   }
+  ]
+ }
+}

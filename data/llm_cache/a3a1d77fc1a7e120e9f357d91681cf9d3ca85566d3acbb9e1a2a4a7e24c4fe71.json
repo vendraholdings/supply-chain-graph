@@ -1,0 +1,18 @@
+{
+ "label": "open-weights-local",
+ "prompt_version": "v1",
+ "response": {
+  "customers": [
+   {
+    "basis": "revenue",
+    "name": "Apple Inc.",
+    "percent": 20.6
+   },
+   {
+    "basis": "revenue",
+    "name": "Qualcomm Technologies, Inc.",
+    "percent": 10.1
+   }
+  ]
+ }
+}

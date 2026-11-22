@@ -23,7 +23,7 @@
   *Abstract.* This paper builds a directed supplier-to-customer graph of <<n_companies>> listed semiconductor companies in eleven tiers, from wafers and gases to hyperscalers,
   with the filing, date and source of every edge, and uses it to ask how shocks and returns move across the chain. At the build date the graph holds <<n_pairs>> sourced
   supplier-customer pairs (<<n_edge_rows>> edge-years) covering <<n_connected>> companies: <<n_curated_pairs>> pairs curated by hand and the rest extracted by sentence rules from
-  <<n_filings>> annual reports of <<n_filers>> SEC filers, without confirmation by a language model. A generalised variance
+  <<n_filings>> annual reports of <<n_filers>> SEC filers, each confirmed by a locally run open-weights language model or by manual review. A generalised variance
   decomposition of eleven tier indices gives a total spillover index of <<spill_total>>, with <<tx1_name>> and <<tx2_name>> as net transmitters. Lead-lag correlations
   between tiers are dominated by the order of market closing times. An event study of <<n_shocks>> large one-day price moves finds no abnormal return in
   suppliers, customers or companies two links away that differs from zero at the 5% level; the test has the correct size on random dates. A customer-momentum strategy in the style
@@ -43,7 +43,7 @@ This project asks three questions with only free data. First, can a graph of lis
 the spillovers between tiers and which tiers transmit and receive them? Third, do the sourced links predict returns, either through customer momentum or through abnormal returns of linked companies after large price moves?
 Negative and uninformative results are reported as such. The exported graph is intended for reuse by later projects that map news items to affected companies.
 
-The edges used here are extracted by rules alone; the language-model confirmation step is implemented but was not run, and the effect of that on precision is discussed in Section 5.
+The automated edges are confirmed by a small language model or by manual review; their remaining error and the incompleteness of the rules are discussed in Section 5.
 
 = Data and graph construction
 
@@ -66,9 +66,10 @@ or for one year. This point-in-time rule is enforced by tests, including one tha
 
 A second source extracts customer-concentration statements automatically from the text of 10-K and 20-F filings. Sentence rules find a named customer in the universe followed by a share of revenue
 (or a statement that the customer exceeded a disclosure threshold). Shares stated for several customers "respectively" are paired by position; aggregate shares ("top ten customers"), market shares and matches that cross a sentence boundary are rejected.
-The client reads the EDGAR submissions index of each SEC filer in the universe and every 10-K and 20-F filed since 2015 (<<n_filings>> reports of <<n_filers>> companies) at no more than five requests per second, which gave <<n_extracts>> candidate passages and <<n_auto_rows>> edge-years
-(<<n_auto_pairs>> pairs; <<n_overlap>> of these repeat a curated edge-year, for which the curated row is kept). A second pass by a locally run open-weights language model, which must agree with the rules before an edge is accepted, is implemented and tested on cached responses, but no model endpoint was available for this build;
-the automated edges are therefore marked as not model-confirmed with medium confidence. On ten real filings read in full, the rules before the last revision recovered 5 of about 15 named pairs, with no false positive; the misses are dollar tables.
+The client reads the EDGAR submissions index of each SEC filer in the universe and every 10-K and 20-F filed since 2015 (<<n_filings>> reports of <<n_filers>> companies) at no more than five requests per second, which gave <<n_extracts>> candidate passages. A second pass by a locally run open-weights language model reads each candidate passage independently and must name the same customer and share before an edge is accepted;
+the model is a small code-oriented model, so it often misses names in long lists. Candidates on which it disagreed went to a review queue of <<n_queue>> items that were read against the quoted filing text and accepted (<<n_queue_accepted>>, mostly lists of customers above the disclosure threshold that the model failed to read)
+or rejected (<<n_queue_rejected>>: shares of several customers combined, a supplier's own cost increase, a collective share of two companies). The result is <<n_auto_rows>> edge-years (<<n_auto_pairs>> pairs; <<n_overlap>> of these repeat a curated edge-year, for which the curated row is kept), of which <<n_manual>> rest on the manual review.
+Responses are cached so that the step regenerates the edge file byte for byte without the model. On ten real filings read in full, the rules before the last revision recovered 5 of about 15 named pairs, with no false positive; the misses are dollar tables.
 A read of 30 randomly drawn edge-years against their source sentences found no clear misattribution after the revision, but this is a check of the extracted sentence and not of the filing page, and a first draw before the revision had found four
 wrong attributions in 24, which the revision removes. Table-like layouts and customers named only in a table are missed, so the extracted set is incomplete.
 
@@ -158,11 +159,11 @@ The lead-lag results are therefore not evidence of information flow along the su
 
 The price-based results describe how the tiers move together and do not depend on the edge set. They show substantial common movement (a total spillover index of <<spill_total>>) with equipment and packaging as net transmitters. The edge-based results are negative:
 the customer-momentum strategy does not beat random links after costs, the best of the declared specifications does not survive deflation, and the linked-company event study finds no significant abnormal return. These are results about this edge set, which is small and
-partly unconfirmed, and about this period and universe; they do not show that economic links carry no information elsewhere.
+imperfectly checked, and about this period and universe; they do not show that economic links carry no information elsewhere.
 
 Limitations:
 - *Edge coverage.* Edges come from disclosure thresholds, which favour large customers and suppliers with concentrated sales. Customers reported anonymously cannot be resolved without curation. Coverage of Japan, Korea, Taiwan and Hong Kong filers relies on manual curation.
-- *Edge precision and recall.* The automated edges are not model-confirmed and the rules miss table-only disclosures, so both false and missing links are possible. A strategy built on noisy links is biased towards zero.
+- *Edge precision and recall.* The model check is weak (a small model, one passage at a time) and the rules miss table-only disclosures, so both false and missing links are possible. A strategy built on noisy links is biased towards zero.
 - *Short sample.* The momentum strategy has <<months_primary>> monthly observations, so a Sharpe ratio has a standard error near 0.3.
 - *Survivorship.* The universe and the tier weights use today's constituents.
 - *Timing.* Filing dates are the dates of the documents; some sources are mirrors of the original filing, and one filing date is an auditor report date. Edges become usable the next trading day.

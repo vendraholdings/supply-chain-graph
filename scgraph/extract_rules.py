@@ -95,7 +95,9 @@ def extract_text(text: str, supplier: str, meta: dict, aliases) -> list[dict]:
                 for j in range(s_, e_ + 1):
                     last[marks[j][2]] = j
                 order = sorted(last.values())
-                if last[tk] != i or order.index(i) >= len(pe):
+                if len(order) > len(pe):      # more names than shares ("top three customers were A, B and C, with A and B accounting for 56% and 32%"): align from the end
+                    order = order[-len(pe):]
+                if i not in order:
                     continue
                 after = [pe[order.index(i)]]
             elif not after:   # a list of names followed by one share: "Apple, Samsung and Xiaomi each comprised 10% or more"

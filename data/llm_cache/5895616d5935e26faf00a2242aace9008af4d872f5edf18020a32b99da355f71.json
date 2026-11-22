@@ -1,0 +1,18 @@
+{
+ "label": "open-weights-local",
+ "prompt_version": "v1",
+ "response": {
+  "customers": [
+   {
+    "basis": "revenue",
+    "name": "Lumentum Operations LLC",
+    "percent": 16.0
+   },
+   {
+    "basis": "revenue",
+    "name": "Lumentum Operations LLC",
+    "percent": 17.0
+   }
+  ]
+ }
+}

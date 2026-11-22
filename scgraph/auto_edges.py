@@ -42,6 +42,14 @@ def build(extracts: list[dict], llm: LLM | None, aliases, decisions: dict[str, s
                          source_url=x["source_url"], source_note=f"Rule match, {'model-confirmed' if status == 'agree' else 'not model-confirmed' if status == 'rules_only' else 'manually reviewed'}"
                          + ("; named as a customer above the disclosure threshold, share not stated" if x["pct"] is None else "") + (f"; table row with {len(x['pct_all'])} columns, first column used" if x.get("table_row") else ""),
                          method="rule", confidence="medium" if (x.get("table_row") or status == "rules_only") else "high", reviewed=status != "rules_only"))
+    accepted_keys = {f"{r['supplier']}>{r['customer']}:{r['source_url']}" for r in rows}
+    seen, uniq = set(), []
+    for q in queue:      # one queue entry per filing and pair, and none for a pair that another passage of the same filing already confirmed
+        k2 = q["key"].split(":")[0] + ":" + q["source_url"]
+        if k2 not in accepted_keys and q["key"] not in seen:
+            seen.add(q["key"])
+            uniq.append(q)
+    queue = uniq
     df = pd.DataFrame(rows)
     if df.empty:
         return pd.DataFrame(columns=edges_mod.COLUMNS), queue

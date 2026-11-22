@@ -1,0 +1,38 @@
+{
+ "label": "open-weights-local",
+ "prompt_version": "v1",
+ "response": {
+  "customers": [
+   {
+    "basis": "other",
+    "name": "Samsung Electronics Co. Ltd.",
+    "percent": null
+   },
+   {
+    "basis": "other",
+    "name": "SK hynix",
+    "percent": null
+   },
+   {
+    "basis": "other",
+    "name": "Toshiba Corporation",
+    "percent": null
+   },
+   {
+    "basis": "other",
+    "name": "Intel Corporation",
+    "percent": null
+   },
+   {
+    "basis": "other",
+    "name": "Micron Technology, Inc.",
+    "percent": null
+   },
+   {
+    "basis": "other",
+    "name": "Taiwan Semiconductor Manufacturing Company Limited",
+    "percent": null
+   }
+  ]
+ }
+}

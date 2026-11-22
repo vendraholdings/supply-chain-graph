@@ -67,3 +67,23 @@ def test_load_has_unique_edge_ids_and_validates():
     df = edges.load()
     assert not edges.validate(df)
     assert df["edge_id"].is_unique
+
+
+def test_committed_edges_regenerate_byte_for_byte_from_extracts_and_cache(tmp_path, monkeypatch):
+    monkeypatch.setenv("SCG_LLM_LABEL", "open-weights-local")
+    import json
+    from pathlib import Path
+
+    from scgraph import config
+    from scgraph.extract_rules import read_extracts
+
+    d = config.ROOT / "data"
+    if not (d / "llm_cache").exists() or not (d / "edges_auto.csv").exists():
+        import pytest
+        pytest.skip("no committed model cache")
+    ex = []
+    for p in sorted((d / "extracts").glob("*.jsonl")):
+        ex += read_extracts(Path(p))
+    df, _ = auto_edges.build(ex, LLM(mode="replay"), AL, json.loads((d / "review_decisions.json").read_text()))
+    df.to_csv(tmp_path / "e.csv", index=False)
+    assert (tmp_path / "e.csv").read_bytes() == (d / "edges_auto.csv").read_bytes()

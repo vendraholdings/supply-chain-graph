@@ -1,0 +1,18 @@
+{
+ "label": "open-weights-local",
+ "prompt_version": "v1",
+ "response": {
+  "customers": [
+   {
+    "basis": "revenue",
+    "name": "WT Microelectronics",
+    "percent": 17.0
+   },
+   {
+    "basis": "revenue",
+    "name": "Apple Inc.",
+    "percent": 20.0
+   }
+  ]
+ }
+}

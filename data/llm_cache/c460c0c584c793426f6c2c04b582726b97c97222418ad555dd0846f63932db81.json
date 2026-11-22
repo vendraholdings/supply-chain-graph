@@ -1,0 +1,28 @@
+{
+ "label": "open-weights-local",
+ "prompt_version": "v1",
+ "response": {
+  "customers": [
+   {
+    "basis": "revenue",
+    "name": "Cisco Systems Inc.",
+    "percent": 13.9
+   },
+   {
+    "basis": "revenue",
+    "name": "Lumentum Operations LLC",
+    "percent": 13.6
+   },
+   {
+    "basis": "revenue",
+    "name": "Infinera Corporation",
+    "percent": 11.6
+   },
+   {
+    "basis": "revenue",
+    "name": "Acacia Communications, Inc.",
+    "percent": 10.2
+   }
+  ]
+ }
+}

@@ -1,0 +1,28 @@
+{
+ "label": "open-weights-local",
+ "prompt_version": "v1",
+ "response": {
+  "customers": [
+   {
+    "basis": "revenue",
+    "name": "HP Inc.",
+    "percent": 18.0
+   },
+   {
+    "basis": "revenue",
+    "name": "Hewlett Packard Enterprise Company",
+    "percent": 18.0
+   },
+   {
+    "basis": "revenue",
+    "name": "Dell Inc.",
+    "percent": 15.0
+   },
+   {
+    "basis": "revenue",
+    "name": "Lenovo Group Limited",
+    "percent": 13.0
+   }
+  ]
+ }
+}

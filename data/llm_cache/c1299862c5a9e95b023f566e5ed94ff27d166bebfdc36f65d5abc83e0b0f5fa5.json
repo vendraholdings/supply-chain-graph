@@ -1,0 +1,33 @@
+{
+ "label": "open-weights-local",
+ "prompt_version": "v1",
+ "response": {
+  "customers": [
+   {
+    "basis": "revenue",
+    "name": "Samsung Electronics",
+    "percent": null
+   },
+   {
+    "basis": "revenue",
+    "name": "Xiaomi Corporation",
+    "percent": null
+   },
+   {
+    "basis": "revenue",
+    "name": "GuangDong OPPO Mobile Telecommunications Corp. Ltd.",
+    "percent": null
+   },
+   {
+    "basis": "revenue",
+    "name": "vivo Communication Technology Co., Ltd.",
+    "percent": null
+   },
+   {
+    "basis": "revenue",
+    "name": "Apple Inc.",
+    "percent": null
+   }
+  ]
+ }
+}

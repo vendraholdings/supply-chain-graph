@@ -1,0 +1,23 @@
+{
+ "label": "open-weights-local",
+ "prompt_version": "v1",
+ "response": {
+  "customers": [
+   {
+    "basis": "revenue",
+    "name": "Intel Corporation",
+    "percent": 15.9
+   },
+   {
+    "basis": "revenue",
+    "name": "Intel Corporation",
+    "percent": 12.8
+   },
+   {
+    "basis": "revenue",
+    "name": "Intel Corporation",
+    "percent": 10.5
+   }
+  ]
+ }
+}

@@ -1,0 +1,28 @@
+{
+ "label": "open-weights-local",
+ "prompt_version": "v1",
+ "response": {
+  "customers": [
+   {
+    "basis": "revenue",
+    "name": "Cisco Systems, Inc.",
+    "percent": 19.9
+   },
+   {
+    "basis": "revenue",
+    "name": "NVIDIA Corporation",
+    "percent": 16.3
+   },
+   {
+    "basis": "revenue",
+    "name": "Nokia Corporation",
+    "percent": 10.7
+   },
+   {
+    "basis": "revenue",
+    "name": "Amazon.com, Inc.",
+    "percent": 10.5
+   }
+  ]
+ }
+}
