@@ -1,4 +1,4 @@
-.PHONY: setup verify prices extract graph results figures site paper readme hero test privacy all serve
+.PHONY: setup verify prices extract graph results figures shock site paper readme hero test privacy all serve
 UV ?= uv
 
 setup:
@@ -18,6 +18,9 @@ graph:
 
 results:
 	$(UV) run python scripts/run_all.py
+
+shock:
+	$(UV) run python scripts/run_shock_case.py
 
 figures:
 	$(UV) run python scripts/make_figures.py
@@ -40,7 +43,7 @@ test:
 privacy:
 	$(UV) run python -m scgraph.privacy
 
-all: setup verify prices extract graph results figures paper site readme test privacy
+all: setup verify prices extract graph results figures shock paper site readme test privacy
 
 serve:
 	cd site/dist && python3 -m http.server 8000

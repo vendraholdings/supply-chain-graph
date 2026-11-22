@@ -81,7 +81,8 @@ def main() -> None:
               trials=sorted(round(mo.sharpe(full[c].to_numpy()), 3) for c in full.columns),
               sr0=round(summ["overfitting"]["sr0_per_period"] * mo.PPY ** 0.5, 3), pbo=round(summ["overfitting"]["cscv"]["pbo"], 2),
               dsr=round(summ["overfitting"]["dsr"], 2), p=round(summ["placebo"]["p_ge_real"], 2))
-    data = dict(graph=g, f5=f5, f6=f6, turbo=[[i / 10, matplotlib.colors.to_hex(matplotlib.colormaps["turbo"](i / 10))] for i in range(11)],
+    sc = RES / "shock_case.json"
+    data = dict(graph=g, f5=f5, f6=f6, shock=json.loads(sc.read_text()) if sc.exists() else None, turbo=[[i / 10, matplotlib.colors.to_hex(matplotlib.colormaps["turbo"](i / 10))] for i in range(11)],
                 f2=dict(tiers=tier_ids, countries=ctys, matrix=cm, pair_labels=pc.index.tolist(), pair_counts=pc.tolist()),
                 f3=dict(rows=cent[["ticker", "pagerank", "tier", "mcap_rank", "pr_rank"]].round(5).to_dict("records")),
                 f4=dict(names=list(flow.columns), z=[[None if v == 0 else round(v, 2) for v in r] for r in flow.to_numpy(float)]),
@@ -94,7 +95,8 @@ def main() -> None:
                 facts=dict(n_nodes=summ["graph"]["nodes"], n_connected=summ["graph"]["connected_nodes"], n_edges=summ["graph"]["edges"],
                            n_edge_rows=summ["n_edge_rows"], build_end=summ["build_end"], spill_total=sps["static"]["total_index"],
                            spill_weekly=sps["weekly"]["total_index"], n_shocks=evs["n_shocks"],
-                           max_suppliers=summ["information_set"]["max_suppliers"]),
+                           max_suppliers=summ["information_set"]["max_suppliers"], sr_net=round(summ["momentum_primary"]["cost_x1"]["sharpe"], 2),
+                           pbo=round(summ["overfitting"]["cscv"]["pbo"], 2)),
                 colors=dict(bg=BG, panel=PANEL, ink=INK, link=LINK))
     (DIST / "index.html").write_text(page(data))
     print("site built:", DIST / "index.html", round((DIST / "index.html").stat().st_size / 1e3), "kB")

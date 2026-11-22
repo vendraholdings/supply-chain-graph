@@ -43,6 +43,7 @@ Lead-lag correlations between tiers are mostly an effect of closing-time order b
 | Graph | Edges from annual reports and filings with filing date, availability date, expiry and source URL; point-in-time use only |
 | Edge extraction | Sentence rules over 10-K and 20-F text; a locally run open-weights language model must agree with them, disagreements are reviewed by hand; responses are cached so that `make extract` replays without the model |
 | Customer momentum | Cohen and Frazzini (2008) design with costs, Newey-West and Fama-MacBeth alpha, a declared grid of 48 variants and degree-preserving rewiring as falsification |
+| Shock case | One equipment or memory shock chosen by a fixed rule (largest absolute move with at least five linked companies); abnormal returns of linked companies shown on the network in the site |
 | Event study | Large one-day moves, market model with Dimson terms, time-zone-aware day 0, adjusted standardised test, placebo size check |
 | Spillover | Generalised forecast-error variance decomposition (Diebold and Yilmaz, 2012) on eleven tier indices |
 | Lead-lag | Cross-correlations at lags of -5 to +5 days with stationary-bootstrap intervals |

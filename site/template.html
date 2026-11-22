@@ -26,6 +26,10 @@ html.hero main>*:not(#hero):not(#legend){display:none}html.hero main{padding:0;m
 <div id="legend"></div>
 <div id="hero"><div id="graph"></div><div id="info"><b>Select a company</b><br>Click a node to list its suppliers and customers with the filings behind each edge. Drag to rotate, scroll to zoom.</div></div>
 <p class="cap">Nodes are listed companies, coloured by tier (upstream to downstream, left to right) and sized by market capitalisation at the build date. Arrows point from supplier to customer. Companies without a sourced edge are shown in their tier column for reference.</p>
+<h2>Shock propagation case</h2>
+<p class="lead" id="shocktxt"></p>
+<p id="shockctl" style="display:none"><label><input type="checkbox" id="shockon"> Colour nodes by abnormal return</label> &nbsp; <label>Days after the shock: <input type="range" id="shockday" min="0" max="10" value="0" step="1"> <b id="shockdayv">0</b></label></p>
+<p class="cap" id="shockcap"></p>
 <h2>Sourced edges</h2><div class="tw"><table id="edges"></table></div>
 <h2>Figure 2. Universe and sourced pairs by country and tier</h2><div class="fig"><div id="f2"></div></div>
 <p class="cap">Left: listed companies in the universe by tier and listing country. Right: sourced supplier-customer pairs by country of listing. Listing country is not the country of operations.</p>
@@ -50,7 +54,7 @@ html.hero main>*:not(#hero):not(#legend){display:none}html.hero main{padding:0;m
 <div class="fig"><div id="f11"></div></div>
 <p class="cap">Correlation of the row tier's return on day t with the column tier's return on day t plus the lag. Positive lags: the row leads. Lags of one day between Asian and US listings partly reflect closing-time order and are not evidence of information flow.</p>
 <h2>Method notes and limitations</h2>
-<p class="lead">Prices are daily adjusted closes aligned to US trading days by exchange close time, converted to US dollars. Tier indices use current market capitalisation as static weights, so the sample is subject to survivorship. The edge set is small; statistics that depend on it (customer momentum, linked-company event studies) are not yet reported as results. No price series are published on this site.</p>
+<p class="lead">Prices are daily adjusted closes aligned to US trading days by exchange close time, converted to US dollars. Tier indices use current market capitalisation as static weights, so the sample is subject to survivorship. The edge set is small and imperfectly checked (a small language model and manual review of disagreements); the statistics that depend on it are reported with that caveat in the paper. No price series are published on this site.</p>
 </main>
 <script src="vendor/plotly.min.js"></script><script src="vendor/3d-force-graph.min.js"></script>
 <script>
@@ -59,7 +63,7 @@ const D=%%DATA%%;
 const C=D.colors,F=D.facts,T=D.graph.tiers,TC=D.tier_colors;
 const tierIdx={};T.forEach((t,i)=>tierIdx[t.id]=i);
 document.getElementById('facts').innerHTML=[[F.n_nodes,'companies in the universe'],[F.n_edges,'sourced supplier-customer pairs'],[F.n_edge_rows,'edge-years with a filing date'],[F.spill_total.toFixed(1)+'%','total spillover index (static)'],[F.n_shocks.toLocaleString('en-US'),'price shocks studied']].map(a=>'<div class="fact"><b>'+a[0]+'</b><span>'+a[1]+'</span></div>').join('');
-document.getElementById('notice').textContent='Status: the graph holds '+F.n_edges+' sourced pairs covering '+F.n_connected+' companies; at most '+F.max_suppliers+' suppliers have a usable signal in any month, so the customer-momentum strategy cannot yet be estimated. Automated extraction from SEC filings is built but not yet run. Data as of '+F.build_end+'.';
+document.getElementById('notice').textContent='Status: the graph holds '+F.n_edges+' supplier-customer pairs covering '+F.n_connected+' companies, from hand-curated sources and from rule-based extraction of annual reports confirmed by a small language model or by review. On these edges the customer-momentum strategy earns a net Sharpe ratio of '+F.sr_net+' and is not distinguishable from random links (Figures 5 and 6). Data as of '+F.build_end+'.';
 document.getElementById('legend').innerHTML=T.map((t,i)=>'<span><i style="background:'+TC[i]+'"></i>'+t.id+' '+t.name+'</span>').join('');
 const nodes=D.graph.nodes.map(n=>({id:n.ticker,name:n.name,tier:n.tier,country:n.country,mcap:n.mcap_usd,val:Math.max(1,Math.sqrt((n.mcap_usd||2e9)/1e9)),fx:(tierIdx[n.tier]-5)*60}));
 const links=D.graph.edges.map(e=>({source:e.supplier,target:e.customer,w:e.weight,src:e.sources}));
@@ -71,6 +75,15 @@ G.d3Force('charge').strength(-18);
 G.onNodeClick(n=>{const sup=D.graph.edges.filter(e=>e.customer===n.id),cus=D.graph.edges.filter(e=>e.supplier===n.id);
  const row=(e,o)=>'<li>'+o+' <b>'+(o===e.supplier?e.supplier:e.customer)+'</b>'+(e.disclosed?' ('+e.weight+'% of revenue)':' (named, share not stated)')+' '+e.sources.slice(0,3).map(s=>'<a href="'+s.url+'" target="_blank" rel="noopener">FY'+s.fiscal_year+'</a>').join(' ')+'</li>';
  document.getElementById('info').innerHTML='<b>'+n.id+'</b> '+n.name+'<br><span style="color:#9aa5b1">'+n.tier+' '+(T[tierIdx[n.tier]].name)+', '+n.country+(n.mcap?', market cap about US$'+(n.mcap/1e9).toFixed(0)+' bn':'')+'</span><br>Suppliers: '+(sup.length?'<ul>'+sup.map(e=>row(e,e.supplier)).join('')+'</ul>':'none sourced<br>')+'Customers: '+(cus.length?'<ul>'+cus.map(e=>row(e,e.customer)).join('')+'</ul>':'none sourced');});
+(function(){const S=D.shock;if(!S)return;
+ const cs=D.turbo.map(a=>[parseInt(a[1].slice(1,3),16),parseInt(a[1].slice(3,5),16),parseInt(a[1].slice(5,7),16)]);
+ const col=v=>{const t=(Math.max(-10,Math.min(10,v))+10)/20*(cs.length-1),i=Math.min(cs.length-2,Math.floor(t)),f=t-i;return '#'+[0,1,2].map(k=>Math.round(cs[i][k]*(1-f)+cs[i+1][k]*f).toString(16).padStart(2,'0')).join('');};
+ const on=document.getElementById('shockon'),day=document.getElementById('shockday'),dv=document.getElementById('shockdayv'),e=S.event;
+ const paint=()=>{dv.textContent=day.value;const d=+day.value;G.nodeColor(n=>!on.checked?TC[tierIdx[n.tier]]:(n.id===e.ticker?'#ffffff':(S.nodes[n.id]?col(S.nodes[n.id].car[d]):'#3b4351')));};
+ on.addEventListener('change',paint);day.addEventListener('input',paint);
+ document.getElementById('shockctl').style.display='';
+ document.getElementById('shocktxt').textContent='Case: '+e.ticker+' ('+e.name+', '+e.tier+') moved '+(e.return_pct>0?'+':'')+e.return_pct.toFixed(1)+'% on '+e.date+'. Rule: '+S.rule+'.';
+ document.getElementById('shockcap').textContent='Tick the box to colour the network in Figure 1 by cumulative abnormal return (market model with the local index and a global semiconductor index; percent, turbo scale clipped at plus and minus 10%). White: the company with the shock; grey: not linked at that date. '+Object.keys(S.nodes).length+' linked companies. One case illustrates the method; other news in the window is not controlled and nothing is inferred from it.';})();
 window.addEventListener('resize',()=>G.width(el.clientWidth).height(el.clientHeight));
 const tb=document.getElementById('edges');
 tb.innerHTML='<tr><th>Supplier</th><th>Customer</th><th>Share of revenue</th><th>Fiscal years</th><th>Latest filing</th><th>Source</th></tr>'+D.graph.edges.map(e=>{const s=e.sources.slice().sort((a,b)=>b.filing_date.localeCompare(a.filing_date));return '<tr><td>'+e.supplier+'</td><td>'+e.customer+'</td><td>'+(e.disclosed?e.weight+'%':'named, not stated')+'</td><td>'+[...new Set(e.sources.map(x=>x.fiscal_year))].sort().join(', ')+'</td><td>'+s[0].filing_date+'</td><td><a href="'+s[0].url+'" target="_blank" rel="noopener">'+s[0].type+'</a></td></tr>'}).join('');
