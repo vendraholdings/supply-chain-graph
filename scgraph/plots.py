@@ -204,7 +204,7 @@ def fig_event_fans(caar: pd.DataFrame, out: Path, mode: str, number: int = 7) ->
         ax.set_xlabel("Days after event")
         ax.legend(fontsize=7, loc="best")
     axes[0][0].set_ylabel("Cumulative average abnormal return (%)")
-    fig.suptitle(f"Figure {number}. Sign-adjusted CAAR of linked companies after price shocks (sourced pairs only; no significant path)",
+    fig.suptitle(f"Figure {number}. Sign-adjusted CAAR of linked companies after price shocks (sourced pairs)",
                  fontsize=10, x=0.02, ha="left")
     return _save(fig, out, f"fig{number:02d}_event_fans", mode)
 
@@ -225,3 +225,38 @@ def fig_placebo_panels(draws: pd.DataFrame, summary: dict, out: Path, mode: str,
     axes[0][0].set_ylabel("Draws")
     fig.suptitle(f"Figure {number}. Placebo distribution of CAAR on random dates, with the observed value", fontsize=10, x=0.02, ha="left")
     return _save(fig, out, f"fig{number:02d}_placebo", mode)
+
+
+def fig_momentum(ret: pd.DataFrame, out: Path, mode: str, number: int = 5) -> Path:
+    """Cumulative growth of the primary customer-momentum strategy, gross and net of costs (monthly, log scale)."""
+    theme.use(mode)
+    fig, ax = plt.subplots(figsize=(7.0, 3.9))
+    idx = ret.index.to_timestamp() if hasattr(ret.index, "to_timestamp") else ret.index
+    ax.plot(idx, (1 + ret["gross_return"]).cumprod(), color=theme.MUTED, lw=1.5, label="Gross of costs")
+    ax.plot(idx, (1 + ret["net_return"]).cumprod(), color=theme.AMBER, lw=2.0, label="Net of costs and borrow")
+    ax.axhline(1.0, color=theme.GRID, lw=0.8)
+    ax.set_yscale("log")
+    ax.set_ylabel("Growth of 1 (log scale)")
+    ax.set_title(f"Figure {number}. Customer-momentum strategy, primary specification, long-short, equal weight", fontsize=10, loc="left")
+    ax.legend(fontsize=8)
+    return _save(fig, out, f"fig{number:02d}_momentum", mode)
+
+
+def fig_momentum_placebo(placebo: np.ndarray, real: float, trial_sr: pd.Series, sr0_annual: float, out: Path, mode: str, number: int = 6) -> Path:
+    """Left: real net Sharpe against the rewired-edge placebo distribution. Right: net Sharpe of each full-coverage trial."""
+    theme.use(mode)
+    fig, (a, b) = plt.subplots(1, 2, figsize=(9.6, 4.0), gridspec_kw=dict(width_ratios=[1, 1.15]))
+    a.hist(placebo, bins=40, color=theme.SHADE)
+    a.axvline(real, color=theme.AMBER, lw=2, label=f"Observed {real:+.2f}")
+    a.set_xlabel("Annualised net Sharpe ratio, rewired edges")
+    a.set_ylabel("Draws")
+    a.legend(fontsize=8)
+    t = trial_sr.sort_values()
+    b.scatter(t.to_numpy(), np.arange(len(t)), s=18, color=theme.LINK)
+    b.axvline(sr0_annual, color=theme.AMBER, lw=1.6, label=f"Expected maximum under no skill ({sr0_annual:.2f})")
+    b.axvline(0, color=theme.MUTED, lw=0.8)
+    b.set_yticks([])
+    b.set_xlabel("Annualised net Sharpe ratio, one dot per specification")
+    b.legend(fontsize=8, loc="lower right")
+    fig.suptitle(f"Figure {number}. Observed Sharpe ratio against 1,000 degree-preserving rewirings and the specification grid", fontsize=10, x=0.02, ha="left")
+    return _save(fig, out, f"fig{number:02d}_momentum_placebo", mode)

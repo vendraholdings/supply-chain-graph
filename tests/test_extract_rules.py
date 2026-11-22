@@ -48,3 +48,18 @@ def test_list_of_names_with_threshold_gives_named_customers_without_share():
 def test_negation_is_not_an_extract():
     assert run("ASML did not represent 10% or more of sales in 2024.", "ICHR") == []
     assert run("Apple accounted for less than 10% of net revenue.") == []
+
+
+def test_respectively_pairs_names_and_shares_by_position():
+    ex = run("In 2020, our top two customers were Lam Research and Applied Materials, with Lam Research and Applied Materials accounting for approximately 52% and 35% of sales, respectively.", "ICHR")
+    got = {e["customer"]: e["pct"] for e in ex if e["pct"] is not None}
+    assert got == {"LRCX": 52.0, "AMAT": 35.0}
+
+
+def test_aggregate_share_is_not_attributed_to_one_customer():
+    assert not [e for e in run("In 2023, our top three customers were Applied Materials, Lam Research, and ASML, accounting for a combined 82% of sales.", "ICHR") if e["pct"] is not None]
+    assert not run("Customers include Qualcomm and Novatek. In 2015, our top ten customers accounted for 57.3% of our net operating revenues.", "2303.TW")
+
+
+def test_market_share_of_a_competitor_is_not_a_customer_share():
+    assert not run("Taiwan Semiconductor Manufacturing Company, Limited (\u201cTSMC\u201d) at $75.8 billion of revenue in 2022 accounted for more than 50% of the total market.", "GFS")

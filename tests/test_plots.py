@@ -10,7 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 def test_make_figures_runs_and_writes_all_figures():
     subprocess.run([sys.executable, str(ROOT / "scripts" / "make_figures.py")], check=True, capture_output=True)
     out = ROOT / "results" / "figures"
-    for stem in ("fig02_country_tier", "fig03_centrality", "fig04_tier_flow", "fig07_event_fans", "fig08_placebo",
+    for stem in ("fig02_country_tier", "fig03_centrality", "fig04_tier_flow", "fig05_momentum", "fig06_momentum_placebo", "fig07_event_fans", "fig08_placebo",
                  "fig09_spillover_table", "fig10_spillover_rolling", "fig11_leadlag"):
         for mode in ("light", "dark"):
             assert (out / f"{stem}_{mode}.png").stat().st_size > 5000

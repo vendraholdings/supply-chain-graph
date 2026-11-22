@@ -66,13 +66,15 @@ def main() -> None:
         m = eng.run(EA, prim, cost_mult=float(mult))
         res[f"cost_x{mult}"] = dict(n_months=int(len(m)), sharpe=mo.sharpe(m) if len(m) > 2 else None,
                                     mean_monthly=float(m.mean()) if len(m) else None)
+        if mult == 0:
+            gross = m
         if mult == 1:
             primary = m
     summary["momentum_primary"] = res
     if len(primary) >= 8:
         summary["momentum_primary"]["alpha"] = mo.newey_west_alpha(primary, fac)
     summary["fama_macbeth"] = mo.fama_macbeth(eng, EA, prim)
-    primary.rename("net_return").to_frame().to_parquet(RES / "momentum_primary.parquet")
+    pd.concat([gross.rename("gross_return"), primary.rename("net_return")], axis=1).to_parquet(RES / "momentum_primary.parquet")
     # ---- trials matrix ------------------------------------------------------------------------------------------
     specs = mo.grid_specs()
     cols = {s.label(): eng.run(EA, s) for s in specs}

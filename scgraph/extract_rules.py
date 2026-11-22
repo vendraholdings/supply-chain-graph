@@ -20,7 +20,15 @@ REC = re.compile(r"receivable", re.I)
 THRESH = re.compile(r"10\s?%\s+or\s+more|more than\s+10\s?%|over\s+10\s?%|at least\s+10\s?%|exceed(?:ed|ing)?\s+10\s?%|in excess of\s+10\s?%|"
                     r"individually[^.]{0,60}10\s?%|each[^.]{0,80}10\s?%|10\s?%\s+of\s+(?:our\s+)?(?:total\s+|net\s+)*(?:revenue|sales)\s+or\s+more", re.I)
 NEGATION = re.compile(r"\b(?:did|do|does|had|has|have)\s+not\b|\bless than\s+\d|\bbelow\s+\d|\bno customer\b|\bnot\s+(?:represent|account|exceed|comprise)", re.I)
+AGG = re.compile(r"\b(?:combined|aggregate|together|in total|top\s+(?:\w+\s+)?customers|(?:two|three|four|five|six|seven|eight|nine|ten|\d+)\s+(?:largest|top|major)"
+                 r"|(?:top|largest)\s+(?:two|three|four|five|six|seven|eight|nine|ten|\d+))\b", re.I)
+MARKET = re.compile(r"market share|(?:of|in)\s+the\s+(?:total\s+|global\s+|worldwide\s+)*(?:foundry\s+|semiconductor\s+)?market|competitor|worldwide", re.I)
+ABBREV = re.compile(r"\b(?:Inc|Corp|Co|Ltd|Cos|Lt|No|S\.A|N\.V|L\.P|U\.S)\.|\d\.\d")
 MAX_UNIT = 2000
+
+
+def sentence_break(s: str) -> bool:
+    return bool(re.search(r"\.\s+[A-Z(]", ABBREV.sub("", s)))
 
 
 def load_aliases(path: Path | None = None) -> list[tuple[str, str]]:
@@ -73,11 +81,30 @@ def extract_text(text: str, supplier: str, meta: dict, aliases) -> list[dict]:
             nxt = marks[i + 1][0] if i + 1 < len(marks) else len(u)
             after = [p for p in pcts if b <= p[0] < min(nxt, b + 160)]
             shared = False
-            if not after:   # a list of names followed by one share: "Apple, Samsung and Xiaomi each comprised 10% or more"
+            # "A and B accounted for 52% and 35% of sales, respectively": names and shares are paired by position
+            s_ = i
+            while s_ > 0 and not any(marks[s_ - 1][1] <= q[0] < marks[s_][0] for q in pcts):
+                s_ -= 1
+            e_ = i
+            while e_ + 1 < len(marks) and not any(marks[e_][1] <= q[0] < marks[e_ + 1][0] for q in pcts):
+                e_ += 1
+            nxt_e = marks[e_ + 1][0] if e_ + 1 < len(marks) else len(u)
+            pe = [q for q in pcts if marks[e_][1] <= q[0] < min(nxt_e, marks[e_][1] + 160)]
+            if e_ > s_ and len(pe) > 1 and "respectively" in u[pe[-1][0]: pe[-1][0] + 90].lower():
+                last: dict[str, int] = {}
+                for j in range(s_, e_ + 1):
+                    last[marks[j][2]] = j
+                order = sorted(last.values())
+                if last[tk] != i or order.index(i) >= len(pe):
+                    continue
+                after = [pe[order.index(i)]]
+            elif not after:   # a list of names followed by one share: "Apple, Samsung and Xiaomi each comprised 10% or more"
                 tail = [p for p in pcts if b <= p[0] < b + 160 and "." not in re.sub(r"\d\.\d|Inc\.|Corp\.|Co\.|Ltd\.", "", u[b:p[0]])]
-                if tail and all(m[0] >= b for m in marks[i + 1:]) is not None and len(marks) > i + 1:
+                if tail and len(marks) > i + 1:
                     after, shared = tail, True
             if not after:
+                continue
+            if sentence_break(u[b:after[0][0]]) or AGG.search(u[b:after[0][0]]) or MARKET.search(u[max(0, a - 120): after[0][0] + 80]):
                 continue
             window = u[max(0, a - 120): min(len(u), after[0][0] + 80)]
             if NEGATION.search(window):

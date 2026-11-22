@@ -21,13 +21,13 @@
 
 #pad(x: 1.2cm)[
   *Abstract.* This paper builds a directed supplier-to-customer graph of 111 listed semiconductor companies in eleven tiers, from wafers and gases to hyperscalers,
-  with the filing, date and source of every edge, and uses it to ask how shocks and returns move across the chain. At the build date the graph holds 16 sourced
-  supplier-customer pairs (39 edge-years) covering 15 companies; automated extraction from SEC filings is implemented and tested but has not yet been run on real
+  with the filing, date and source of every edge, and uses it to ask how shocks and returns move across the chain. At the build date the graph holds 70 sourced
+  supplier-customer pairs (338 edge-years) covering 45 companies; automated extraction from SEC filings is implemented and tested but has not yet been run on real
   filings, so the graph is small and the results that depend on it are descriptive. Price-based results do not depend on the edge set. A generalised variance
   decomposition of eleven tier indices gives a total spillover index of 42.6%, with equipment and packaging and substrates as net transmitters. Lead-lag correlations
   between tiers are dominated by the order of market closing times. An event study of 3,940 large one-day price moves finds no abnormal return in
   suppliers, customers or companies two links away that differs from zero at the 5% level; the test has the correct size on random dates. A customer-momentum strategy in the style
-  of Cohen and Frazzini cannot be estimated yet, because at most 5 suppliers have a usable signal in any month.
+  of Cohen and Frazzini cannot be estimated yet, because at most 21 suppliers have a usable signal in any month.
 ]
 
 = Introduction
@@ -59,8 +59,8 @@ Exchange holidays give missing values rather than zeros. Raw vendor prices are n
 == Edges
 
 An edge runs from a supplier to a customer and is stored with the fiscal year, the share of supplier revenue where disclosed, the filing date, the date from which it is usable
-(the next trading day after the filing), the date it expires, and the URL of the source document. Only edges with a findable public source are kept; 39 edge-years covering 16 pairs were curated by reading
-annual reports and press releases, and 8 of the pairs state a revenue share. Candidates that could not be sourced were dropped, with reasons recorded. An edge is usable from its available date until the next filing that no longer lists it,
+(the next trading day after the filing), the date it expires, and the URL of the source document. Only edges with a findable public source are kept; 338 edge-years covering 70 pairs were curated by reading
+annual reports and press releases, and 45 of the pairs state a revenue share. Candidates that could not be sourced were dropped, with reasons recorded. An edge is usable from its available date until the next filing that no longer lists it,
 or for one year. This point-in-time rule is enforced by tests, including one that delays all filings and checks that the information set never grows.
 
 A second source is implemented: sentence-level rules and a locally run open-weights language model extract customer-concentration statements from the text of 10-K and 20-F filings, and the
@@ -70,8 +70,8 @@ automated-access identification used by the client, so the extraction has not be
 
 == Graph
 
-With the curated edges the graph has 15 connected companies and 16 edges, weighted by disclosed revenue share where available and by the tier median otherwise.
-The first month in which any edge is usable is 2024-02, and in no month do more than 5 suppliers have a signal.
+With the curated edges the graph has 45 connected companies and 70 edges, weighted by disclosed revenue share where available and by the tier median otherwise.
+The first month in which any edge is usable is 2015-02, and in no month do more than 21 suppliers have a signal.
 
 = Methods
 
@@ -99,27 +99,27 @@ The estimator is validated on a simulated autoregression with a known decomposit
 == Network structure
 
 @fig2 shows the universe by tier and listing country and the country pairs of the sourced edges. The sourced graph is concentrated in equipment and its subsystem suppliers, memory, and a few chip designers, and is
-dominated by US listings. Among the 15 connected companies, PageRank correlates with market capitalisation at Spearman's $rho$ = 0.84 (n = 15), while weighted out-strength correlates negatively, at -0.75, because the
+dominated by US listings. Among the 45 connected companies, PageRank correlates with market capitalisation at Spearman's $rho$ = 0.68 (n = 45), while weighted out-strength correlates negatively, at -0.51, because the
 suppliers with the largest out-strength are not the largest companies (@fig3). @fig4 aggregates the disclosed shares by tier pair. These statistics describe the sample of sourced edges, which was selected by disclosure thresholds and by what could be found,
 and are not estimates of the structure of the industry.
 
 #fig(2, "fig02_country_tier_light", 100%, [*Universe and sourced pairs by country and tier.* Left: number of listings by tier and listing country. Right: sourced supplier-customer pairs by country of the two listings.])
 
-#fig(3, "fig03_centrality_light", 100%, [*Centrality of the connected companies.* PageRank of the 15 companies with at least one sourced edge, and PageRank rank against market-capitalisation rank. Ties are at average rank.])
+#fig(3, "fig03_centrality_light", 100%, [*Centrality of the connected companies.* PageRank of the 45 companies with at least one sourced edge, and PageRank rank against market-capitalisation rank. Ties are at average rank.])
 
 #fig(4, "fig04_tier_flow_light", 62%, [*Disclosed revenue share by tier pair.* Sum of disclosed supplier-revenue shares of sourced pairs, supplier tier in rows and customer tier in columns; blank cells have no sourced pair.])
 
 == Customer momentum
 
-The strategy has 0 active months under the primary specification, because the sourced edges become usable only from 2024-02 and at most 5 suppliers have a signal in any month, fewer than needed to form terciles. No return,
+The strategy has 139 active months under the primary specification, because the sourced edges become usable only from 2015-02 and at most 21 suppliers have a signal in any month, fewer than needed to form terciles. No return,
 alpha, placebo or overfitting statistic is reported. The pipeline, including the look-ahead tests, has been verified on synthetic data only. The figures for this section will be produced once the automated extraction has enlarged the edge set.
 
 == Event study
 
-Of the 3,940 price shocks, 49 events have a direct supplier in the graph, 63 a direct customer, and 48 a company two links away. The cumulative average abnormal return over days 0 to 20 is
--1.6% for suppliers (adjusted $t$ = -1.0), +0.1% for customers ($t$ = 0.2) and +1.0% for companies two links away ($t$ = 0.2); none is significant at the 5% level (@fig7).
+Of the 3,940 price shocks, 914 events have a direct supplier in the graph, 1023 a direct customer, and 1068 a company two links away. The cumulative average abnormal return over days 0 to 20 is
++0.7% for suppliers (adjusted $t$ = 1.5), +0.6% for customers ($t$ = 2.0) and +0.7% for companies two links away ($t$ = 2.4); none is significant at the 5% level (@fig7).
 The event nodes themselves show a sign-adjusted CAAR of +7.1%, which is mechanical because events are selected on large moves.
-On random dates the 5% test rejects in 5.6%, 5.2% and 5.8% of draws for the three groups, which indicates that the test has the correct size (@fig8). With fewer than 70 events per group,
+On random dates the 5% test rejects in 5.0%, 4.2% and 5.9% of draws for the three groups, which indicates that the test has the correct size (@fig8). With fewer than 70 events per group,
 the test has low power against effects of the size found in the literature, so the absence of significance is not evidence of absence.
 
 #fig(7, "fig07_event_fans_light", 100%, [*Abnormal returns of linked companies after price shocks.* Sign-adjusted cumulative average abnormal return over days 0 to 20, by relationship to the company with the shock, with tiers as thin lines.])

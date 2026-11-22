@@ -1,4 +1,4 @@
-"""Figures that depend only on committed results (figures 2 to 4 and 7 to 11; figures 5 and 6 need an active momentum strategy)."""
+"""Figures that depend only on committed results (figures 2 to 11)."""
 from __future__ import annotations
 
 import sys
@@ -9,7 +9,7 @@ import json
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from scgraph import config, plots  # noqa: E402
+from scgraph import config, edges as edges_mod, momentum as mo, plots  # noqa: E402
 
 RES = config.ROOT / "results"
 
@@ -20,7 +20,7 @@ def main() -> None:
     ro = pd.read_parquet(RES / "spillover_rolling.parquet")
     ll = pd.read_csv(RES / "leadlag_tiers.csv")
     uni = pd.read_csv(config.ROOT / "data" / "universe.csv")
-    edges = pd.read_csv(config.ROOT / "data" / "edges_curated.csv")
+    edges = edges_mod.load()
     der = config.ROOT / "data" / "derived"
     cent = pd.read_csv(der / "centrality.csv")
     nodes = pd.DataFrame(json.loads((der / "graph.json").read_text())["nodes"])
@@ -28,8 +28,17 @@ def main() -> None:
     caar = pd.read_csv(RES / "event_caar.csv")
     draws = pd.read_csv(RES / "event_placebo_draws.csv")
     esum = json.loads((RES / "event_summary.json").read_text())
+    ret = pd.read_parquet(RES / "momentum_primary.parquet")
+    placebo = pd.read_parquet(RES / "placebo_rewiring.parquet")["sharpe"].to_numpy()
+    summ = json.loads((RES / "summary.json").read_text())
+    trials = pd.read_parquet(RES / "momentum_trials.parquet")
+    full = trials.loc[:, trials.notna().mean() >= 0.9].dropna()
+    trial_sr = full.apply(lambda c: mo.sharpe(c.to_numpy()))
+    sr0_annual = summ["overfitting"]["sr0_per_period"] * mo.PPY ** 0.5
+    real = summ["placebo"]["real_sharpe"]
     for mode in ("light", "dark"):
-        for p in (plots.fig_country_tier(uni, edges, out, mode), plots.fig_centrality(cent, nodes, out, mode),
+        for p in (plots.fig_momentum(ret, out, mode), plots.fig_momentum_placebo(placebo, real, trial_sr, sr0_annual, out, mode),
+                  plots.fig_country_tier(uni, edges, out, mode), plots.fig_centrality(cent, nodes, out, mode),
                   plots.fig_tier_flow(flow, out, mode), plots.fig_event_fans(caar, out, mode),
                   plots.fig_placebo_panels(draws, esum, out, mode),
                   plots.fig_spillover_table(st, out, mode), plots.fig_spillover_rolling(ro, out, mode), plots.fig_leadlag_grid(ll, out, mode)):
