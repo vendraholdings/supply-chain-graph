@@ -82,7 +82,9 @@ def main() -> None:
               sr0=round(summ["overfitting"]["sr0_per_period"] * mo.PPY ** 0.5, 3), pbo=round(summ["overfitting"]["cscv"]["pbo"], 2),
               dsr=round(summ["overfitting"]["dsr"], 2), p=round(summ["placebo"]["p_ge_real"], 2))
     sc = RES / "shock_case.json"
-    data = dict(graph=g, f5=f5, f6=f6, shock=json.loads(sc.read_text()) if sc.exists() else None, turbo=[[i / 10, matplotlib.colors.to_hex(matplotlib.colormaps["turbo"](i / 10))] for i in range(11)],
+    ns = RES / "node_stats.csv"
+    nstats = pd.read_csv(ns).set_index("ticker").where(lambda d: d.notna(), None).to_dict("index") if ns.exists() else {}
+    data = dict(graph=g, nstats=nstats, f5=f5, f6=f6, shock=json.loads(sc.read_text()) if sc.exists() else None, turbo=[[i / 10, matplotlib.colors.to_hex(matplotlib.colormaps["turbo"](i / 10))] for i in range(11)],
                 f2=dict(tiers=tier_ids, countries=ctys, matrix=cm, pair_labels=pc.index.tolist(), pair_counts=pc.tolist()),
                 f3=dict(rows=cent[["ticker", "pagerank", "tier", "mcap_rank", "pr_rank"]].round(5).to_dict("records")),
                 f4=dict(names=list(flow.columns), z=[[None if v == 0 else round(v, 2) for v in r] for r in flow.to_numpy(float)]),
