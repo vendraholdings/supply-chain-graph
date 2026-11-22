@@ -41,7 +41,8 @@ def test_average_rate_is_capped():
     assert log[-1] - log[0] >= 100 / 5 - 1e-6
 
 
-def test_user_agent_matches_required_string_and_is_sent(tmp_path):
+def test_user_agent_matches_required_string_and_is_sent(tmp_path, monkeypatch):
+    monkeypatch.delenv("SEC_USER_AGENT", raising=False)
     cfg = config.load()
     assert cfg["edgar_user_agent"] == REQUIRED_UA
     seen = {}
@@ -76,3 +77,31 @@ def test_http_error_is_raised(tmp_path):
 def test_html_to_text_keeps_rows():
     t = html_to_text("<html><body><p>Customer A</p><table><tr><td>Apple</td><td>23%</td></tr></table><script>x()</script></body></html>")
     assert "Customer A" in t and "Apple | 23%" in t.replace("\n", " ") and "x()" not in t
+
+
+def test_private_user_agent_from_environment_is_sent_but_never_cached_or_reported(tmp_path, monkeypatch):
+    secret = "research-agent private-contact-line"
+    monkeypatch.setenv("SEC_USER_AGENT", secret)
+    seen = {}
+
+    class R:
+        def __init__(self, code):
+            self.status_code, self.text = code, "body"
+
+    class S:
+        code = 200
+
+        def get(self, url, headers=None, timeout=None):
+            seen.update(headers)
+            return R(S.code)
+
+    c = EdgarClient(config.load(), cache_dir=tmp_path, session=S(), limiter=RateLimiter(1000))
+    c.get("https://data.sec.gov/a")
+    assert seen["User-Agent"] == secret
+    assert all(secret not in f.read_text() for f in tmp_path.iterdir())
+    S.code = 403
+    try:
+        c.get("https://data.sec.gov/b")
+        raise AssertionError("expected a failure")
+    except RuntimeError as e:
+        assert secret not in str(e)

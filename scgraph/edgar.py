@@ -1,12 +1,13 @@
 """SEC EDGAR client: shared rate limiter, declared User-Agent, on-disk cache of every response.
 
-Fair-access policy: https://www.sec.gov/os/accessing-edgar-data. The declared User-Agent comes from config.yaml.
+Fair-access policy: https://www.sec.gov/os/accessing-edgar-data. The declared User-Agent comes from the environment variable SEC_USER_AGENT (a private contact line kept outside the repository), else from config.yaml.
 """
 from __future__ import annotations
 
 import collections
 import hashlib
 import json
+import os
 import re
 import time
 from pathlib import Path
@@ -50,7 +51,7 @@ class RateLimiter:
 class EdgarClient:
     def __init__(self, cfg: dict | None = None, cache_dir: Path | None = None, session=None, limiter: RateLimiter | None = None):
         cfg = cfg or config.load()
-        self.user_agent = cfg["edgar_user_agent"]
+        self.user_agent = os.environ.get("SEC_USER_AGENT") or cfg["edgar_user_agent"]   # the private value is never logged, cached or committed
         self.limiter = limiter or RateLimiter(cfg["edgar_rate_per_s"])
         self.cache = Path(cache_dir) if cache_dir else config.ROOT / "cache" / "edgar"
         self.cache.mkdir(parents=True, exist_ok=True)
