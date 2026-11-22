@@ -1,4 +1,4 @@
-.PHONY: setup verify prices extract graph results figures site paper test privacy all serve
+.PHONY: setup verify prices extract graph results figures site paper readme hero test privacy all serve
 UV ?= uv
 
 setup:
@@ -26,7 +26,13 @@ site:
 	$(UV) run python site/build.py
 
 paper:
-	@echo "target 'paper' is built in the second stage of the project"
+	$(UV) run python scripts/build_paper.py
+
+readme:
+	$(UV) run python scripts/build_readme.py
+
+hero:
+	$(UV) run python scripts/record_hero.py
 
 test:
 	$(UV) run pytest -q
@@ -34,7 +40,7 @@ test:
 privacy:
 	$(UV) run python -m scgraph.privacy
 
-all: setup verify prices extract graph results test privacy
+all: setup verify prices extract graph results figures paper site readme test privacy
 
 serve:
 	cd site/dist && python3 -m http.server 8000

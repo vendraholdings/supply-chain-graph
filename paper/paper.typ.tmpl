@@ -1,0 +1,161 @@
+#set document(title: "Mapping the Semiconductor Supply Chain from Public Filings")
+#set page(paper: "a4", margin: (x: 2.3cm, y: 2.4cm), numbering: "1")
+#set text(font: "New Computer Modern", size: 10pt)
+#set par(justify: true, leading: 0.62em)
+#set heading(numbering: "1.1")
+#show heading.where(level: 1): set text(size: 13pt)
+#show heading.where(level: 2): set text(size: 11pt)
+#show figure.caption: set text(size: 9pt)
+#show figure: set block(breakable: false)
+#let fig(n, name, w, cap) = {
+  counter(figure.where(kind: image)).update(n - 1)
+  [#figure(image("figures/" + name + ".png", width: w), caption: cap, placement: auto)#label("fig" + str(n))]
+}
+
+#align(center)[
+  #text(size: 17pt, weight: "bold")[Mapping the Semiconductor Supply Chain from Public Filings] \
+  #v(2pt)
+  #text(size: 12pt)[Network structure, shock propagation and customer-to-supplier return predictability]
+]
+#v(10pt)
+
+#pad(x: 1.2cm)[
+  *Abstract.* This paper builds a directed supplier-to-customer graph of <<n_companies>> listed semiconductor companies in eleven tiers, from wafers and gases to hyperscalers,
+  with the filing, date and source of every edge, and uses it to ask how shocks and returns move across the chain. At the build date the graph holds <<n_pairs>> sourced
+  supplier-customer pairs (<<n_edge_rows>> edge-years) covering <<n_connected>> companies; automated extraction from SEC filings is implemented and tested but has not yet been run on real
+  filings, so the graph is small and the results that depend on it are descriptive. Price-based results do not depend on the edge set. A generalised variance
+  decomposition of eleven tier indices gives a total spillover index of <<spill_total>>, with <<tx1_name>> and <<tx2_name>> as net transmitters. Lead-lag correlations
+  between tiers are dominated by the order of market closing times. An event study of <<n_shocks>> large one-day price moves finds no abnormal return in
+  suppliers, customers or companies two links away that differs from zero at the 5% level; the test has the correct size on random dates. A customer-momentum strategy in the style
+  of Cohen and Frazzini cannot be estimated yet, because at most <<max_suppliers>> suppliers have a usable signal in any month.
+]
+
+= Introduction
+
+Semiconductor production passes through many specialised firms: materials and gases, wafers, deposition, etch and lithography equipment, electronic design automation and intellectual property,
+foundries and memory makers, packaging, chip designers, and finally the system makers and cloud providers that buy the chips. Most of these links are not recorded in any
+single public dataset. They are, however, disclosed in annual reports whenever a customer exceeds a materiality threshold, for example 10% of revenue in US filings.
+Cohen and Frazzini @cohen2008 showed for US firms that the returns of a supplier are predicted by the lagged returns of its customers, which they attribute to limited investor attention to economic links.
+Menzly and Ozbas @menzly2010 document related cross-predictability between industries linked through the input-output structure.
+
+This project asks three questions with only free data. First, can a graph of listed semiconductor companies be built with a documented source and date on every edge? Second, how large are
+the spillovers between tiers and which tiers transmit and receive them? Third, do the sourced links predict returns, either through customer momentum or through abnormal returns of linked companies after large price moves?
+Negative and uninformative results are reported as such. The exported graph is intended for reuse by later projects that map news items to affected companies.
+
+This version of the paper is written at a stage where the price-based analyses are complete and the filing-based edge extraction is not. The status is stated in each section where it matters.
+
+= Data and graph construction
+
+== Universe and prices
+
+A seed list of <<n_seed>> tickers was verified against a price vendor: each ticker had to exist, be an equity, match its name, and have at least three years of history and a recent last price.
+<<n_dropped>> were dropped, each with a recorded reason (two have no price history and one has vendor history ending on 2 October 2026), leaving <<n_companies>> listings, one per company on its home exchange, in the
+eleven tiers of @fig2. Three listings with short histories are kept and flagged. The universe is defined from today's constituents and is therefore subject to survivorship bias.
+
+Daily adjusted closes from 2015 to <<build_end>> are converted to US dollars and placed on a common grid of <<n_days>> US trading days. A listing's return for grid day $t$ is the compounded return over its own
+sessions that close after the US close of day $t-1$ and no later than the US close of day $t$. Asian and European sessions on calendar date $t$ therefore fall in grid day $t$ and are known before the US open.
+Exchange holidays give missing values rather than zeros. Raw vendor prices are not redistributed with this repository; only derived results are.
+
+== Edges
+
+An edge runs from a supplier to a customer and is stored with the fiscal year, the share of supplier revenue where disclosed, the filing date, the date from which it is usable
+(the next trading day after the filing), the date it expires, and the URL of the source document. Only edges with a findable public source are kept; <<n_edge_rows>> edge-years covering <<n_pairs>> pairs were curated by reading
+annual reports and press releases, and <<n_disclosed>> of the pairs state a revenue share. Candidates that could not be sourced were dropped, with reasons recorded. An edge is usable from its available date until the next filing that no longer lists it,
+or for one year. This point-in-time rule is enforced by tests, including one that delays all filings and checks that the information set never grows.
+
+A second source is implemented: sentence-level rules and a locally run open-weights language model extract customer-concentration statements from the text of 10-K and 20-F filings, and the
+two outputs must agree before an edge enters the graph, otherwise it goes to a review queue. The model's responses are cached so that the step can be replayed without network access. On ten real filings,
+the rules recovered 5 of about 15 named pairs found by reading, with no false positive; the misses are dollar tables. As of the build date, SEC EDGAR has not accepted the
+automated-access identification used by the client, so the extraction has not been run on the full filing set, and the results below use the curated edges only.
+
+== Graph
+
+With the curated edges the graph has <<n_connected>> connected companies and <<n_pairs>> edges, weighted by disclosed revenue share where available and by the tier median otherwise.
+The first month in which any edge is usable is <<first_edge_month>>, and in no month do more than <<max_suppliers>> suppliers have a signal.
+
+= Methods
+
+*Centrality.* PageRank with damping 0.85, weighted in-strength and out-strength, and betweenness, computed on the directed graph @page1999. Rank correlations with market capitalisation use Spearman's coefficient.
+
+*Customer momentum.* Following Cohen and Frazzini, each month end a supplier's signal is the revenue-weighted return in US dollars of its customers over the month; suppliers are sorted into terciles, the top tercile is bought
+and the bottom sold, equal-weighted and held one month. Costs are 10 basis points one way for US, European and Japanese listings, 25 basis points for Taiwan, Korea and Hong Kong, and 50 basis points a year on short positions.
+Alpha is estimated with Newey-West standard errors @neweywest1987 and by Fama-MacBeth cross-sectional regressions @famamacbeth1973. The primary specification is fixed in the configuration file before any result is computed, and a declared grid of <<n_trials>> variants
+(lag, quantiles, weighting, edge set, holding period) is run so that the multiple-testing diagnostics of the deflated Sharpe ratio @bailey2014 and of the probability of backtest overfitting can be applied.
+A falsification test rewires the edges at random within tiers, preserving degrees.
+
+*Event study.* An event is a one-day move of a listing larger than three trailing 60-day standard deviations. For each linked listing, day 0 is its first session closing after the event, so that an after-close US move is day 0 for Asia
+on the next calendar date. Abnormal returns are the US-dollar return minus a market model with the local index, a global semiconductor index and a lagged term @dimson1979, estimated on days $-250$ to $-30$. Returns are sign-adjusted, so that a
+supplier moving with the event node counts positively whatever the direction of the shock. The test statistic is the standardised cross-sectional test @bmp1991 adjusted for event clustering @kolari2010.
+The size of the test is checked on <<placebo_draws>> draws of random listings and dates with the same number of events as each real set.
+
+*Spillover.* The generalised forecast-error variance decomposition of Diebold and Yilmaz @dy2012, based on generalised impulse responses @pesaran1998, is computed from a vector autoregression of the eleven tier indices (cap-weighted, in US dollars,
+residualised on the US market) with the lag chosen by BIC (at most three) and a ten-day horizon. The total spillover index is the share of forecast-error variance that comes from other tiers. Rolling estimates use 250-day windows; weekly data are used as a robustness check.
+The estimator is validated on a simulated autoregression with a known decomposition, matching it within 0.02.
+
+*Lead-lag.* Cross-correlations of tier returns at lags from $-5$ to $+5$ grid days for all <<ll_pairs>> ordered tier pairs, with 95% intervals from a stationary bootstrap @politis1994.
+
+= Results
+
+== Network structure
+
+@fig2 shows the universe by tier and listing country and the country pairs of the sourced edges. The sourced graph is concentrated in equipment and its subsystem suppliers, memory, and a few chip designers, and is
+dominated by US listings. Among the <<n_connected>> connected companies, PageRank correlates with market capitalisation at Spearman's $rho$ = <<pr_rho>> (n = <<pr_n>>), while weighted out-strength correlates negatively, at <<str_rho>>, because the
+suppliers with the largest out-strength are not the largest companies (@fig3). @fig4 aggregates the disclosed shares by tier pair. These statistics describe the sample of sourced edges, which was selected by disclosure thresholds and by what could be found,
+and are not estimates of the structure of the industry.
+
+#fig(2, "fig02_country_tier_light", 100%, [*Universe and sourced pairs by country and tier.* Left: number of listings by tier and listing country. Right: sourced supplier-customer pairs by country of the two listings.])
+
+#fig(3, "fig03_centrality_light", 100%, [*Centrality of the connected companies.* PageRank of the <<n_connected>> companies with at least one sourced edge, and PageRank rank against market-capitalisation rank. Ties are at average rank.])
+
+#fig(4, "fig04_tier_flow_light", 62%, [*Disclosed revenue share by tier pair.* Sum of disclosed supplier-revenue shares of sourced pairs, supplier tier in rows and customer tier in columns; blank cells have no sourced pair.])
+
+== Customer momentum
+
+The strategy has <<months_primary>> active months under the primary specification, because the sourced edges become usable only from <<first_edge_month>> and at most <<max_suppliers>> suppliers have a signal in any month, fewer than needed to form terciles. No return,
+alpha, placebo or overfitting statistic is reported. The pipeline, including the look-ahead tests, has been verified on synthetic data only. The figures for this section will be produced once the automated extraction has enlarged the edge set.
+
+== Event study
+
+Of the <<n_shocks>> price shocks, <<direct_supplier_n>> events have a direct supplier in the graph, <<direct_customer_n>> a direct customer, and <<two_hop_n>> a company two links away. The cumulative average abnormal return over days 0 to 20 is
+<<direct_supplier_caar>> for suppliers (adjusted $t$ = <<direct_supplier_t>>), <<direct_customer_caar>> for customers ($t$ = <<direct_customer_t>>) and <<two_hop_caar>> for companies two links away ($t$ = <<two_hop_t>>); none is significant at the 5% level (@fig7).
+The event nodes themselves show a sign-adjusted CAAR of <<node_caar>>, which is mechanical because events are selected on large moves.
+On random dates the 5% test rejects in <<direct_supplier_rej>>, <<direct_customer_rej>> and <<two_hop_rej>> of draws for the three groups, which indicates that the test has the correct size (@fig8). With fewer than 70 events per group,
+the test has low power against effects of the size found in the literature, so the absence of significance is not evidence of absence.
+
+#fig(7, "fig07_event_fans_light", 100%, [*Abnormal returns of linked companies after price shocks.* Sign-adjusted cumulative average abnormal return over days 0 to 20, by relationship to the company with the shock, with tiers as thin lines.])
+
+#fig(8, "fig08_placebo_light", 100%, [*Placebo distribution on random dates.* Cumulative average abnormal return at day 20 for random listings and dates, with the observed value marked.])
+
+== Spillovers between tiers
+
+The static total spillover index of the eleven tier indices is <<spill_total>> (<<spill_weekly>> with weekly data), so slightly more than two fifths of the ten-day forecast-error variance of a tier comes from other tiers. The rolling index ranges between <<spill_min>> and <<spill_max>>
+across <<n_windows>> windows, and the VAR is stable in every window (@fig10). The largest net transmitters are <<tx1_name>> (<<tx1>>, <<tx1_v>> points) and <<tx2_name>> (<<tx2>>, <<tx2_v>>); the largest net receivers are <<rx1_name>> (<<rx1>>, <<rx1_v>>) and <<rx2_name>> (<<rx2>>, <<rx2_v>>) (@fig9).
+Tier indices use current market capitalisation as static weights, which favours today's large companies.
+
+#fig(9, "fig09_spillover_table_light", 70%, [*Generalised forecast-error variance decomposition, ten-day horizon.* Each row sums to 100% over the originating tiers; the colour scale is capped at 20% so that off-diagonal cells are legible.])
+
+#fig(10, "fig10_spillover_rolling_light", 85%, [*Rolling total spillover index and net directional spillover by tier.* 250-day windows of residualised daily returns on the US trading-day grid.])
+
+== Lead-lag relations
+
+Of the non-zero-lag intervals, <<ll_share>> exclude zero, against <<ll_null>> expected under the null of no relation (@fig11). The strongest relation is <<ll_top_leader>> leading <<ll_top_follower>> at one day (correlation <<ll_top_corr>>). Because the grid places the Asian
+and European sessions of a calendar date before the US open, a lag of one day between a mainly Asian tier and a mainly US tier largely reflects closing-time order. The median same-day correlation between the Asian and US halves of a tier is <<asia_us_corr>>, reported separately.
+The lead-lag results are therefore not evidence of information flow along the supply chain.
+
+#fig(11, "fig11_leadlag_light", 100%, [*Lead-lag cross-correlations between tiers.* Row tier leads column tier at positive lags; intervals are 95% stationary-bootstrap bands.])
+
+= Discussion and limitations
+
+The price-based results describe how the tiers move together and do not depend on the edge set. They show substantial common movement (a total spillover index of <<spill_total>>) with equipment and packaging as net transmitters. The edge-based results are, at this stage,
+too thin to support conclusions: the event study has the correct size but low power, and the momentum strategy cannot be estimated.
+
+Limitations:
+- *Edge coverage.* Edges come from disclosure thresholds, which favour large customers and suppliers with concentrated sales. Customers reported anonymously cannot be resolved without curation. Coverage of Japan, Korea, Taiwan and Hong Kong filers relies on manual curation.
+- *Small samples.* Event groups have fewer than 70 events and the momentum strategy has no active months.
+- *Survivorship.* The universe and the tier weights use today's constituents.
+- *Timing.* Filing dates are the dates of the documents; some sources are mirrors of the original filing, and one filing date is an auditor report date. Edges become usable the next trading day.
+- *Costs and constraints.* Costs are stylised; short-sale constraints and borrow availability in Asian markets are not modelled beyond a flat fee.
+- *Mechanical lead-lag.* Time-zone order explains the largest lead-lag correlations.
+- *Single data vendor.* Prices come from one free vendor and were not cross-checked against a second source.
+
+#bibliography("refs.bib", style: "apa", title: "References")
