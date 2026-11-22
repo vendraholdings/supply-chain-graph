@@ -52,7 +52,32 @@ def main() -> None:
     summ = json.loads((RES / "summary.json").read_text())
     sps = json.loads((RES / "spillover_summary.json").read_text())
     evs = json.loads((RES / "event_summary.json").read_text())
-    data = dict(graph=g, tier_colors=turbo_hex(len(g["tiers"])),
+    uni = pd.read_csv(ROOT / "data" / "universe.csv")
+    edges = pd.read_csv(ROOT / "data" / "edges_curated.csv").drop_duplicates(["supplier", "customer"])
+    tier_ids = [t["id"] for t in g["tiers"]]
+    ctys = sorted(uni["country"].unique())
+    cm = [[int(((uni.tier == t) & (uni.country == c)).sum()) for c in ctys] for t in tier_ids]
+    cty = dict(zip(uni.ticker, uni.country))
+    pc = (edges.supplier.map(cty) + " to " + edges.customer.map(cty)).value_counts().sort_values()
+    cent = pd.read_csv(ROOT / "data" / "derived" / "centrality.csv").merge(
+        pd.DataFrame(g["nodes"]).rename(columns={"ticker": "ticker"})[["ticker", "tier", "mcap_usd"]], on="ticker")
+    cent = cent[(cent.in_degree + cent.out_degree) > 0].copy()
+    cent["mcap_rank"] = cent.mcap_usd.rank(ascending=False)
+    cent["pr_rank"] = cent.pagerank.rank(ascending=False)
+    flow = pd.read_csv(ROOT / "data" / "derived" / "tier_flow.csv", index_col=0)
+    caar = pd.read_csv(RES / "event_caar.csv")
+    caar_d = {}
+    for (rel, tr), d in caar.groupby(["relation", "tier"]):
+        if rel != "event_node":
+            caar_d.setdefault(rel, {})[tr] = dict(day=d.day.tolist(), caar=(100 * d.caar).round(3).tolist(), n=int(d.n.iloc[0]))
+    draws = pd.read_csv(RES / "event_placebo_draws.csv")
+    plc = {rel: dict(draws=(100 * d.caar_end).round(3).tolist(), observed=round(100 * evs[rel]["caar_end"], 3), n=evs[rel]["n"],
+                     rejection=evs[rel]["placebo"]["rejection_rate_5pct"]) for rel, d in draws.groupby("relation")}
+    data = dict(graph=g, turbo=[[i / 10, matplotlib.colors.to_hex(matplotlib.colormaps["turbo"](i / 10))] for i in range(11)],
+                f2=dict(tiers=tier_ids, countries=ctys, matrix=cm, pair_labels=pc.index.tolist(), pair_counts=pc.tolist()),
+                f3=dict(rows=cent[["ticker", "pagerank", "tier", "mcap_rank", "pr_rank"]].round(5).to_dict("records")),
+                f4=dict(names=list(flow.columns), z=[[None if v == 0 else round(v, 2) for v in r] for r in flow.to_numpy(float)]),
+                f7=caar_d, f8=plc, tier_colors=turbo_hex(len(g["tiers"])),
                 spill=dict(names=names, theta=st.loc[names, names].round(2).values.tolist(),
                            net=st.loc["net", names].round(2).tolist(), total=sps["static"]["total_index"]),
                 rolling=dict(dates=[d.strftime("%Y-%m-%d") for d in ro.index], total=ro["total"].round(2).tolist(),

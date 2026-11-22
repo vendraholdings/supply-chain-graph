@@ -19,8 +19,14 @@ graph:
 results:
 	$(UV) run python scripts/run_all.py
 
-figures site paper:
-	@echo "target '$@' is built in the second stage of the project"
+figures:
+	$(UV) run python scripts/make_figures.py
+
+site:
+	$(UV) run python site/build.py
+
+paper:
+	@echo "target 'paper' is built in the second stage of the project"
 
 test:
 	$(UV) run pytest -q
