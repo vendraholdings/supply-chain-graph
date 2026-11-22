@@ -23,6 +23,14 @@ SEC_SYMBOL = {"ASML.AS": "ASML", "2330.TW": "TSM", "2303.TW": "UMC", "3711.TW": 
               "000660.KS": None, "005930.KS": None}
 
 
+class EdgarHTTPError(RuntimeError):
+    """Non-200 answer from EDGAR; `status` holds the HTTP code. The message never contains request headers."""
+
+    def __init__(self, status: int, url: str):
+        super().__init__(f"EDGAR request failed: HTTP {status} for {url}")
+        self.status = status
+
+
 class RateLimiter:
     """Sliding-window limiter: at most `rate` requests per second on average, never more than `hard` in any 1 s window."""
 
@@ -77,7 +85,7 @@ class EdgarClient:
         r = self.session.get(url, headers={"User-Agent": self.user_agent, "Accept-Encoding": "gzip, deflate"}, timeout=60)
         self.n_requests += 1
         if r.status_code != 200:
-            raise RuntimeError(f"EDGAR request failed: HTTP {r.status_code} for {url}")
+            raise EdgarHTTPError(r.status_code, url)
         p.write_text(r.text)
         return r.text
 
