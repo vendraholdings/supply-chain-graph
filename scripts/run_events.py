@@ -50,6 +50,7 @@ def main() -> None:
     out: dict = dict(n_shocks=len(groups.get("event_node", [])), edges_used=int(len(E)))
     rng = np.random.default_rng(cfg["seed"])
     rows = []
+    draw_rows = []
     for rel, items in groups.items():
         pairs = [(c, d, s) for c, d, s, _ in items]
         r = ev.study(Y, F, pairs, ec["car_horizon"], tuple(ec["estimation_window"]))
@@ -58,6 +59,7 @@ def main() -> None:
         if r["n"] >= 10 and rel != "event_node":
             pl = ev.placebo(Y, F, [col[t] for t in tick], [country[t] for t in tick], r["n"], ec["placebo_draws"], rng,
                             ec["car_horizon"], tuple(ec["estimation_window"]))
+            draw_rows += [dict(relation=rel, draw=i, caar_end=float(v)) for i, v in enumerate(pl["caar_draws"])]
             entry["placebo"] = dict(rejection_rate_5pct=pl["rejection_rate"], mean_caar=pl["mean_caar"], se=pl["se_caar"], draws=pl["draws"])
         if r["caar"] is not None:
             for h, v in enumerate(r["caar"]):
@@ -70,6 +72,7 @@ def main() -> None:
                     rows.append(dict(relation=rel, tier=tr, day=h, caar=float(v), n=rt["n"]))
         out[rel] = entry
     pd.DataFrame(rows).to_csv(RES / "event_caar.csv", index=False)
+    pd.DataFrame(draw_rows).to_csv(RES / "event_placebo_draws.csv", index=False)
     (RES / "event_summary.json").write_text(json.dumps(out, indent=1, default=float))
     print(json.dumps(out, indent=1, default=float))
 

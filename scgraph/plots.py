@@ -96,3 +96,132 @@ def fig_placebo_hist(draws: np.ndarray, real: float, out: Path, mode: str, numbe
     ax.set_title(f"Figure {number}. Placebo distribution on random dates and the observed {label}")
     ax.legend()
     return _save(fig, out, f"fig{number:02d}_placebo", mode)
+
+
+REL_LABEL = {"direct_supplier": "Direct suppliers of the event node", "direct_customer": "Direct customers of the event node",
+             "two_hop": "Two hops from the event node"}
+
+
+def _tier_colors(tiers):
+    keys = list(TIERS)
+    cm = plt.get_cmap(theme.CMAP)
+    return {t: cm(0.05 + 0.9 * keys.index(t) / (len(keys) - 1)) for t in tiers}
+
+
+def fig_country_tier(universe: pd.DataFrame, edges: pd.DataFrame, out: Path, mode: str, number: int = 2) -> Path:
+    """Listings by tier and country (left) and curated supplier-customer pairs by country pair (right)."""
+    theme.use(mode)
+    tiers = list(TIERS)
+    countries = sorted(universe["country"].unique())
+    M = np.zeros((len(tiers), len(countries)))
+    for _, r in universe.iterrows():
+        M[tiers.index(r["tier"]), countries.index(r["country"])] += 1
+    cty = dict(zip(universe["ticker"], universe["country"]))
+    pairs = edges.drop_duplicates(["supplier", "customer"])
+    cc = pairs.assign(k=pairs["supplier"].map(cty) + " to " + pairs["customer"].map(cty)).groupby("k").size().sort_values()
+    fig, (a, b) = plt.subplots(1, 2, figsize=(12, 5.2), gridspec_kw=dict(width_ratios=[1.5, 1], wspace=0.55))
+    im = a.imshow(M, cmap=theme.CMAP, vmin=0, vmax=max(M.max(), 1))
+    a.set_xticks(range(len(countries)), countries)
+    a.set_yticks(range(len(tiers)), [f"{t} {TIERS[t]}" for t in tiers])
+    a.grid(False)
+    for i in range(len(tiers)):
+        for j in range(len(countries)):
+            if M[i, j]:
+                a.text(j, i, f"{M[i, j]:.0f}", ha="center", va="center", fontsize=8, color="white" if M[i, j] < 0.25 * M.max() else "black")
+    a.set_title("Listings by tier and country")
+    fig.colorbar(im, ax=a, fraction=0.046, label="Number of listings")
+    b.barh(cc.index, cc.values, color=theme.LGB)
+    b.set_xlabel("Supplier-customer pairs")
+    b.set_title(f"Sourced pairs by country (n = {int(cc.sum())})")
+    b.xaxis.get_major_locator().set_params(integer=True)
+    fig.suptitle(f"Figure {number}. Universe and sourced supplier-customer pairs by country and tier", fontsize=11, x=0.02, ha="left")
+    return _save(fig, out, f"fig{number:02d}_country_tier", mode)
+
+
+def fig_centrality(cent: pd.DataFrame, nodes: pd.DataFrame, out: Path, mode: str, number: int = 3) -> Path:
+    """PageRank of the connected nodes (bar) and PageRank rank against market-cap rank (scatter)."""
+    theme.use(mode)
+    d = cent.merge(nodes[["ticker", "name", "tier", "mcap_usd"]], on="ticker")
+    d = d[(d["in_degree"] + d["out_degree"]) > 0].copy()
+    d["mcap_rank"] = d["mcap_usd"].rank(ascending=False)
+    d["pr_rank"] = d["pagerank"].rank(ascending=False)
+    top = d.sort_values("pagerank").tail(15)
+    col = _tier_colors(d["tier"].unique())
+    fig, (a, b) = plt.subplots(1, 2, figsize=(10.5, 4.6))
+    a.barh(top["ticker"], top["pagerank"], color=[col[t] for t in top["tier"]])
+    a.set_xlabel("PageRank (damping 0.85)")
+    a.set_title(f"Connected nodes by PageRank (n = {len(d)})")
+    b.scatter(d["mcap_rank"], d["pr_rank"], c=[col[t] for t in d["tier"]], s=40)
+    for _, r in d[d["pr_rank"] < 10].iterrows():
+        b.annotate(r["ticker"], (r["mcap_rank"], r["pr_rank"]), fontsize=7, xytext=(3, 3), textcoords="offset points")
+    lim = len(d) + 1
+    b.plot([0, lim], [0, lim], color=theme.MUTED, lw=0.8, ls="--")
+    b.set_xlim(0, lim)
+    b.set_ylim(0, lim)
+    b.set_xlabel("Market-capitalisation rank among connected nodes")
+    b.set_ylabel("PageRank rank")
+    b.set_title("Centrality rank against size rank (labels omitted for the tied bottom group)", fontsize=9)
+    fig.suptitle(f"Figure {number}. Centrality in the sourced graph (descriptive; 16 pairs)", fontsize=11, x=0.02, ha="left")
+    return _save(fig, out, f"fig{number:02d}_centrality", mode)
+
+
+def fig_tier_flow(flow: pd.DataFrame, out: Path, mode: str, number: int = 4) -> Path:
+    """Tier-to-tier flow of disclosed revenue share (supplier tier in rows, customer tier in columns)."""
+    theme.use(mode)
+    names = list(flow.columns)
+    M = flow.loc[names, names].to_numpy(float)
+    fig, ax = plt.subplots(figsize=(7.2, 6.0))
+    Mm = np.ma.masked_where(M == 0, M)
+    im = ax.imshow(Mm, cmap=theme.CMAP, vmin=0, vmax=max(M.max(), 1))
+    ax.set_xticks(range(len(names)), names, rotation=45, ha="right")
+    ax.set_yticks(range(len(names)), names)
+    ax.grid(False)
+    for i in range(len(names)):
+        for j in range(len(names)):
+            if M[i, j]:
+                ax.text(j, i, f"{M[i, j]:.0f}", ha="center", va="center", fontsize=8, color="black")
+    ax.set_xlabel("Customer tier")
+    ax.set_ylabel("Supplier tier")
+    ax.set_title(f"Figure {number}. Disclosed revenue share by tier pair (sum of pair weights; blank = no sourced pair)")
+    fig.colorbar(im, ax=ax, fraction=0.046, label="Sum of disclosed shares (% of supplier revenue)")
+    return _save(fig, out, f"fig{number:02d}_tier_flow", mode)
+
+
+def fig_event_fans(caar: pd.DataFrame, out: Path, mode: str, number: int = 7) -> Path:
+    """CAAR paths over days 0 to 20 by relationship (panels) and tier (lines)."""
+    theme.use(mode)
+    rels = [r for r in REL_LABEL if r in set(caar["relation"])]
+    fig, axes = plt.subplots(1, len(rels), figsize=(4.2 * len(rels), 4.0), sharey=True, squeeze=False)
+    col = _tier_colors(sorted(set(caar["tier"]) - {"all"}))
+    for ax, rel in zip(axes[0], rels):
+        d = caar[caar["relation"] == rel]
+        for t, g in d[d["tier"] != "all"].groupby("tier"):
+            ax.plot(g["day"], 100 * g["caar"], color=col[t], lw=1.1, label=f"{t} (n={int(g['n'].iloc[0])})")
+        a = d[d["tier"] == "all"]
+        ax.plot(a["day"], 100 * a["caar"], color=theme.INK, lw=2.2, label=f"All (n={int(a['n'].iloc[0])})")
+        ax.axhline(0, color=theme.MUTED, lw=0.8)
+        ax.set_title(REL_LABEL[rel], fontsize=9)
+        ax.set_xlabel("Days after event")
+        ax.legend(fontsize=7, loc="best")
+    axes[0][0].set_ylabel("Cumulative average abnormal return (%)")
+    fig.suptitle(f"Figure {number}. Sign-adjusted CAAR of linked companies after price shocks (sourced pairs only; no significant path)",
+                 fontsize=10, x=0.02, ha="left")
+    return _save(fig, out, f"fig{number:02d}_event_fans", mode)
+
+
+def fig_placebo_panels(draws: pd.DataFrame, summary: dict, out: Path, mode: str, number: int = 8) -> Path:
+    """Placebo CAAR (day 20) distribution on random dates by relationship, with the observed CAAR."""
+    theme.use(mode)
+    rels = [r for r in REL_LABEL if r in set(draws["relation"])]
+    fig, axes = plt.subplots(1, len(rels), figsize=(4.2 * len(rels), 3.8), sharey=True, squeeze=False)
+    for ax, rel in zip(axes[0], rels):
+        v = 100 * draws.loc[draws["relation"] == rel, "caar_end"].to_numpy()
+        ax.hist(v, bins=40, color=theme.SHADE)
+        obs = 100 * summary[rel]["caar_end"]
+        ax.axvline(obs, color=theme.AMBER, lw=2, label=f"Observed {obs:+.1f}%")
+        ax.set_title(REL_LABEL[rel], fontsize=9)
+        ax.set_xlabel("CAAR at day 20 on random dates (%)")
+        ax.legend(fontsize=8)
+    axes[0][0].set_ylabel("Draws")
+    fig.suptitle(f"Figure {number}. Placebo distribution of CAAR on random dates, with the observed value", fontsize=10, x=0.02, ha="left")
+    return _save(fig, out, f"fig{number:02d}_placebo", mode)
