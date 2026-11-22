@@ -98,7 +98,9 @@ def main() -> None:
     else:
         summary["placebo"] = dict(note="skipped: primary strategy has fewer than 8 active months")
     # ---- overfitting diagnostics ------------------------------------------------------------------------------
-    X = M.loc[active].fillna(0.0)
+    X = M.loc[active]
+    n_defined = X.shape[1]
+    X = X.loc[:, X.notna().mean() >= 0.9].dropna()   # sparse specifications (curated edges only) are excluded; CSCV needs every trial observed in every month
     T = len(X)
     s = min(16, (T // 12) // 2 * 2)
     if s >= 4:
@@ -107,7 +109,7 @@ def main() -> None:
         srs = np.nan_to_num(srs)
         best = int(np.argmax(srs))
         dsr, sr0 = sh.dsr(X.iloc[:, best].to_numpy(float), srs)
-        summary["overfitting"] = dict(cscv=r.summary(), best_trial=X.columns[best], dsr=float(dsr), sr0_per_period=float(sr0), T=int(T), n_trials=int(X.shape[1]))
+        summary["overfitting"] = dict(cscv=r.summary(), best_trial=X.columns[best], dsr=float(dsr), sr0_per_period=float(sr0), T=int(T), n_trials=int(X.shape[1]), n_trials_defined=int(n_defined))
     else:
         summary["overfitting"] = dict(note=f"skipped: {T} months give fewer than 4 CSCV blocks of 12 months", T=int(T))
     summary["runtime_s"] = round(time.time() - t0, 1)

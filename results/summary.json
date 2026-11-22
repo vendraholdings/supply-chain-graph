@@ -1,64 +1,102 @@
 {
  "build_end": "2026-10-30",
  "n_companies": 111,
- "n_edge_rows": 39,
+ "n_edge_rows": 338,
  "methods": {
+  "rule": 299,
   "curated": 39
  },
  "graph": {
   "nodes": 111,
-  "connected_nodes": 15,
-  "edges": 16,
-  "disclosed_weight_share": 0.5,
+  "connected_nodes": 45,
+  "edges": 70,
+  "disclosed_weight_share": 0.6428571428571429,
   "pagerank_vs_mcap": {
-   "rho": 0.8422276927942434,
-   "p": 8.163862028240154e-05,
-   "n": 15
+   "rho": 0.6838291741524789,
+   "p": 2.244226867298252e-07,
+   "n": 45
   },
   "strength_vs_mcap": {
-   "rho": -0.7506210580506754,
-   "p": 0.0012624254906597999,
-   "n": 15
+   "rho": -0.5080439206018499,
+   "p": 0.0003670141285775704,
+   "n": 45
   }
  },
  "information_set": {
-  "first_month_with_edges": "2024-02-29",
-  "months_with_at_least_6_suppliers": 0,
-  "max_suppliers": 5
+  "first_month_with_edges": "2015-02-27",
+  "months_with_at_least_6_suppliers": 140,
+  "max_suppliers": 21
  },
  "momentum_primary": {
   "cost_x0": {
-   "n_months": 0,
-   "sharpe": null,
-   "mean_monthly": null
+   "n_months": 139,
+   "sharpe": 0.018413155883123443,
+   "mean_monthly": 0.00035756940938029867
   },
   "cost_x1": {
-   "n_months": 0,
-   "sharpe": null,
-   "mean_monthly": null
+   "n_months": 139,
+   "sharpe": -0.15480000657510778,
+   "mean_monthly": -0.003001648478026351
   },
   "cost_x2": {
-   "n_months": 0,
-   "sharpe": null,
-   "mean_monthly": null
+   "n_months": 139,
+   "sharpe": -0.3283280566447119,
+   "mean_monthly": -0.006358371367403061
+  },
+  "alpha": {
+   "alpha_monthly": -0.003959404261475724,
+   "alpha_annual": -0.047512851137708687,
+   "t": -0.6940711163404757,
+   "ci95_annual": [
+    -0.18168278681190891,
+    0.08665708453649154
+   ],
+   "n": 139,
+   "betas": {
+    "mkt": -0.2449492293870823,
+    "semi": 0.15775148519181553
+   }
   }
  },
  "fama_macbeth": {
-  "n_months": 0,
-  "slope": null,
-  "t": null
+  "n_months": 139,
+  "slope": 0.06737506646963466,
+  "t": 1.5425774827385763,
+  "own_lag_slope": 0.012762259698585703
  },
  "trials": {
   "n_trials": 48,
-  "months_total": 18,
-  "months_primary": 0
+  "months_total": 140,
+  "months_primary": 139
  },
  "placebo": {
-  "note": "skipped: primary strategy has fewer than 8 active months"
+  "n": 1000,
+  "real_sharpe": -0.15480000657510778,
+  "mean": 0.00315148822599833,
+  "sd": 0.18997609412117242,
+  "p_ge_real": 0.799
  },
  "overfitting": {
-  "note": "skipped: 0 months give fewer than 4 CSCV blocks of 12 months",
-  "T": 0
+  "cscv": {
+   "pbo": 0.6111111111111112,
+   "n_splits": 252,
+   "n_trials": 24,
+   "n_blocks": 10,
+   "degradation_slope": -0.11136537718486433,
+   "degradation_intercept": -0.10477035099026487,
+   "prob_oos_loss": 0.8531746031746031,
+   "mean_is_sr": 0.10083097342777465,
+   "mean_oos_sr": -0.11599943037796599,
+   "mean_oos_sr_all_trials": -0.06897135110973864,
+   "sd1_dominance": 0.3325,
+   "sd2_dominance": 0.0
+  },
+  "best_trial": "lag1_q2_revenue_curated+rule_h3",
+  "dsr": 0.2080061300035133,
+  "sr0_per_period": 0.13644079547945578,
+  "T": 139,
+  "n_trials": 24,
+  "n_trials_defined": 48
  },
- "runtime_s": 0.1
+ "runtime_s": 18.8
 }
