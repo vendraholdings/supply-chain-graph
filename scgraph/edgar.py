@@ -115,6 +115,7 @@ def html_to_text(html: str) -> str:
     """Plain text with one line per block element; scripts, styles and hidden inline-XBRL headers removed."""
     from lxml import html as lh
 
+    html = re.sub(r"^\s*<\?xml[^>]*\?>", "", html)     # lxml refuses str input that carries an encoding declaration
     root = lh.fromstring(html)
     for bad in root.xpath("//script|//style|//*[local-name()='header']"):
         bad.getparent().remove(bad)

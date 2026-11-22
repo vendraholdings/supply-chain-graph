@@ -105,3 +105,8 @@ def test_private_user_agent_from_environment_is_sent_but_never_cached_or_reporte
         raise AssertionError("expected a failure")
     except RuntimeError as e:
         assert secret not in str(e)
+
+
+def test_html_to_text_accepts_xml_declaration():
+    t = html_to_text('<?xml version="1.0" encoding="utf-8"?><html><body><p>Apple accounted for 23%</p><p>x</p></body></html>')
+    assert "Apple accounted for 23%" in t
