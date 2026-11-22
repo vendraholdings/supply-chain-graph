@@ -30,13 +30,15 @@ html.hero main>*:not(#hero):not(#legend){display:none}html.hero main{padding:0;m
 <h2>Figure 2. Universe and sourced pairs by country and tier</h2><div class="fig"><div id="f2"></div></div>
 <p class="cap">Left: listed companies in the universe by tier and listing country. Right: sourced supplier-customer pairs by country of listing. Listing country is not the country of operations.</p>
 <h2>Figure 3. Centrality of the connected companies</h2><div class="fig"><div id="f3"></div></div>
-<p class="cap">PageRank (damping 0.85) of the companies that have at least one sourced edge, and PageRank rank against market-capitalisation rank. With 16 pairs the measure is descriptive; ties among the lowest-ranked nodes are shown at their average rank.</p>
+<p class="cap">PageRank (damping 0.85) of the companies that have at least one sourced edge, and PageRank rank against market-capitalisation rank. The measure describes the sourced sample only; ties among the lowest-ranked nodes are shown at their average rank.</p>
 <h2>Figure 4. Disclosed revenue share by tier pair</h2><div class="fig"><div id="f4"></div></div>
 <p class="cap">Sum of disclosed supplier-revenue shares for sourced pairs, by supplier tier (rows) and customer tier (columns). Blank cells have no sourced pair.</p>
-<h2>Figures 5 and 6. Customer momentum</h2>
-<p class="lead">Not shown. The strategy needs at least eight active months and currently has none, because sourced edges become usable only from 2024 and at most five suppliers have a signal in any month. These figures will be produced when the automated extraction has run on the filings.</p>
+<h2>Figure 5. Customer-momentum strategy</h2><div class="fig"><div id="f5"></div></div>
+<p class="cap">Growth of one unit in the primary specification (terciles, equal weight, curated and automated edges, one-month holding), gross and net of costs and borrow. Log scale.</p>
+<h2>Figure 6. Falsification and multiple testing</h2><div class="fig"><div id="f6"></div></div>
+<p class="cap" id="cap6"></p>
 <h2>Figure 7. Abnormal returns of linked companies after price shocks</h2><div class="fig"><div id="f7"></div></div>
-<p class="cap">Sign-adjusted cumulative average abnormal return, days 0 to 20, by relationship to the company with the shock. Thick line: all linked companies; thin lines: by tier (click a legend entry to hide it). No path is statistically distinguishable from zero.</p>
+<p class="cap">Sign-adjusted cumulative average abnormal return, days 0 to 20, by relationship to the company with the shock. Thick line: all linked companies; thin lines: by tier (click a legend entry to hide it). No path is statistically distinguishable from zero at the 5% level.</p>
 <h2>Figure 8. Placebo distribution on random dates</h2><div class="fig"><div id="f8"></div></div>
 <p class="cap" id="cap8"></p>
 <h2>Figure 9. Spillovers between tiers</h2><div class="fig"><div id="f9"></div></div>
@@ -91,6 +93,13 @@ const sp=(n)=>Array.from({length:n},(_,i)=>i);
  {type:'scatter',mode:'markers',x:r.map(d=>d.mcap_rank),y:r.map(d=>d.pr_rank),text:r.map(d=>d.ticker),marker:{color:r.map(col),size:10},xaxis:'x2',yaxis:'y2',hovertemplate:'%{text}: size rank %{x}, PageRank rank %{y}<extra></extra>'}];
  Plotly.newPlot('f3',tr,L({grid:{rows:1,columns:2,pattern:'independent'},xaxis:{domain:[0,.45],title:{text:'PageRank'}},xaxis2:{domain:[.58,1],title:{text:'Market-cap rank'}},yaxis2:{title:{text:'PageRank rank'},autorange:'reversed'},height:480,showlegend:false}),{responsive:true,displaylogo:false});})();
 Plotly.newPlot('f4',[{type:'heatmap',z:D.f4.z,x:D.f4.names,y:D.f4.names,colorscale:D.turbo,zmin:0,colorbar:{title:{text:'sum of shares (%)'}},hovertemplate:'supplier %{y} to customer %{x}: %{z}<extra></extra>'}],L({yaxis:{autorange:'reversed',title:{text:'Supplier tier'}},xaxis:{title:{text:'Customer tier'}},height:520}),{responsive:true,displaylogo:false});
+(function(){const d=D.f5;Plotly.newPlot('f5',[{x:d.dates,y:d.gross,name:'Gross of costs',mode:'lines',line:{color:'#9aa5b1',width:2}},{x:d.dates,y:d.net,name:'Net of costs and borrow',mode:'lines',line:{color:'#f9c74f',width:3}}],L({yaxis:{type:'log',title:{text:'Growth of 1 (log scale)'}},height:400,legend:{orientation:'h',y:-.2}}),{responsive:true,displaylogo:false});})();
+(function(){const d=D.f6,n=d.trials.length;Plotly.newPlot('f6',[{type:'histogram',x:d.draws,nbinsx:40,marker:{color:'#5b6b82'},name:'Rewired edges',showlegend:false,hovertemplate:'Sharpe %{x}: %{y} draws<extra></extra>'},
+ {type:'scatter',mode:'lines',x:[d.observed,d.observed],y:[0,80],line:{color:'#f9c74f',width:3},showlegend:false,hovertemplate:'Observed %{x}<extra></extra>'},
+ {type:'scatter',mode:'markers',x:d.trials,y:d.trials.map((_,i)=>i),xaxis:'x2',yaxis:'y2',marker:{color:'#4cc9f0',size:8},showlegend:false,hovertemplate:'Sharpe %{x}<extra></extra>'},
+ {type:'scatter',mode:'lines',x:[d.sr0,d.sr0],y:[0,n],xaxis:'x2',yaxis:'y2',line:{color:'#f9c74f',width:3},showlegend:false,hovertemplate:'Expected maximum under no skill %{x}<extra></extra>'}],
+ L({grid:{rows:1,columns:2,pattern:'independent'},height:420,xaxis:{domain:[0,.45],title:{text:'Annualised net Sharpe ratio, rewired edges'}},yaxis:{title:{text:'Draws'}},xaxis2:{domain:[.55,1],title:{text:'Annualised net Sharpe ratio, one dot per specification'}},yaxis2:{showticklabels:false}}),{responsive:true,displaylogo:false});
+ document.getElementById('cap6').textContent='Left: net Sharpe ratio of 1,000 degree-preserving rewirings of the edges within tiers; the yellow line is the observed value ('+d.observed.toFixed(2)+'); a share '+d.p.toFixed(2)+' of draws reach it. Right: net Sharpe ratio of each of the '+n+' fully observed specifications; the yellow line is the expected maximum under no skill ('+d.sr0.toFixed(2)+'). Probability of backtest overfitting '+d.pbo.toFixed(2)+'; deflated Sharpe ratio of the best specification '+d.dsr.toFixed(2)+'.';})();
 (function(){const rels=Object.keys(REL).filter(k=>D.f7[k]),tr=[];
  rels.forEach((rel,i)=>{const ax=i?String(i+1):'';Object.keys(D.f7[rel]).forEach(k=>{const d=D.f7[rel][k],all=k==='all';
   tr.push({x:d.day,y:d.caar,name:all?'All':k,legendgroup:k,showlegend:i===0,mode:'lines',line:{width:all?3:1.2,color:all?C.ink:TC[tierIdx[k]]},xaxis:'x'+ax,yaxis:'y'+ax,hovertemplate:'day %{x}: %{y:.2f}% (n='+d.n+')<extra>'+(all?'All':k)+'</extra>'});});});

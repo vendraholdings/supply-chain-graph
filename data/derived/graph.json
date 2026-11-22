@@ -782,176 +782,8 @@
  ],
  "edges": [
   {
-   "supplier": "2303.TW",
-   "customer": "2454.TW",
-   "weight": 57.0,
-   "disclosed": true,
-   "valid_from": "2015-04-22",
-   "valid_to": "2027-05-01",
-   "sources": [
-    {
-     "url": "https://www.sec.gov/Archives/edgar/data/1033767/000119312515138989/d910283d20f.htm",
-     "type": "20-F",
-     "filing_date": "2015-04-21",
-     "fiscal_year": 2014
-    },
-    {
-     "url": "https://www.sec.gov/Archives/edgar/data/1033767/000119312525092142/d846836d20f.htm",
-     "type": "20-F",
-     "filing_date": "2025-04-24",
-     "fiscal_year": 2024
-    },
-    {
-     "url": "https://www.sec.gov/Archives/edgar/data/1033767/000119312526193757/d91630d20f.htm",
-     "type": "20-F",
-     "filing_date": "2026-04-30",
-     "fiscal_year": 2025
-    }
-   ]
-  },
-  {
-   "supplier": "2303.TW",
-   "customer": "QCOM",
-   "weight": 62.0,
-   "disclosed": true,
-   "valid_from": "2016-04-19",
-   "valid_to": "2025-04-26",
-   "sources": [
-    {
-     "url": "https://www.sec.gov/Archives/edgar/data/1033767/000119312516543756/d168513d20f.htm",
-     "type": "20-F",
-     "filing_date": "2016-04-18",
-     "fiscal_year": 2015
-    },
-    {
-     "url": "https://www.sec.gov/Archives/edgar/data/1033767/000119312517122107/d280541d20f.htm",
-     "type": "20-F",
-     "filing_date": "2017-04-13",
-     "fiscal_year": 2016
-    },
-    {
-     "url": "https://www.sec.gov/Archives/edgar/data/1033767/000119312518132616/d484523d20f.htm",
-     "type": "20-F",
-     "filing_date": "2018-04-26",
-     "fiscal_year": 2017
-    },
-    {
-     "url": "https://www.sec.gov/Archives/edgar/data/1033767/000119312519117861/d603585d20f.htm",
-     "type": "20-F",
-     "filing_date": "2019-04-25",
-     "fiscal_year": 2018
-    },
-    {
-     "url": "https://www.sec.gov/Archives/edgar/data/1033767/000119312520121853/d820941d20f.htm",
-     "type": "20-F",
-     "filing_date": "2020-04-28",
-     "fiscal_year": 2019
-    },
-    {
-     "url": "https://www.sec.gov/Archives/edgar/data/1033767/000156459021021578/umc-20f_20201231.htm",
-     "type": "20-F",
-     "filing_date": "2021-04-29",
-     "fiscal_year": 2020
-    },
-    {
-     "url": "https://www.sec.gov/Archives/edgar/data/1033767/000119312522125284/d168667d20f.htm",
-     "type": "20-F",
-     "filing_date": "2022-04-28",
-     "fiscal_year": 2021
-    },
-    {
-     "url": "https://www.sec.gov/Archives/edgar/data/1033767/000119312523119772/d389572d20f.htm",
-     "type": "20-F",
-     "filing_date": "2023-04-27",
-     "fiscal_year": 2022
-    },
-    {
-     "url": "https://www.sec.gov/Archives/edgar/data/1033767/000119312524111429/d448612d20f.htm",
-     "type": "20-F",
-     "filing_date": "2024-04-25",
-     "fiscal_year": 2023
-    }
-   ]
-  },
-  {
    "supplier": "AEIS",
    "customer": "AMAT",
-   "weight": 22.0,
-   "disclosed": true,
-   "valid_from": "2015-02-27",
-   "valid_to": "2026-02-19",
-   "sources": [
-    {
-     "url": "https://www.sec.gov/Archives/edgar/data/927003/000092700315000012/aeis10k2014.htm",
-     "type": "10-K",
-     "filing_date": "2015-02-26",
-     "fiscal_year": 2014
-    },
-    {
-     "url": "https://www.sec.gov/Archives/edgar/data/927003/000092700316000094/aeis10k2015.htm",
-     "type": "10-K",
-     "filing_date": "2016-02-25",
-     "fiscal_year": 2015
-    },
-    {
-     "url": "https://www.sec.gov/Archives/edgar/data/927003/000092700317000010/aeis10k2016.htm",
-     "type": "10-K",
-     "filing_date": "2017-02-24",
-     "fiscal_year": 2016
-    },
-    {
-     "url": "https://www.sec.gov/Archives/edgar/data/927003/000092700318000005/aeis10k2017.htm",
-     "type": "10-K",
-     "filing_date": "2018-02-15",
-     "fiscal_year": 2017
-    },
-    {
-     "url": "https://www.sec.gov/Archives/edgar/data/927003/000092700319000007/aeis10k2018.htm",
-     "type": "10-K",
-     "filing_date": "2019-02-21",
-     "fiscal_year": 2018
-    },
-    {
-     "url": "https://www.sec.gov/Archives/edgar/data/927003/000155837020001892/aeis-20191231x10k136eb2.htm",
-     "type": "10-K",
-     "filing_date": "2020-03-02",
-     "fiscal_year": 2019
-    },
-    {
-     "url": "https://www.sec.gov/Archives/edgar/data/927003/000092700324000003/aeis-20231231x10k.htm",
-     "type": "10-K",
-     "filing_date": "2024-02-20",
-     "fiscal_year": 2023
-    },
-    {
-     "url": "https://pdf.dfcfw.com/pdf/H2_AN202503141644375881_1.pdf",
-     "type": "annual_report",
-     "filing_date": "2025-02-18",
-     "fiscal_year": 2024
-    },
-    {
-     "url": "https://pdf.dfcfw.com/pdf/H2_AN202503141644375881_1.pdf",
-     "type": "annual_report",
-     "filing_date": "2025-02-18",
-     "fiscal_year": 2023
-    },
-    {
-     "url": "https://pdf.dfcfw.com/pdf/H2_AN202503141644375881_1.pdf",
-     "type": "annual_report",
-     "filing_date": "2025-02-18",
-     "fiscal_year": 2022
-    },
-    {
-     "url": "https://www.sec.gov/Archives/edgar/data/927003/000155837025001038/aeis-20241231x10k.htm",
-     "type": "10-K",
-     "filing_date": "2025-02-18",
-     "fiscal_year": 2024
-    }
-   ]
-  },
-  {
-   "supplier": "AEIS",
-   "customer": "LRCX",
    "weight": 26.0,
    "disclosed": true,
    "valid_from": "2015-02-27",
@@ -994,10 +826,86 @@
      "fiscal_year": 2019
     },
     {
-     "url": "https://www.sec.gov/Archives/edgar/data/927003/000155837021001513/aeis-20201231x10k.htm",
+     "url": "https://www.sec.gov/Archives/edgar/data/927003/000155837023001498/aeis-20221231x10k.htm",
      "type": "10-K",
-     "filing_date": "2021-02-24",
-     "fiscal_year": 2020
+     "filing_date": "2023-02-17",
+     "fiscal_year": 2022
+    },
+    {
+     "url": "https://www.sec.gov/Archives/edgar/data/927003/000092700324000003/aeis-20231231x10k.htm",
+     "type": "10-K",
+     "filing_date": "2024-02-20",
+     "fiscal_year": 2023
+    },
+    {
+     "url": "https://pdf.dfcfw.com/pdf/H2_AN202503141644375881_1.pdf",
+     "type": "annual_report",
+     "filing_date": "2025-02-18",
+     "fiscal_year": 2024
+    },
+    {
+     "url": "https://pdf.dfcfw.com/pdf/H2_AN202503141644375881_1.pdf",
+     "type": "annual_report",
+     "filing_date": "2025-02-18",
+     "fiscal_year": 2023
+    },
+    {
+     "url": "https://pdf.dfcfw.com/pdf/H2_AN202503141644375881_1.pdf",
+     "type": "annual_report",
+     "filing_date": "2025-02-18",
+     "fiscal_year": 2022
+    },
+    {
+     "url": "https://www.sec.gov/Archives/edgar/data/927003/000155837025001038/aeis-20241231x10k.htm",
+     "type": "10-K",
+     "filing_date": "2025-02-18",
+     "fiscal_year": 2024
+    }
+   ]
+  },
+  {
+   "supplier": "AEIS",
+   "customer": "LRCX",
+   "weight": 11.0,
+   "disclosed": true,
+   "valid_from": "2015-02-27",
+   "valid_to": "2026-02-19",
+   "sources": [
+    {
+     "url": "https://www.sec.gov/Archives/edgar/data/927003/000092700315000012/aeis10k2014.htm",
+     "type": "10-K",
+     "filing_date": "2015-02-26",
+     "fiscal_year": 2014
+    },
+    {
+     "url": "https://www.sec.gov/Archives/edgar/data/927003/000092700316000094/aeis10k2015.htm",
+     "type": "10-K",
+     "filing_date": "2016-02-25",
+     "fiscal_year": 2015
+    },
+    {
+     "url": "https://www.sec.gov/Archives/edgar/data/927003/000092700317000010/aeis10k2016.htm",
+     "type": "10-K",
+     "filing_date": "2017-02-24",
+     "fiscal_year": 2016
+    },
+    {
+     "url": "https://www.sec.gov/Archives/edgar/data/927003/000092700318000005/aeis10k2017.htm",
+     "type": "10-K",
+     "filing_date": "2018-02-15",
+     "fiscal_year": 2017
+    },
+    {
+     "url": "https://www.sec.gov/Archives/edgar/data/927003/000092700319000007/aeis10k2018.htm",
+     "type": "10-K",
+     "filing_date": "2019-02-21",
+     "fiscal_year": 2018
+    },
+    {
+     "url": "https://www.sec.gov/Archives/edgar/data/927003/000155837020001892/aeis-20191231x10k136eb2.htm",
+     "type": "10-K",
+     "filing_date": "2020-03-02",
+     "fiscal_year": 2019
     },
     {
      "url": "https://www.sec.gov/Archives/edgar/data/927003/000155837023001498/aeis-20221231x10k.htm",
@@ -1194,7 +1102,7 @@
   {
    "supplier": "AMD",
    "customer": "MSFT",
-   "weight": 15.5,
+   "weight": 16.0,
    "disclosed": false,
    "valid_from": "2015-02-20",
    "valid_to": "2020-02-11",
@@ -1234,10 +1142,10 @@
   {
    "supplier": "AMKR",
    "customer": "AAPL",
-   "weight": 27.7,
+   "weight": 29.8,
    "disclosed": true,
    "valid_from": "2021-02-22",
-   "valid_to": "2025-02-19",
+   "valid_to": "2027-02-23",
    "sources": [
     {
      "url": "https://www.sec.gov/Archives/edgar/data/1047127/000104712721000010/amkr-20201231.htm",
@@ -1252,23 +1160,35 @@
      "fiscal_year": 2021
     },
     {
+     "url": "https://www.sec.gov/Archives/edgar/data/1047127/000104712723000009/amkr-20221231.htm",
+     "type": "10-K",
+     "filing_date": "2023-02-22",
+     "fiscal_year": 2022
+    },
+    {
      "url": "https://stocklight.com/stocks/us/nasdaq-amkr/amkor-technology/annual-reports/nasdaq-amkr-2024-10K-24648139.pdf",
      "type": "10-K",
      "filing_date": "2024-02-16",
      "fiscal_year": 2023
     },
     {
-     "url": "https://www.sec.gov/Archives/edgar/data/1047127/000104712724000019/amkr-20231231.htm",
+     "url": "https://www.sec.gov/Archives/edgar/data/1047127/000104712725000030/amkr-20241231.htm",
      "type": "10-K",
-     "filing_date": "2024-02-16",
-     "fiscal_year": 2023
+     "filing_date": "2025-02-21",
+     "fiscal_year": 2024
+    },
+    {
+     "url": "https://www.sec.gov/Archives/edgar/data/1047127/000104712726000014/amkr-20251231.htm",
+     "type": "10-K",
+     "filing_date": "2026-02-20",
+     "fiscal_year": 2025
     }
    ]
   },
   {
    "supplier": "AMKR",
    "customer": "QCOM",
-   "weight": 29.8,
+   "weight": 11.1,
    "disclosed": true,
    "valid_from": "2015-02-20",
    "valid_to": "2027-02-23",
@@ -1518,7 +1438,7 @@
   {
    "supplier": "FN",
    "customer": "AMZN",
-   "weight": 27.65,
+   "weight": 15.05,
    "disclosed": false,
    "valid_from": "2026-08-19",
    "valid_to": "2027-08-19",
@@ -1534,10 +1454,10 @@
   {
    "supplier": "FN",
    "customer": "LITE",
-   "weight": 27.65,
-   "disclosed": false,
+   "weight": 15.6,
+   "disclosed": true,
    "valid_from": "2018-08-23",
-   "valid_to": "2024-08-22",
+   "valid_to": "2025-08-21",
    "sources": [
     {
      "url": "https://www.sec.gov/Archives/edgar/data/1408710/000119312518255054/d820225d10k.htm",
@@ -1574,14 +1494,20 @@
      "type": "10-K",
      "filing_date": "2023-08-22",
      "fiscal_year": 2023
+    },
+    {
+     "url": "https://www.sec.gov/Archives/edgar/data/1408710/000140871024000032/fn-20240628.htm",
+     "type": "10-K",
+     "filing_date": "2024-08-20",
+     "fiscal_year": 2024
     }
    ]
   },
   {
    "supplier": "FN",
    "customer": "NVDA",
-   "weight": 27.6,
-   "disclosed": true,
+   "weight": 15.05,
+   "disclosed": false,
    "valid_from": "2023-08-23",
    "valid_to": "2027-08-19",
    "sources": [
@@ -1612,40 +1538,6 @@
    ]
   },
   {
-   "supplier": "GFS",
-   "customer": "2330.TW",
-   "weight": 50.0,
-   "disclosed": true,
-   "valid_from": "2022-04-01",
-   "valid_to": "2026-03-21",
-   "sources": [
-    {
-     "url": "https://www.sec.gov/Archives/edgar/data/1709048/000170904822000008/gfs-20211231.htm",
-     "type": "20-F",
-     "filing_date": "2022-03-31",
-     "fiscal_year": 2021
-    },
-    {
-     "url": "https://www.sec.gov/Archives/edgar/data/1709048/000170904823000013/gfs-20221231.htm",
-     "type": "20-F",
-     "filing_date": "2023-04-14",
-     "fiscal_year": 2022
-    },
-    {
-     "url": "https://www.sec.gov/Archives/edgar/data/1709048/000170904824000013/gfs-20231231.htm",
-     "type": "20-F",
-     "filing_date": "2024-04-29",
-     "fiscal_year": 2023
-    },
-    {
-     "url": "https://www.sec.gov/Archives/edgar/data/1709048/000170904825000024/gfs-20241231.htm",
-     "type": "20-F",
-     "filing_date": "2025-03-20",
-     "fiscal_year": 2024
-    }
-   ]
-  },
-  {
    "supplier": "HPE",
    "customer": "HPQ",
    "weight": 99.0,
@@ -1664,10 +1556,78 @@
   {
    "supplier": "ICHR",
    "customer": "AMAT",
-   "weight": 18.35,
-   "disclosed": false,
+   "weight": 31.0,
+   "disclosed": true,
    "valid_from": "2017-03-29",
-   "valid_to": "2027-02-23",
+   "valid_to": "2026-02-24",
+   "sources": [
+    {
+     "url": "https://www.sec.gov/Archives/edgar/data/1652535/000156459017005419/ichr-10k_20161230.htm",
+     "type": "10-K",
+     "filing_date": "2017-03-28",
+     "fiscal_year": 2016
+    },
+    {
+     "url": "https://www.sec.gov/Archives/edgar/data/1652535/000156459018005482/ichr-10k_20171229.htm",
+     "type": "10-K",
+     "filing_date": "2018-03-13",
+     "fiscal_year": 2017
+    },
+    {
+     "url": "https://www.sec.gov/Archives/edgar/data/1652535/000156459020009069/ichr-10k_20191227.htm",
+     "type": "10-K",
+     "filing_date": "2020-03-06",
+     "fiscal_year": 2019
+    },
+    {
+     "url": "https://www.sec.gov/Archives/edgar/data/1652535/000156459021011114/ichr-10k_20201225.htm",
+     "type": "10-K",
+     "filing_date": "2021-03-05",
+     "fiscal_year": 2020
+    },
+    {
+     "url": "https://ir-api.eqs.com/media/document/9b346343-d2a9-40c3-9343-2c30ed10351a/assets/Annual_Report_23.pdf",
+     "type": "10-K",
+     "filing_date": "2025-02-21",
+     "fiscal_year": 2024
+    },
+    {
+     "url": "https://ir-api.eqs.com/media/document/9b346343-d2a9-40c3-9343-2c30ed10351a/assets/Annual_Report_23.pdf",
+     "type": "10-K",
+     "filing_date": "2025-02-21",
+     "fiscal_year": 2023
+    },
+    {
+     "url": "https://ir-api.eqs.com/media/document/9b346343-d2a9-40c3-9343-2c30ed10351a/assets/Annual_Report_23.pdf",
+     "type": "10-K",
+     "filing_date": "2025-02-21",
+     "fiscal_year": 2022
+    }
+   ]
+  },
+  {
+   "supplier": "ICHR",
+   "customer": "ASML.AS",
+   "weight": 56.0,
+   "disclosed": true,
+   "valid_from": "2019-03-11",
+   "valid_to": "2020-03-10",
+   "sources": [
+    {
+     "url": "https://www.sec.gov/Archives/edgar/data/1652535/000156459019006988/ichr-10k_20181228.htm",
+     "type": "10-K",
+     "filing_date": "2019-03-08",
+     "fiscal_year": 2018
+    }
+   ]
+  },
+  {
+   "supplier": "ICHR",
+   "customer": "LRCX",
+   "weight": 48.2,
+   "disclosed": true,
+   "valid_from": "2017-03-29",
+   "valid_to": "2026-02-24",
    "sources": [
     {
      "url": "https://www.sec.gov/Archives/edgar/data/1652535/000156459017005419/ichr-10k_20161230.htm",
@@ -1700,74 +1660,12 @@
      "fiscal_year": 2020
     },
     {
-     "url": "https://ir-api.eqs.com/media/document/9b346343-d2a9-40c3-9343-2c30ed10351a/assets/Annual_Report_23.pdf",
-     "type": "10-K",
-     "filing_date": "2025-02-21",
-     "fiscal_year": 2024
-    },
-    {
-     "url": "https://ir-api.eqs.com/media/document/9b346343-d2a9-40c3-9343-2c30ed10351a/assets/Annual_Report_23.pdf",
-     "type": "10-K",
-     "filing_date": "2025-02-21",
-     "fiscal_year": 2023
-    },
-    {
-     "url": "https://ir-api.eqs.com/media/document/9b346343-d2a9-40c3-9343-2c30ed10351a/assets/Annual_Report_23.pdf",
-     "type": "10-K",
-     "filing_date": "2025-02-21",
-     "fiscal_year": 2022
-    },
-    {
-     "url": "https://www.sec.gov/Archives/edgar/data/1652535/000162828025006992/ichr-20241227.htm",
-     "type": "10-K",
-     "filing_date": "2025-02-21",
-     "fiscal_year": 2024
-    },
-    {
-     "url": "https://www.sec.gov/Archives/edgar/data/1652535/000165253526000012/ichr-20251226.htm",
-     "type": "10-K",
-     "filing_date": "2026-02-20",
-     "fiscal_year": 2025
-    }
-   ]
-  },
-  {
-   "supplier": "ICHR",
-   "customer": "ASML.AS",
-   "weight": 82.0,
-   "disclosed": true,
-   "valid_from": "2024-02-26",
-   "valid_to": "2025-02-25",
-   "sources": [
-    {
-     "url": "https://www.sec.gov/Archives/edgar/data/1652535/000162828024006527/ichr-20231229.htm",
-     "type": "10-K",
-     "filing_date": "2024-02-23",
-     "fiscal_year": 2023
-    }
-   ]
-  },
-  {
-   "supplier": "ICHR",
-   "customer": "LRCX",
-   "weight": 18.35,
-   "disclosed": false,
-   "valid_from": "2022-03-01",
-   "valid_to": "2027-02-23",
-   "sources": [
-    {
      "url": "https://www.sec.gov/Archives/edgar/data/1652535/000156459022007613/ichr-10k_20211231.htm",
      "type": "10-K",
      "filing_date": "2022-02-28",
      "fiscal_year": 2021
     },
     {
-     "url": "https://www.sec.gov/Archives/edgar/data/1652535/000156459023002383/ichr-10k_20221230.htm",
-     "type": "10-K",
-     "filing_date": "2023-02-24",
-     "fiscal_year": 2022
-    },
-    {
      "url": "https://ir-api.eqs.com/media/document/9b346343-d2a9-40c3-9343-2c30ed10351a/assets/Annual_Report_23.pdf",
      "type": "10-K",
      "filing_date": "2025-02-21",
@@ -1784,18 +1682,6 @@
      "type": "10-K",
      "filing_date": "2025-02-21",
      "fiscal_year": 2022
-    },
-    {
-     "url": "https://www.sec.gov/Archives/edgar/data/1652535/000162828025006992/ichr-20241227.htm",
-     "type": "10-K",
-     "filing_date": "2025-02-21",
-     "fiscal_year": 2024
-    },
-    {
-     "url": "https://www.sec.gov/Archives/edgar/data/1652535/000165253526000012/ichr-20251226.htm",
-     "type": "10-K",
-     "filing_date": "2026-02-20",
-     "fiscal_year": 2025
     }
    ]
   },
@@ -1932,15 +1818,9 @@
    "customer": "HPE",
    "weight": 18.0,
    "disclosed": true,
-   "valid_from": "2016-02-16",
+   "valid_from": "2017-02-21",
    "valid_to": "2018-02-21",
    "sources": [
-    {
-     "url": "https://www.sec.gov/Archives/edgar/data/50863/000005086316000105/a10kdocument12262015q4.htm",
-     "type": "10-K",
-     "filing_date": "2016-02-12",
-     "fiscal_year": 2015
-    },
     {
      "url": "https://www.sec.gov/Archives/edgar/data/50863/000005086317000012/a10kdocument12312016q4.htm",
      "type": "10-K",
@@ -1980,7 +1860,7 @@
   {
    "supplier": "KLAC",
    "customer": "2330.TW",
-   "weight": 18.35,
+   "weight": 15.0,
    "disclosed": false,
    "valid_from": "2026-08-07",
    "valid_to": "2027-08-07",
@@ -2006,25 +1886,9 @@
    ]
   },
   {
-   "supplier": "LITE",
-   "customer": "MSFT",
-   "weight": 10.0,
-   "disclosed": true,
-   "valid_from": "2015-09-28",
-   "valid_to": "2016-09-27",
-   "sources": [
-    {
-     "url": "https://www.sec.gov/Archives/edgar/data/1633978/000162828015007281/lumentumfy1510k.htm",
-     "type": "10-K",
-     "filing_date": "2015-09-25",
-     "fiscal_year": 2015
-    }
-   ]
-  },
-  {
    "supplier": "LRCX",
    "customer": "000660.KS",
-   "weight": 18.35,
+   "weight": 15.0,
    "disclosed": false,
    "valid_from": "2018-08-15",
    "valid_to": "2025-08-30",
@@ -2064,7 +1928,7 @@
   {
    "supplier": "LRCX",
    "customer": "005930.KS",
-   "weight": 18.35,
+   "weight": 15.0,
    "disclosed": false,
    "valid_from": "2024-08-30",
    "valid_to": "2025-08-30",
@@ -2092,7 +1956,7 @@
   {
    "supplier": "LRCX",
    "customer": "2330.TW",
-   "weight": 18.35,
+   "weight": 15.0,
    "disclosed": false,
    "valid_from": "2015-08-14",
    "valid_to": "2025-08-30",
@@ -2122,12 +1986,6 @@
      "fiscal_year": 2018
     },
     {
-     "url": "https://www.sec.gov/Archives/edgar/data/707549/000070754920000138/lrcx10k2020document.htm",
-     "type": "10-K",
-     "filing_date": "2020-08-18",
-     "fiscal_year": 2020
-    },
-    {
      "url": "https://filecache.investorroom.com/mr5ir_lamresearch2/1411/LRCX%20(Lam%20Research%20Corporation)%20%20(10-K)%202024-08-29.pdf_.pdf",
      "type": "10-K",
      "filing_date": "2024-08-29",
@@ -2149,24 +2007,8 @@
   },
   {
    "supplier": "LRCX",
-   "customer": "285A.T",
-   "weight": 10.0,
-   "disclosed": true,
-   "valid_from": "2020-08-19",
-   "valid_to": "2021-08-19",
-   "sources": [
-    {
-     "url": "https://www.sec.gov/Archives/edgar/data/707549/000070754920000138/lrcx10k2020document.htm",
-     "type": "10-K",
-     "filing_date": "2020-08-18",
-     "fiscal_year": 2020
-    }
-   ]
-  },
-  {
-   "supplier": "LRCX",
    "customer": "MU",
-   "weight": 18.35,
+   "weight": 15.0,
    "disclosed": false,
    "valid_from": "2024-08-30",
    "valid_to": "2025-08-30",
@@ -2194,10 +2036,10 @@
   {
    "supplier": "MKSI",
    "customer": "AMAT",
-   "weight": 24.0,
+   "weight": 18.0,
    "disclosed": true,
    "valid_from": "2015-02-26",
-   "valid_to": "2024-03-14",
+   "valid_to": "2022-02-24",
    "sources": [
     {
      "url": "https://www.sec.gov/Archives/edgar/data/1049502/000119312515062618/d838776d10k.htm",
@@ -2240,28 +2082,16 @@
      "type": "10-K",
      "filing_date": "2021-02-23",
      "fiscal_year": 2020
-    },
-    {
-     "url": "https://www.sec.gov/Archives/edgar/data/1049502/000156459022007637/mksi-10k_20211231.htm",
-     "type": "10-K",
-     "filing_date": "2022-02-28",
-     "fiscal_year": 2021
-    },
-    {
-     "url": "https://www.sec.gov/Archives/edgar/data/1049502/000095017023007851/mksi-20221231.htm",
-     "type": "10-K",
-     "filing_date": "2023-03-14",
-     "fiscal_year": 2022
     }
    ]
   },
   {
    "supplier": "MKSI",
    "customer": "LRCX",
-   "weight": 11.0,
+   "weight": 24.0,
    "disclosed": true,
    "valid_from": "2015-02-26",
-   "valid_to": "2021-03-02",
+   "valid_to": "2022-02-24",
    "sources": [
     {
      "url": "https://www.sec.gov/Archives/edgar/data/1049502/000119312515062618/d838776d10k.htm",
@@ -2298,6 +2128,12 @@
      "type": "10-K",
      "filing_date": "2020-02-28",
      "fiscal_year": 2019
+    },
+    {
+     "url": "https://www.sec.gov/Archives/edgar/data/1049502/000156459021007630/mksi-10k_20201231.htm",
+     "type": "10-K",
+     "filing_date": "2021-02-23",
+     "fiscal_year": 2020
     }
    ]
   },
@@ -2392,7 +2228,7 @@
   {
    "supplier": "ONTO",
    "customer": "000660.KS",
-   "weight": 13.4,
+   "weight": 13.1,
    "disclosed": true,
    "valid_from": "2019-02-26",
    "valid_to": "2021-02-25",
@@ -2414,7 +2250,7 @@
   {
    "supplier": "ONTO",
    "customer": "005930.KS",
-   "weight": 18.35,
+   "weight": 15.0,
    "disclosed": false,
    "valid_from": "2019-02-26",
    "valid_to": "2020-02-26",
@@ -2430,23 +2266,29 @@
   {
    "supplier": "ONTO",
    "customer": "2330.TW",
-   "weight": 18.35,
-   "disclosed": false,
+   "weight": 13.4,
+   "disclosed": true,
    "valid_from": "2019-02-26",
-   "valid_to": "2020-02-26",
+   "valid_to": "2021-02-25",
    "sources": [
     {
      "url": "https://www.sec.gov/Archives/edgar/data/704532/000156459019004083/nano-10k_20181229.htm",
      "type": "10-K",
      "filing_date": "2019-02-25",
      "fiscal_year": 2018
+    },
+    {
+     "url": "https://www.sec.gov/Archives/edgar/data/704532/000156459020006357/onto-10k_20191231.htm",
+     "type": "10-K",
+     "filing_date": "2020-02-25",
+     "fiscal_year": 2019
     }
    ]
   },
   {
    "supplier": "ONTO",
    "customer": "INTC",
-   "weight": 18.35,
+   "weight": 15.0,
    "disclosed": false,
    "valid_from": "2019-02-26",
    "valid_to": "2020-02-26",
@@ -2462,7 +2304,7 @@
   {
    "supplier": "ONTO",
    "customer": "MU",
-   "weight": 18.35,
+   "weight": 15.0,
    "disclosed": false,
    "valid_from": "2019-02-26",
    "valid_to": "2020-02-26",
@@ -2592,7 +2434,7 @@
   {
    "supplier": "QCOM",
    "customer": "005930.KS",
-   "weight": 15.5,
+   "weight": 16.0,
    "disclosed": false,
    "valid_from": "2015-11-05",
    "valid_to": "2027-11-05",
@@ -2658,12 +2500,6 @@
      "fiscal_year": 2025
     },
     {
-     "url": "https://www.sec.gov/Archives/edgar/data/804328/000080432825000085/qcom-20250928.htm",
-     "type": "10-K",
-     "filing_date": "2025-11-05",
-     "fiscal_year": 2025
-    },
-    {
      "url": "https://www.sec.gov/Archives/edgar/data/804328/000080432826000128/qcom-20260927.htm",
      "type": "10-K",
      "filing_date": "2026-11-04",
@@ -2674,7 +2510,7 @@
   {
    "supplier": "QCOM",
    "customer": "2317.TW",
-   "weight": 15.5,
+   "weight": 16.0,
    "disclosed": false,
    "valid_from": "2015-11-05",
    "valid_to": "2017-11-03",
@@ -2696,7 +2532,7 @@
   {
    "supplier": "QCOM",
    "customer": "AAPL",
-   "weight": 15.5,
+   "weight": 16.0,
    "disclosed": false,
    "valid_from": "2015-11-05",
    "valid_to": "2027-11-05",
@@ -2756,12 +2592,6 @@
      "fiscal_year": 2025
     },
     {
-     "url": "https://www.sec.gov/Archives/edgar/data/804328/000080432825000085/qcom-20250928.htm",
-     "type": "10-K",
-     "filing_date": "2025-11-05",
-     "fiscal_year": 2025
-    },
-    {
      "url": "https://www.sec.gov/Archives/edgar/data/804328/000080432826000128/qcom-20260927.htm",
      "type": "10-K",
      "filing_date": "2026-11-04",
@@ -2772,10 +2602,10 @@
   {
    "supplier": "RMBS",
    "customer": "000660.KS",
-   "weight": 49.0,
-   "disclosed": true,
+   "weight": 12.8,
+   "disclosed": false,
    "valid_from": "2015-02-23",
-   "valid_to": "2027-02-19",
+   "valid_to": "2023-03-01",
    "sources": [
     {
      "url": "https://www.sec.gov/Archives/edgar/data/917273/000091727315000005/rmbs-20141231x10xk.htm",
@@ -2824,37 +2654,13 @@
      "type": "10-K",
      "filing_date": "2022-02-28",
      "fiscal_year": 2021
-    },
-    {
-     "url": "https://www.sec.gov/Archives/edgar/data/917273/000091727323000008/rmbs-20221231.htm",
-     "type": "10-K",
-     "filing_date": "2023-02-24",
-     "fiscal_year": 2022
-    },
-    {
-     "url": "https://www.sec.gov/Archives/edgar/data/917273/000091727324000028/rmbs-20231231.htm",
-     "type": "10-K",
-     "filing_date": "2024-02-23",
-     "fiscal_year": 2023
-    },
-    {
-     "url": "https://www.sec.gov/Archives/edgar/data/917273/000091727325000021/rmbs-20241231.htm",
-     "type": "10-K",
-     "filing_date": "2025-02-24",
-     "fiscal_year": 2024
-    },
-    {
-     "url": "https://www.sec.gov/Archives/edgar/data/917273/000119312526057101/rmbs-20251231.htm",
-     "type": "10-K",
-     "filing_date": "2026-02-18",
-     "fiscal_year": 2025
     }
    ]
   },
   {
    "supplier": "RMBS",
    "customer": "005930.KS",
-   "weight": 15.65,
+   "weight": 12.8,
    "disclosed": false,
    "valid_from": "2015-02-23",
    "valid_to": "2023-03-01",
@@ -2906,7 +2712,7 @@
   {
    "supplier": "RMBS",
    "customer": "AVGO",
-   "weight": 15.65,
+   "weight": 12.8,
    "disclosed": false,
    "valid_from": "2019-02-25",
    "valid_to": "2023-03-01",
@@ -2940,7 +2746,7 @@
   {
    "supplier": "RMBS",
    "customer": "MU",
-   "weight": 15.65,
+   "weight": 12.8,
    "disclosed": false,
    "valid_from": "2015-02-23",
    "valid_to": "2023-03-01",
@@ -2998,7 +2804,7 @@
   {
    "supplier": "RMBS",
    "customer": "NVDA",
-   "weight": 15.65,
+   "weight": 12.8,
    "disclosed": false,
    "valid_from": "2019-02-25",
    "valid_to": "2022-03-01",
@@ -3129,28 +2935,6 @@
   },
   {
    "supplier": "SWKS",
-   "customer": "005930.KS",
-   "weight": 12.0,
-   "disclosed": true,
-   "valid_from": "2018-11-16",
-   "valid_to": "2020-11-14",
-   "sources": [
-    {
-     "url": "https://www.sec.gov/Archives/edgar/data/4127/000000412718000046/fy1810k92818.htm",
-     "type": "10-K",
-     "filing_date": "2018-11-15",
-     "fiscal_year": 2018
-    },
-    {
-     "url": "https://www.sec.gov/Archives/edgar/data/4127/000000412719000049/fy1910k92719.htm",
-     "type": "10-K",
-     "filing_date": "2019-11-14",
-     "fiscal_year": 2019
-    }
-   ]
-  },
-  {
-   "supplier": "SWKS",
    "customer": "AAPL",
    "weight": 66.0,
    "disclosed": true,
@@ -3248,7 +3032,7 @@
   {
    "supplier": "TER",
    "customer": "AAPL",
-   "weight": 18.35,
+   "weight": 15.0,
    "disclosed": false,
    "valid_from": "2015-03-02",
    "valid_to": "2017-03-01",
@@ -3314,7 +3098,7 @@
   {
    "supplier": "UCTT",
    "customer": "AMAT",
-   "weight": 18.35,
+   "weight": 15.0,
    "disclosed": false,
    "valid_from": "2015-03-12",
    "valid_to": "2027-02-24",
@@ -3338,18 +3122,6 @@
      "fiscal_year": 2016
     },
     {
-     "url": "https://www.sec.gov/Archives/edgar/data/1275014/000095017023005148/uctt-20221230.htm",
-     "type": "10-K",
-     "filing_date": "2023-02-28",
-     "fiscal_year": 2022
-    },
-    {
-     "url": "https://www.sec.gov/Archives/edgar/data/1275014/000095017024027213/uctt-20231229.htm",
-     "type": "10-K",
-     "filing_date": "2024-03-06",
-     "fiscal_year": 2023
-    },
-    {
      "url": "https://s29.q4cdn.com/619069826/files/doc_downloads/2025/03/2024-Form-10K-with-Exhibits_final.pdf",
      "type": "10-K",
      "filing_date": "2025-02-25",
@@ -3366,12 +3138,6 @@
      "type": "10-K",
      "filing_date": "2025-02-25",
      "fiscal_year": 2022
-    },
-    {
-     "url": "https://www.sec.gov/Archives/edgar/data/1275014/000162828025007865/uctt-20241227.htm",
-     "type": "10-K",
-     "filing_date": "2025-02-25",
-     "fiscal_year": 2024
     },
     {
      "url": "https://www.sec.gov/Archives/edgar/data/1275014/000162828026010744/uctt-20251226.htm",
@@ -3384,8 +3150,8 @@
   {
    "supplier": "UCTT",
    "customer": "ASM.AS",
-   "weight": 10.0,
-   "disclosed": true,
+   "weight": 15.0,
+   "disclosed": false,
    "valid_from": "2015-03-12",
    "valid_to": "2018-03-16",
    "sources": [
@@ -3412,7 +3178,7 @@
   {
    "supplier": "UCTT",
    "customer": "LRCX",
-   "weight": 18.35,
+   "weight": 15.0,
    "disclosed": false,
    "valid_from": "2015-03-12",
    "valid_to": "2027-02-24",
@@ -3466,18 +3232,6 @@
      "fiscal_year": 2021
     },
     {
-     "url": "https://www.sec.gov/Archives/edgar/data/1275014/000095017023005148/uctt-20221230.htm",
-     "type": "10-K",
-     "filing_date": "2023-02-28",
-     "fiscal_year": 2022
-    },
-    {
-     "url": "https://www.sec.gov/Archives/edgar/data/1275014/000095017024027213/uctt-20231229.htm",
-     "type": "10-K",
-     "filing_date": "2024-03-06",
-     "fiscal_year": 2023
-    },
-    {
      "url": "https://s29.q4cdn.com/619069826/files/doc_downloads/2025/03/2024-Form-10K-with-Exhibits_final.pdf",
      "type": "10-K",
      "filing_date": "2025-02-25",
@@ -3494,12 +3248,6 @@
      "type": "10-K",
      "filing_date": "2025-02-25",
      "fiscal_year": 2022
-    },
-    {
-     "url": "https://www.sec.gov/Archives/edgar/data/1275014/000162828025007865/uctt-20241227.htm",
-     "type": "10-K",
-     "filing_date": "2025-02-25",
-     "fiscal_year": 2024
     },
     {
      "url": "https://www.sec.gov/Archives/edgar/data/1275014/000162828026010744/uctt-20251226.htm",

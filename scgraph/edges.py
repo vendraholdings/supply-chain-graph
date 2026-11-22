@@ -97,5 +97,5 @@ def load(include=("curated", "rule", "llm")) -> pd.DataFrame:
             parts.append(pd.read_csv(p))
     if not parts:
         return pd.DataFrame(columns=COLUMNS)
-    df = pd.concat(parts, ignore_index=True)
+    df = pd.concat(parts, ignore_index=True).drop_duplicates("edge_id", keep="first")   # curated rows come first and win over a rule row for the same edge-year
     return df[df["method"].isin(include)].reset_index(drop=True)

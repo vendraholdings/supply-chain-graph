@@ -21,13 +21,14 @@
 
 #pad(x: 1.2cm)[
   *Abstract.* This paper builds a directed supplier-to-customer graph of 111 listed semiconductor companies in eleven tiers, from wafers and gases to hyperscalers,
-  with the filing, date and source of every edge, and uses it to ask how shocks and returns move across the chain. At the build date the graph holds 70 sourced
-  supplier-customer pairs (338 edge-years) covering 45 companies; automated extraction from SEC filings is implemented and tested but has not yet been run on real
-  filings, so the graph is small and the results that depend on it are descriptive. Price-based results do not depend on the edge set. A generalised variance
+  with the filing, date and source of every edge, and uses it to ask how shocks and returns move across the chain. At the build date the graph holds 64 sourced
+  supplier-customer pairs (306 edge-years) covering 42 companies: 16 pairs curated by hand and the rest extracted by sentence rules from
+  602 annual reports of 56 SEC filers, without confirmation by a language model. A generalised variance
   decomposition of eleven tier indices gives a total spillover index of 42.6%, with equipment and packaging and substrates as net transmitters. Lead-lag correlations
   between tiers are dominated by the order of market closing times. An event study of 3,940 large one-day price moves finds no abnormal return in
   suppliers, customers or companies two links away that differs from zero at the 5% level; the test has the correct size on random dates. A customer-momentum strategy in the style
-  of Cohen and Frazzini cannot be estimated yet, because at most 21 suppliers have a usable signal in any month.
+  of Cohen and Frazzini earns an annualised net Sharpe ratio of 0.01 (0.15 before costs), which is not distinguishable from strategies built on randomly rewired edges, and the
+  probability of backtest overfitting over the declared grid of specifications is 0.78. The data give no evidence that the disclosed links predict returns.
 ]
 
 = Introduction
@@ -42,7 +43,7 @@ This project asks three questions with only free data. First, can a graph of lis
 the spillovers between tiers and which tiers transmit and receive them? Third, do the sourced links predict returns, either through customer momentum or through abnormal returns of linked companies after large price moves?
 Negative and uninformative results are reported as such. The exported graph is intended for reuse by later projects that map news items to affected companies.
 
-This version of the paper is written at a stage where the price-based analyses are complete and the filing-based edge extraction is not. The status is stated in each section where it matters.
+The edges used here are extracted by rules alone; the language-model confirmation step is implemented but was not run, and the effect of that on precision is discussed in Section 5.
 
 = Data and graph construction
 
@@ -59,19 +60,22 @@ Exchange holidays give missing values rather than zeros. Raw vendor prices are n
 == Edges
 
 An edge runs from a supplier to a customer and is stored with the fiscal year, the share of supplier revenue where disclosed, the filing date, the date from which it is usable
-(the next trading day after the filing), the date it expires, and the URL of the source document. Only edges with a findable public source are kept; 338 edge-years covering 70 pairs were curated by reading
-annual reports and press releases, and 45 of the pairs state a revenue share. Candidates that could not be sourced were dropped, with reasons recorded. An edge is usable from its available date until the next filing that no longer lists it,
+(the next trading day after the filing), the date it expires, and the URL of the source document. Only edges with a findable public source are kept; 306 edge-years covering 64 pairs were curated by reading
+annual reports and press releases, and 40 of the pairs state a revenue share. Candidates that could not be sourced were dropped, with reasons recorded. An edge is usable from its available date until the next filing that no longer lists it,
 or for one year. This point-in-time rule is enforced by tests, including one that delays all filings and checks that the information set never grows.
 
-A second source is implemented: sentence-level rules and a locally run open-weights language model extract customer-concentration statements from the text of 10-K and 20-F filings, and the
-two outputs must agree before an edge enters the graph, otherwise it goes to a review queue. The model's responses are cached so that the step can be replayed without network access. On ten real filings,
-the rules recovered 5 of about 15 named pairs found by reading, with no false positive; the misses are dollar tables. As of the build date, SEC EDGAR has not accepted the
-automated-access identification used by the client, so the extraction has not been run on the full filing set, and the results below use the curated edges only.
+A second source extracts customer-concentration statements automatically from the text of 10-K and 20-F filings. Sentence rules find a named customer in the universe followed by a share of revenue
+(or a statement that the customer exceeded a disclosure threshold). Shares stated for several customers "respectively" are paired by position; aggregate shares ("top ten customers"), market shares and matches that cross a sentence boundary are rejected.
+The client reads the EDGAR submissions index of each SEC filer in the universe and every 10-K and 20-F filed since 2015 (602 reports of 56 companies) at no more than five requests per second, which gave 974 candidate passages and 276 edge-years
+(59 pairs; 9 of these repeat a curated edge-year, for which the curated row is kept). A second pass by a locally run open-weights language model, which must agree with the rules before an edge is accepted, is implemented and tested on cached responses, but no model endpoint was available for this build;
+the automated edges are therefore marked as not model-confirmed with medium confidence. On ten real filings read in full, the rules before the last revision recovered 5 of about 15 named pairs, with no false positive; the misses are dollar tables.
+A read of 30 randomly drawn edge-years against their source sentences found no clear misattribution after the revision, but this is a check of the extracted sentence and not of the filing page, and a first draw before the revision had found four
+wrong attributions in 24, which the revision removes. Table-like layouts and customers named only in a table are missed, so the extracted set is incomplete.
 
 == Graph
 
-With the curated edges the graph has 45 connected companies and 70 edges, weighted by disclosed revenue share where available and by the tier median otherwise.
-The first month in which any edge is usable is 2015-02, and in no month do more than 21 suppliers have a signal.
+The graph combines the curated and automated edges: 42 connected companies and 64 edges, weighted by disclosed revenue share where available and by the tier median otherwise.
+The first month in which any edge is usable is 2015-02, and at most 19 suppliers have a signal in any month.
 
 = Methods
 
@@ -99,30 +103,36 @@ The estimator is validated on a simulated autoregression with a known decomposit
 == Network structure
 
 @fig2 shows the universe by tier and listing country and the country pairs of the sourced edges. The sourced graph is concentrated in equipment and its subsystem suppliers, memory, and a few chip designers, and is
-dominated by US listings. Among the 45 connected companies, PageRank correlates with market capitalisation at Spearman's $rho$ = 0.68 (n = 45), while weighted out-strength correlates negatively, at -0.51, because the
+dominated by US listings. Among the 42 connected companies, PageRank correlates with market capitalisation at Spearman's $rho$ = 0.64 (n = 42), while weighted out-strength correlates negatively, at -0.45, because the
 suppliers with the largest out-strength are not the largest companies (@fig3). @fig4 aggregates the disclosed shares by tier pair. These statistics describe the sample of sourced edges, which was selected by disclosure thresholds and by what could be found,
 and are not estimates of the structure of the industry.
 
-#fig(2, "fig02_country_tier_light", 100%, [*Universe and sourced pairs by country and tier.* Left: number of listings by tier and listing country. Right: sourced supplier-customer pairs by country of the two listings.])
+#fig(2, "fig02_country_tier_light", 88%, [*Universe and sourced pairs by country and tier.* Left: number of listings by tier and listing country. Right: sourced supplier-customer pairs by country of the two listings.])
 
-#fig(3, "fig03_centrality_light", 100%, [*Centrality of the connected companies.* PageRank of the 45 companies with at least one sourced edge, and PageRank rank against market-capitalisation rank. Ties are at average rank.])
+#fig(3, "fig03_centrality_light", 88%, [*Centrality of the connected companies.* PageRank of the 42 companies with at least one sourced edge, and PageRank rank against market-capitalisation rank. Ties are at average rank.])
 
-#fig(4, "fig04_tier_flow_light", 62%, [*Disclosed revenue share by tier pair.* Sum of disclosed supplier-revenue shares of sourced pairs, supplier tier in rows and customer tier in columns; blank cells have no sourced pair.])
+#fig(4, "fig04_tier_flow_light", 50%, [*Disclosed revenue share by tier pair.* Sum of disclosed supplier-revenue shares of sourced pairs, supplier tier in rows and customer tier in columns; blank cells have no sourced pair.])
 
 == Customer momentum
 
-The strategy has 139 active months under the primary specification, because the sourced edges become usable only from 2015-02 and at most 21 suppliers have a signal in any month, fewer than needed to form terciles. No return,
-alpha, placebo or overfitting statistic is reported. The pipeline, including the look-ahead tests, has been verified on synthetic data only. The figures for this section will be produced once the automated extraction has enlarged the edge set.
+The primary specification has 139 active months. Its long-short return has an annualised Sharpe ratio of 0.15 before costs and 0.01 after costs and borrow (-0.13 at twice the cost); the
+Newey-West alpha against the market and the semiconductor index is +0.2% a year ($t$ = 0.02), and the Fama-MacBeth slope has $t$ = 1.5 (@fig5). Across 1,000 degree-preserving rewirings of the edges within tiers, the Sharpe ratio has mean -0.03 and
+standard deviation 0.21, and a share 0.43 of the draws reach or exceed the observed value, so the strategy is not distinguishable from one built on random links (@fig6, left).
+Of the declared grid of 48 specifications, 24 use the automated edges and are observed in every month; the others rely on the sparse curated set and are excluded from the overfitting diagnostics. For those 24, the deflated Sharpe ratio of the best specification is 0.09
+(the expected maximum Sharpe ratio of the grid under no skill is 0.41 a year, @fig6 right), the probability of backtest overfitting is 0.78, and the share of splits in which the selected specification loses money out of sample is 93%.
+
+#fig(5, "fig05_momentum_light", 58%, [*Customer-momentum strategy.* Growth of one unit in the primary specification (terciles, equal weight, curated and automated edges, one-month holding), gross and net of costs and borrow.])
+
+#fig(6, "fig06_momentum_placebo_light", 92%, [*Falsification and multiple testing.* Left: net Sharpe ratio of 1,000 rewired-edge strategies and the observed value. Right: net Sharpe ratio of each fully observed specification and the expected maximum under no skill.])
 
 == Event study
 
-Of the 3,940 price shocks, 914 events have a direct supplier in the graph, 1023 a direct customer, and 1068 a company two links away. The cumulative average abnormal return over days 0 to 20 is
-+0.7% for suppliers (adjusted $t$ = 1.5), +0.6% for customers ($t$ = 2.0) and +0.7% for companies two links away ($t$ = 2.4); none is significant at the 5% level (@fig7).
+Of the 3,940 price shocks, 850 events have a direct supplier in the graph, 947 a direct customer, and 842 a company two links away. The cumulative average abnormal return over days 0 to 20 is
++0.6% for suppliers (adjusted $t$ = 1.1), +0.6% for customers ($t$ = 1.8) and +0.4% for companies two links away ($t$ = 1.5); none is significant at the 5% level (@fig7); all three are positive and below one per cent.
 The event nodes themselves show a sign-adjusted CAAR of +7.1%, which is mechanical because events are selected on large moves.
-On random dates the 5% test rejects in 5.0%, 4.2% and 5.9% of draws for the three groups, which indicates that the test has the correct size (@fig8). With fewer than 70 events per group,
-the test has low power against effects of the size found in the literature, so the absence of significance is not evidence of absence.
+On random dates the 5% test rejects in 5.6%, 5.6% and 4.5% of draws for the three groups, which indicates that the test has the correct size (@fig8). The events within a group overlap in time and share common shocks, which the adjustment only partly addresses, and a mean effect below one per cent would need many more independent events to detect, so the absence of significance is not evidence of absence.
 
-#fig(7, "fig07_event_fans_light", 100%, [*Abnormal returns of linked companies after price shocks.* Sign-adjusted cumulative average abnormal return over days 0 to 20, by relationship to the company with the shock, with tiers as thin lines.])
+#fig(7, "fig07_event_fans_light", 92%, [*Abnormal returns of linked companies after price shocks.* Sign-adjusted cumulative average abnormal return over days 0 to 20, by relationship to the company with the shock, with tiers as thin lines.])
 
 #fig(8, "fig08_placebo_light", 100%, [*Placebo distribution on random dates.* Cumulative average abnormal return at day 20 for random listings and dates, with the observed value marked.])
 
@@ -142,16 +152,18 @@ Of the non-zero-lag intervals, 12.7% exclude zero, against 5% expected under the
 and European sessions of a calendar date before the US open, a lag of one day between a mainly Asian tier and a mainly US tier largely reflects closing-time order. The median same-day correlation between the Asian and US halves of a tier is 0.12, reported separately.
 The lead-lag results are therefore not evidence of information flow along the supply chain.
 
-#fig(11, "fig11_leadlag_light", 100%, [*Lead-lag cross-correlations between tiers.* Row tier leads column tier at positive lags; intervals are 95% stationary-bootstrap bands.])
+#fig(11, "fig11_leadlag_light", 82%, [*Lead-lag cross-correlations between tiers.* Row tier leads column tier at positive lags; intervals are 95% stationary-bootstrap bands.])
 
 = Discussion and limitations
 
-The price-based results describe how the tiers move together and do not depend on the edge set. They show substantial common movement (a total spillover index of 42.6%) with equipment and packaging as net transmitters. The edge-based results are, at this stage,
-too thin to support conclusions: the event study has the correct size but low power, and the momentum strategy cannot be estimated.
+The price-based results describe how the tiers move together and do not depend on the edge set. They show substantial common movement (a total spillover index of 42.6%) with equipment and packaging as net transmitters. The edge-based results are negative:
+the customer-momentum strategy does not beat random links after costs, the best of the declared specifications does not survive deflation, and the linked-company event study finds no significant abnormal return. These are results about this edge set, which is small and
+partly unconfirmed, and about this period and universe; they do not show that economic links carry no information elsewhere.
 
 Limitations:
 - *Edge coverage.* Edges come from disclosure thresholds, which favour large customers and suppliers with concentrated sales. Customers reported anonymously cannot be resolved without curation. Coverage of Japan, Korea, Taiwan and Hong Kong filers relies on manual curation.
-- *Small samples.* Event groups have fewer than 70 events and the momentum strategy has no active months.
+- *Edge precision and recall.* The automated edges are not model-confirmed and the rules miss table-only disclosures, so both false and missing links are possible. A strategy built on noisy links is biased towards zero.
+- *Short sample.* The momentum strategy has 139 monthly observations, so a Sharpe ratio has a standard error near 0.3.
 - *Survivorship.* The universe and the tier weights use today's constituents.
 - *Timing.* Filing dates are the dates of the documents; some sources are mirrors of the original filing, and one filing date is an auditor report date. Edges become usable the next trading day.
 - *Costs and constraints.* Costs are stylised; short-sale constraints and borrow availability in Asian markets are not modelled beyond a flat fee.

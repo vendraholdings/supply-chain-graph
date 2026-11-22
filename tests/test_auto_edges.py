@@ -61,3 +61,9 @@ def test_threshold_edge_has_empty_share(tmp_path):
     os.environ["SCG_LLM_LABEL"] = "lbl"
     a, q = auto_edges.build(ex, LLM(mode="replay", cache_dir=tmp_path), AL)
     assert len(a) == 2 and a["pct_revenue"].isna().all() and edges.validate(a) == []
+
+
+def test_load_has_unique_edge_ids_and_validates():
+    df = edges.load()
+    assert not edges.validate(df)
+    assert df["edge_id"].is_unique

@@ -10,7 +10,7 @@ import matplotlib
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from scgraph import config  # noqa: E402
+from scgraph import config, edges as edges_mod, momentum as mo  # noqa: E402
 
 ROOT = config.ROOT
 DIST = ROOT / "site" / "dist"
@@ -53,7 +53,7 @@ def main() -> None:
     sps = json.loads((RES / "spillover_summary.json").read_text())
     evs = json.loads((RES / "event_summary.json").read_text())
     uni = pd.read_csv(ROOT / "data" / "universe.csv")
-    edges = pd.read_csv(ROOT / "data" / "edges_curated.csv").drop_duplicates(["supplier", "customer"])
+    edges = edges_mod.load().drop_duplicates(["supplier", "customer"])
     tier_ids = [t["id"] for t in g["tiers"]]
     ctys = sorted(uni["country"].unique())
     cm = [[int(((uni.tier == t) & (uni.country == c)).sum()) for c in ctys] for t in tier_ids]
@@ -73,7 +73,15 @@ def main() -> None:
     draws = pd.read_csv(RES / "event_placebo_draws.csv")
     plc = {rel: dict(draws=(100 * d.caar_end).round(3).tolist(), observed=round(100 * evs[rel]["caar_end"], 3), n=evs[rel]["n"],
                      rejection=evs[rel]["placebo"]["rejection_rate_5pct"]) for rel, d in draws.groupby("relation")}
-    data = dict(graph=g, turbo=[[i / 10, matplotlib.colors.to_hex(matplotlib.colormaps["turbo"](i / 10))] for i in range(11)],
+    ret = pd.read_parquet(RES / "momentum_primary.parquet")
+    trials = pd.read_parquet(RES / "momentum_trials.parquet")
+    full = trials.loc[:, trials.notna().mean() >= 0.9].dropna()
+    f5 = dict(dates=[str(d) for d in ret.index], gross=(1 + ret["gross_return"]).cumprod().round(4).tolist(), net=(1 + ret["net_return"]).cumprod().round(4).tolist())
+    f6 = dict(draws=pd.read_parquet(RES / "placebo_rewiring.parquet")["sharpe"].round(3).tolist(), observed=round(summ["placebo"]["real_sharpe"], 3),
+              trials=sorted(round(mo.sharpe(full[c].to_numpy()), 3) for c in full.columns),
+              sr0=round(summ["overfitting"]["sr0_per_period"] * mo.PPY ** 0.5, 3), pbo=round(summ["overfitting"]["cscv"]["pbo"], 2),
+              dsr=round(summ["overfitting"]["dsr"], 2), p=round(summ["placebo"]["p_ge_real"], 2))
+    data = dict(graph=g, f5=f5, f6=f6, turbo=[[i / 10, matplotlib.colors.to_hex(matplotlib.colormaps["turbo"](i / 10))] for i in range(11)],
                 f2=dict(tiers=tier_ids, countries=ctys, matrix=cm, pair_labels=pc.index.tolist(), pair_counts=pc.tolist()),
                 f3=dict(rows=cent[["ticker", "pagerank", "tier", "mcap_rank", "pr_rank"]].round(5).to_dict("records")),
                 f4=dict(names=list(flow.columns), z=[[None if v == 0 else round(v, 2) for v in r] for r in flow.to_numpy(float)]),
