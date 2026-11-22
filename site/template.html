@@ -16,6 +16,7 @@ p.lead{color:var(--muted);margin:0 0 14px;max-width:820px}
 .fig{background:var(--panel);border:1px solid var(--grid);border-radius:6px;padding:6px;margin:10px 0}.cap{color:var(--muted);font-size:.85rem;margin:4px 2px 0}
 table{border-collapse:collapse;width:100%;font-size:.8rem}th,td{border-bottom:1px solid var(--grid);padding:5px 7px;text-align:left}th{color:var(--muted);font-weight:500}.tw{overflow-x:auto}
 label{font-size:.85rem;color:var(--muted)}input[type=range]{width:240px;vertical-align:middle}
+html.hero main>*:not(#hero):not(#legend){display:none}html.hero main{padding:0;max-width:none}html.hero #hero{height:calc(100vh - 34px);border-radius:0}html.hero #info{display:none}html.hero #legend{margin:6px 10px}
 </style></head><body><main>
 <h1>Mapping the semiconductor supply chain from public filings</h1>
 <p class="lead">A directed supplier-to-customer graph of listed semiconductor companies, with the source and filing date of every edge, and tests of how shocks and returns move across tiers. Negative and uninformative results are reported as such.</p>
@@ -51,6 +52,7 @@ label{font-size:.85rem;color:var(--muted)}input[type=range]{width:240px;vertical
 </main>
 <script src="vendor/plotly.min.js"></script><script src="vendor/3d-force-graph.min.js"></script>
 <script>
+if(location.search.indexOf('hero=1')>=0)document.documentElement.classList.add('hero');
 const D=%%DATA%%;
 const C=D.colors,F=D.facts,T=D.graph.tiers,TC=D.tier_colors;
 const tierIdx={};T.forEach((t,i)=>tierIdx[t.id]=i);
@@ -60,7 +62,7 @@ document.getElementById('legend').innerHTML=T.map((t,i)=>'<span><i style="backgr
 const nodes=D.graph.nodes.map(n=>({id:n.ticker,name:n.name,tier:n.tier,country:n.country,mcap:n.mcap_usd,val:Math.max(1,Math.sqrt((n.mcap_usd||2e9)/1e9)),fx:(tierIdx[n.tier]-5)*60}));
 const links=D.graph.edges.map(e=>({source:e.supplier,target:e.customer,w:e.weight,src:e.sources}));
 const el=document.getElementById('graph');
-const G=ForceGraph3D()(el).graphData({nodes,links}).backgroundColor(C.panel).nodeColor(n=>TC[tierIdx[n.tier]]).nodeVal('val').nodeRelSize(3).nodeOpacity(.95)
+const G=window.G=ForceGraph3D()(el).graphData({nodes,links}).backgroundColor(C.panel).nodeColor(n=>TC[tierIdx[n.tier]]).nodeVal('val').nodeRelSize(3).nodeOpacity(.95)
  .nodeLabel(n=>n.id+' '+n.name+' ('+n.tier+')').linkColor(()=>'#9aa5b1').linkOpacity(.7).linkWidth(l=>0.4+Math.min(l.w,40)/20).linkDirectionalArrowLength(5).linkDirectionalArrowRelPos(1)
  .cooldownTicks(120).d3VelocityDecay(.4).width(el.clientWidth).height(el.clientHeight);
 G.d3Force('charge').strength(-18);
